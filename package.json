@@ -1,0 +1,29 @@
+{
+	"name": "intro",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"dependencies": {
+		"@koa/router": "^10.0.0",
+		"@types/node": "^14.10.2",
+		"jsdom": "^16.4.0",
+		"koa": "^2.13.0",
+		"koa-body": "^4.2.0",
+		"koa-static": "^5.0.0",
+		"koa-views": "^7.0.0",
+		"nodemon": "^2.0.6",
+		"nunjucks": "^3.2.2",
+		"run": "^1.4.0",
+		"sqlite": "^4.0.17",
+		"sqlite3": "^5.0.0"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "node ./src/test/cli-app.test.js",
+		"test-intro": "node ./src/test/intro.test.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

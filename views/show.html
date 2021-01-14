@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}Ein Bookmark{% endblock %}
+{% block content %}
+
+<h1>Bookmark Details</h1>
+
+<h1>{{bookmark['title']}}</h1>
+<a href="{{bookmark['uri']}}">
+    {{bookmark['uri']}}
+</a>
+<p>{{bookmark['description']}}</p>
+<p>{{bookmark['tags']}}</p>
+<p>Gespeichert am {{bookmark['date_created']}}</p>
+
+<a href="/bookmark/{{bookmark['id']}}/edit">Bearbeiten</a>
+<a href="/bookmark/{{bookmark['id']}}/delete">Löschen</a>
+
+{% endblock %}

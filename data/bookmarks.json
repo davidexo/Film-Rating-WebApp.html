@@ -1,0 +1,112 @@
+[
+	{
+		"URI": "http://www.righto.com/2019/07/bitcoin-mining-on-apollo-guidance.html",
+		"Title": "Bitcoin mining on an Apollo Guidance Computer: 10.3 seconds per hash",
+		"Description": "Trying to mine Bitcoin on this 1960s computer seemed both pointless and anachronistic, so I had to give it a shot.",
+		"Date_created": "2019-07-19",
+		"Tags": "Apollo, programming, bitcoin",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "dd63e8b74faaa21c67fa1161d49fe3feba12801fa2baac5f4269e600906cdc74"
+	},
+	{
+		"URI": "https://crocks.dev",
+		"Title": "Crocks",
+		"Description": "A collection of well known Algebraic Data Types for your utter enjoyment.",
+		"Date_created": "2019-07-27",
+		"Tags": "js,fp,programming,monad",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "dfe02c9e3dad95129ca3b2978412803316421f81477edb65973c2501b1790dc8"
+	},
+	{
+		"URI": "https://koajs.com/#",
+		"Title": "Koa - next generation web framework for node.js",
+		"Description": "Koa is a new web framework designed by the team behind Express, which aims to be a smaller, more expressive, and more robust foundation for web applications and APIs.",
+		"Date_created": "2019-07-23",
+		"Tags": "web,js,framework",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "2dfadda70c5f50962d08a0e9b2131bf53ccb2af578cbe1356f9e8b9c678b1746"
+	},
+	{
+		"URI": "https://marcus.io/blog/menu-or-not",
+		"Title": "Menu (or not)",
+		"Description": "This article marks the third time I try to create a useful menu pattern for accessible-app.com - but hopefully the third time's the charm.",
+		"Date_created": "2019-07-25",
+		"Tags": "html,css,a11y,menu",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "ad12223c52962855ef9f2bf4853425877a3018edfb071e7d04a405e7873a1ab4"
+	},
+	{
+		"URI": "https://www.lexaloffle.com/pico-8.php",
+		"Title": "PICO-8 Fantasy Console",
+		"Description": "Play, create and share tiny games and other cartridges! PICO-8 has 1000s of community-made projects and resources.",
+		"Date_created": "2019-07-07",
+		"Tags": "8-bit, game, programming",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "4e07110b8bbc51438f666d1e71c3e3559fb08bcfccde5959c30747478bb1e028"
+	},
+	{
+		"URI": "http://adrianroselli.com/2019/09/under-engineered-text-boxen.html",
+		"Title": "Under-Engineered Text Boxen",
+		"Description": "Generally I am looking at the minimum amount of CSS necessary to style native HTML controls while also retaining or improving accessibility and honoring different user preferences.",
+		"Date_created": "2019-09-06",
+		"Tags": "web,css,html,a11y",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "a48590e00ece8ec6a354c1d1f11a6dee0022a51cc40831db672d94672d647e55"
+	},
+	{
+		"URI": "https://www.octoparse.com",
+		"Title": "Web Scraping for Anyone",
+		"Description": "Quickly scrape web data without coding\nTurn web pages into structured spreadsheets within clicks",
+		"Date_created": "2019-06-13",
+		"Tags": "web, screen scraping, html, service, data",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "92bfce0a1bb2cdc65ba8437216c432235ab3710d8d360fff58a6bfe03c456b67"
+	},
+	{
+		"URI": "https://wiki.haskell.org/Web/Frameworks",
+		"Title": "Web/Frameworks",
+		"Description": "Below is a list of known to be active Haskell web frameworks. Rather than one framework to rule them all, Haskell provides several options.",
+		"Date_created": "2019-07-29",
+		"Tags": "haskepl,fp,web,list",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "35bbbcb13aaa5d0be368bc8dbdf6e4e46ccf9d0b3ccb853e7b6029d3864189f3"
+	},
+	{
+		"URI": "https://webdriver.io",
+		"Title": "Webdriver",
+		"Description": "Next-gen WebDriver test framework for Node.js",
+		"Date_created": "2019-07-21",
+		"Tags": "testing, node, js,web",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "91ce0575a53447f487a01d6685772b16124589a380f1aaa2f800f7602c729c9c"
+	},
+	{
+		"URI": "https://mitmproxy.org",
+		"Title": "mitmproxy - an interactive HTTPS proxy",
+		"Description": "mitmproxy is your swiss-army knife for debugging, testing, privacy measurements, and penetration testing. It can be used to intercept, inspect, modify and replay web traffic such as HTTP/1, HTTP/2, WebSockets, or any other SSL/TLS-protected protocols.",
+		"Date_created": "2019-09-04",
+		"Tags": "http, internet,proxy, open source",
+		"Date_checked": "",
+		"Result": "",
+		"Title_checked": "",
+		"UriHash": "53b36fc60aab3ed9fd80d305a893ed978bfde51909688a1bf854b580f47aca97"
+	}
+]

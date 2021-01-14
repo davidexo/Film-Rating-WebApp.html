@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Add{% endblock %}
+{% block content %}
+
+<h1>Add a bookmark</h1>
+<div>
+    <form method="post">
+        <div id="form">
+            <div>
+                <label for="form_title" class="required">Titel</label>
+                <input type="text" id="form_title" size="80" name="title" value="{{ form['title'] }}" required>
+                {% if form.errors['title'] %}<p class="Form-error">{{ form.errors['title'] }}</p>{% endif %}
+
+                <label for="form_uri" class="required">URI</label>
+                <input type="text" id="form_uri" size="80" name="uri" value="{{ form['uri'] }}" required>
+                {% if form.errors['uri'] %}<p class="Form-error">{{ form.errors['uri'] }}</p>{% endif %}
+
+                <label for="form_tags" class="required">Tags</label>
+                <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}">
+                {% if form.errors['tags'] %}<p class="Form-error">{{ form.errors['tags'] }}</p>{% endif %}
+
+                <label for="form_description">Beschreibung</label>
+                <textarea type="text" id="form_description" name="description">{{ form['description'] }}</textarea>
+                {% if form.errors['description'] %}<p class="Form-error">{{ form.errors['description'] }}</p>{% endif %}
+            </div>
+        </div>
+        <button type="submit" id="form_save" name="save">Speichern</button>
+        <a href="/">Abbrechen</a>
+    </form>
+</div>
+{% endblock %}

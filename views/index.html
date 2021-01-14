@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}Bookmark-App{% endblock %}
+{% block content %}
+<h1>Alle Bookmarks</h1>
+<ul>
+    {% for bookmark in bookmarks %}
+    <li>
+        <h2>
+        <a href="/bookmark/{{bookmark['id']}}">
+            {{bookmark['title']}}
+        </a>
+        </h2>
+        <a href="{{bookmark['uri']}}">
+            {{bookmark['uri']}}
+        </a>
+        <h4>
+            {{bookmark['tags']}}
+        </h4>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
