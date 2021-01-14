@@ -4,21 +4,10 @@ import helloRouter from './hello.js';
 import bookmarkRouter from './bookmark/router.js';
 import koaBody from 'koa-body';
 import views from 'koa-views';
-import serve from "koa-static";
-import { SSL_OP_CRYPTOPRO_TLSEXT_BUG } from 'constants';
+import koaStatic from "koa-static";
 
 
 export default async function webApp(config) {
-
-
-	const templateDir = process.cwd() + '/views';
-	const render = views(templateDir, {
-		extension: 'html',
-		map: { html: 'nunjucks' },
-		options: {
-			nunjucks: { loader: templateDir }
-		}
-	});
 
 	// Initialize application
 	const app = new Koa();
@@ -28,6 +17,19 @@ export default async function webApp(config) {
 
 	// Insert Middelware here!
 	app.use(koaBody());
+	app.use(koaStatic('./public'));
+
+
+	const templateDir = process.cwd() + '/views';
+	
+	const render = views(templateDir, {
+		extension: 'html',
+		map: { html: 'nunjucks' },
+		options: {
+			nunjucks: { loader: templateDir }
+		}
+	});
+	
 
 	// Extent context protype with the render function
 	app.use(render);

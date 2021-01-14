@@ -1,5 +1,5 @@
 {
-	"name": "intro",
+	"name": "hausarbeit",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -7,6 +7,7 @@
 	"dependencies": {
 		"@koa/router": "^10.0.0",
 		"@types/node": "^14.10.2",
+		"autoprefixer": "^10.2.1",
 		"jsdom": "^16.4.0",
 		"koa": "^2.13.0",
 		"koa-body": "^4.2.0",
@@ -16,10 +17,12 @@
 		"nunjucks": "^3.2.2",
 		"run": "^1.4.0",
 		"sqlite": "^4.0.17",
-		"sqlite3": "^5.0.0"
+		"sqlite3": "^5.0.0",
+		"tailwindcss": "^2.0.2"
 	},
 	"devDependencies": {},
 	"scripts": {
+		"build-css": "tailwindcss build src/styles.css -o public/styles.css",
 		"test": "node ./src/test/cli-app.test.js",
 		"test-intro": "node ./src/test/intro.test.js"
 	},
