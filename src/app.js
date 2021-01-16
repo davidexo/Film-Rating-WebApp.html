@@ -7,6 +7,7 @@ import views from 'koa-views';
 import koaStatic from "koa-static";
 
 
+
 export default async function webApp(config) {
 
 	// Initialize application
