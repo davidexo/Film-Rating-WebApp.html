@@ -3,6 +3,8 @@ import {
 } from 'console';
 import * as model from './model.js';
 import * as uuid from 'uuid';
+import * as path from 'path';
+import * as fs from 'fs';
 
 // render form with additional data
 export async function renderForm(ctx, form) {
@@ -29,9 +31,21 @@ export async function submitForm(ctx) {
     data.files = ctx.request.files;
     const errors = await validateForm(data);
 
-    //console.table(data.files);
-    data.image =data.files.image.name;
-    
+    //data.image = generateFilename(data.files.image);
+    //console.log(data.image);
+
+    if (data.files.image.size > 0) {
+        const filename = generateFilename(data.files.image);
+        data.image = filename;
+        const localPath = path.join(process.cwd(), 'public', filename);
+
+        fs.rename(data.files.image.path, localPath, function(err) {
+            if ( err ) console.log('ERROR: ' + err);
+        });
+    } else {
+        console.error("File is missing");
+    }
+
 
     // Something went wrong
     if (Object.values(errors).some(Boolean)) {
@@ -43,7 +57,6 @@ export async function submitForm(ctx) {
         await renderForm(ctx, data);
     } else {
         // Edit
-        console.log("Edit Entry");
         if (ctx.params.id) {
             console.table(data);
             await model.update(ctx.db, ctx.params.id, data);
@@ -98,9 +111,19 @@ export function validateImage(file) {
 
 // Randomly generate a filename using UUID
 function generateFilename(file) {
-    return path.join('upload', uuid.v4() 
-        //+ '.' + extensionFromMimetype(file.type)
-        + '.' + file.type)
-        
-        
+    return path.join('upload', uuid.v4() +
+        '.' + getFiletype(file.type))
+}
+
+function getFiletype(filename) {
+    const string = filename;
+    const lastSlash = string.lastIndexOf('/');
+
+    const fileName = string.substring(0, lastSlash);
+    const ext = string.substring(lastSlash + 1);
+    return ext;
+}
+
+export async function processFormData(ctx, data) {
+
 }
