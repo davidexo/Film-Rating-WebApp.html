@@ -1,9 +1,14 @@
+import {
+    debug
+} from 'console';
 import * as model from './model.js';
-
+import * as uuid from 'uuid';
 
 // render form with additional data
 export async function renderForm(ctx, form) {
-    await ctx.render("add", {form: form});
+    await ctx.render("add", {
+        form: form
+    });
 }
 
 // add a bookmark
@@ -19,23 +24,31 @@ export async function edit(ctx) {
         form: data
     });
 }
-
 export async function submitForm(ctx) {
     var data = ctx.request.body || {};
+    data.files = ctx.request.files;
     const errors = await validateForm(data);
+
+    //console.table(data.files);
+    data.image =data.files.image.name;
     
+
     // Something went wrong
     if (Object.values(errors).some(Boolean)) {
         console.log("Fehler gefunden. Formular neu rendern");
-        var data = {...data, errors};
+        var data = {
+            ...data,
+            errors
+        };
         await renderForm(ctx, data);
     } else {
         // Edit
         console.log("Edit Entry");
-        if(ctx.params.id) {
+        if (ctx.params.id) {
+            console.table(data);
             await model.update(ctx.db, ctx.params.id, data);
             ctx.redirect("/bookmark/" + ctx.params.id);
-        } 
+        }
         // Add new
         else {
             await model.add(ctx.db, data);
@@ -47,7 +60,8 @@ export async function submitForm(ctx) {
 export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
-        uri: validateUri(data.uri)
+        uri: validateUri(data.uri),
+        image: validateImage(data.image),
     }
 }
 
@@ -72,4 +86,21 @@ export function validateUri(string) {
     } catch (error) {
         return "Keine gültige URL";
     }
+}
+
+export function validateImage(file) {
+    if (!file) return;
+    if (file.size == 0) return;
+    // Check file type (functions still missing)
+    //if (mimetypeOk(file.type) && typeOk(file.name)) return;
+    return 'Dateiformat nicht zulässig.';
+}
+
+// Randomly generate a filename using UUID
+function generateFilename(file) {
+    return path.join('upload', uuid.v4() 
+        //+ '.' + extensionFromMimetype(file.type)
+        + '.' + file.type)
+        
+        
 }

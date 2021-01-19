@@ -12,6 +12,8 @@ import {
  * @property {string} description
  * @property {string} date_created
  * @property {string} tags
+ * @property {string} image
+ * 
  */
 
 /**
@@ -37,15 +39,16 @@ export async function getById(db, id) {
 
 export async function add(db, bookmark) {
   const sql = `INSERT INTO bookmarks
- (uri,title, description, tags,date_created)
- VALUES ($uri, $title, $description, $tags, $date)`;
+ (uri, title, description, tags, date_created, image)
+ VALUES ($uri, $title, $description, $tags, $date, $image)`;
 
   const parameters = {
     $uri: bookmark.uri,
     $title: bookmark.title,
     $description: bookmark.description,
     $tags: bookmark.tags,
-    $date: new Date(Date.now()).toISOString()
+    $date: new Date(Date.now()).toISOString(),
+    $image: bookmark.image
   };
 
   const result = await db.run(sql, parameters);
@@ -70,7 +73,7 @@ export async function deleteById(db, id) {
  * @return {Promise<number>}
  */
 export async function update (db, id, bookmark) {
-  const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=? WHERE id = ?", 
-  bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, id);
+  const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
+  bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, bookmark.image, id);
   return result.changes;
 }

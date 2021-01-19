@@ -5,12 +5,19 @@ import * as formController from "./form-controller.js";
 
 const router = new Router();
 
+
+
 // Alle Bookmarks ausgeben
 router.get("/", async (ctx, next) => {
     await controller.index(ctx);
   });
   
   // Ein neues Bookmark anlegen
+
+  router.post("/bookmark/add", async (ctx, next) => {
+    await controller.add(ctx);
+  });
+
   router.post("/bookmark/add", async (ctx, next) => {
     await controller.add(ctx);
   });
@@ -31,9 +38,12 @@ router.get("/", async (ctx, next) => {
   });
   
   // Ein Bookmark bearbeiten - Aktion ausfuehren
+
   router.post("/bookmark/:id/edit", async (ctx, next) => {
     await formController.submitForm(ctx);
   });
+
+  //router.post("/bookmark/:id/edit", formController.fileUploadBodyParser(), formController.submitForm)
   
   // Frage: Bookmark loeschen?
   router.get("/bookmark/:id/delete", async (ctx, next) => {

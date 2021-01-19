@@ -80,6 +80,7 @@ export async function add(ctx) {
                 description: ctx.request.body.description,
                 tags: ctx.request.body.tags,
                 date_created: ctx.request.body.date_created,
+                image: ctx.request.body.image,
             };
             // neues Bookmark in Datenbank sichern
             const newId = await model.add(ctx.db, bookmark);

@@ -17,20 +17,24 @@ export default async function webApp(config) {
 	app.context.db = config.db;
 
 	// Insert Middelware here!
-	app.use(koaBody());
+	//app.use(koaBody());
+	app.use(koaBody({ multipart: true }));
 	app.use(koaStatic('./public'));
 
-
 	const templateDir = process.cwd() + '/views';
-	
+
 	const render = views(templateDir, {
 		extension: 'html',
-		map: { html: 'nunjucks' },
+		map: {
+			html: 'nunjucks'
+		},
 		options: {
-			nunjucks: { loader: templateDir }
+			nunjucks: {
+				loader: templateDir
+			}
 		}
 	});
-	
+
 
 	// Extent context protype with the render function
 	app.use(render);
