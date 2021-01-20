@@ -117,7 +117,9 @@
                     <div class="rounded-lg bg-gray-700 overflow-hidden shadow">
                         <div class="p-6 text-gray-300">
                             <!-- Your content -->
-                            <p>Andere Infos</p>
+                            {% if bookmark['image'] %}
+                            <img src="/{{bookmark['image']}}" alt="">
+                            {% endif %}
                         </div>
                     </div>
                 </section>

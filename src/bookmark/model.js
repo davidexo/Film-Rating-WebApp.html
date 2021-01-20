@@ -73,7 +73,16 @@ export async function deleteById(db, id) {
  * @return {Promise<number>}
  */
 export async function update (db, id, bookmark) {
-  const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
-  bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, bookmark.image, id);
-  return result.changes;
+
+  if(bookmark.image) {
+    console.log("There is an image");
+    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
+    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, bookmark.image, id);
+    return result.changes;
+  } else {
+    console.log("There is no image");
+    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=? WHERE id = ?", 
+    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, id);
+    return result.changes;
+  }
 }

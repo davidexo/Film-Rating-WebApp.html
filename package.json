@@ -25,9 +25,7 @@
 	},
 	"devDependencies": {},
 	"scripts": {
-		"build-css": "tailwindcss build src/styles.css -o public/styles.css",
-		"test": "node ./src/test/cli-app.test.js",
-		"test-intro": "node ./src/test/intro.test.js"
+		"build-css": "tailwindcss build src/styles.css -o public/styles.css"
 	},
 	"keywords": [],
 	"author": "",

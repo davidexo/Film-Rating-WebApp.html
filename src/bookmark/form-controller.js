@@ -31,9 +31,7 @@ export async function submitForm(ctx) {
     data.files = ctx.request.files;
     const errors = await validateForm(data);
 
-    //data.image = generateFilename(data.files.image);
-    //console.log(data.image);
-
+    // Handle uploaded image
     if (data.files.image.size > 0) {
         const filename = generateFilename(data.files.image);
         data.image = filename;

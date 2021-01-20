@@ -5,76 +5,80 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white my-10 py-20 rounded-md shadow-xl">
     <div class="max-w-3xl mx-auto">
 
-    <!-- Intro -->
-    <div>
-        <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
-            Film hinzufügen
-        </h2>
-        <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            Füge einen Film hinzu, welchen du veröffentlichen möchtest.
-        </p>
-    </div>
+        <!-- Intro -->
+        <div>
+            <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
+                Film hinzufügen
+            </h2>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                Füge einen Film hinzu, welchen du veröffentlichen möchtest.
+            </p>
+        </div>
 
 
-    <!-- Formular-->
+        <!-- Formular-->
 
-    <!--
+        <!--
         enctype="multipart/form-data"
     -->
 
-    
-    <form method="post"  enctype="multipart/form-data" class="space-y-8 divide-y divide-gray-200">
-        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-            <ul class="divide-y divide-gray-200">
-                <li class="py-4">
-                    <label for="form_title" class="block text-sm font-medium text-gray-700">Titel</label>
-                    <div class="mt-1">
-                        <input type="text" id="form_title" size="80" name="title" value="{{ form['title'] }}"
+
+        <form method="post" enctype="multipart/form-data" class="space-y-8 divide-y divide-gray-200">
+            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                <ul class="divide-y divide-gray-200">
+                    <li class="py-4">
+                        <label for="form_title" class="block text-sm font-medium text-gray-700">Titel</label>
+                        <div class="mt-1">
+                            <input type="text" id="form_title" size="80" name="title" value="{{ form['title'] }}"
+                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                placeholder="you@example.com" required>
+                            {% if form.errors['title'] %}<p class="Form-error">{{ form.errors['title'] }}</p>{% endif %}
+                    </li>
+                    <li class="py-4">
+                        <label for="form_uri" class="block text-sm font-medium text-gray-700">URI</label>
+                        <input type="text" id="form_uri" size="80" name="uri" value="{{ form['uri'] }}"
                             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                             placeholder="you@example.com" required>
-                        {% if form.errors['title'] %}<p class="Form-error">{{ form.errors['title'] }}</p>{% endif %}
-                </li>
-                <li class="py-4">
-                    <label for="form_uri" class="block text-sm font-medium text-gray-700">URI</label>
-                    <input type="text" id="form_uri" size="80" name="uri" value="{{ form['uri'] }}"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder="you@example.com" required>
-                    {% if form.errors['uri'] %}<p class="Form-error">{{ form.errors['uri'] }}</p>{% endif %}
-                </li>
-                <li class="py-4">
-                    <label for="form_tags" class="block text-sm font-medium text-gray-700">Tags</label>
-                    <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder="you@example.com">
-                    {% if form.errors['tags'] %}<p class="Form-error">{{ form.errors['tags'] }}</p>{% endif %}
-                </li>
-                <li class="py-4">
-                    <label for="form_description" class="block text-sm font-medium text-gray-700">Beschreibung</label>
-                    <div class="mt-1 sm:mt-0 sm:col-span-2">
-                        <textarea id="form_description" name="description" rows="3" value="{{ form['uri'] }}"
-                            class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">{{ form['description'] }}</textarea>
-                        {% if form.errors['description'] %}<p class="Form-error">{{ form.errors['description'] }}</p>
+                        {% if form.errors['uri'] %}<p class="Form-error">{{ form.errors['uri'] }}</p>{% endif %}
+                    </li>
+                    <li class="py-4">
+                        <label for="form_tags" class="block text-sm font-medium text-gray-700">Tags</label>
+                        <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            placeholder="you@example.com">
+                        {% if form.errors['tags'] %}<p class="Form-error">{{ form.errors['tags'] }}</p>{% endif %}
+                    </li>
+                    <li class="py-4">
+                        <label for="form_description"
+                            class="block text-sm font-medium text-gray-700">Beschreibung</label>
+                        <div class="mt-1 sm:mt-0 sm:col-span-2">
+                            <textarea id="form_description" name="description" rows="3" value="{{ form['uri'] }}"
+                                class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">{{ form['description'] }}</textarea>
+                            {% if form.errors['description'] %}<p class="Form-error">{{ form.errors['description'] }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </li>
+                    <li class="py-4">
+                        <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
+
+                        {% if form['image'] %}
+                        <img class="h-64 object-cover my-8" id="form_image" name="image" src="/{{ form['image'] }}" alt="">
                         {% endif %}
-                    </div>
-                </li>
-                <li class="py-4">
-                    <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                    <div class="flex items-center">
                         <input type="file" id="form_image" name="image" value="{{ form['image'] }}">
-                    </div>
-                </li>
-            </ul>
-            <button type="submit" id="form_save"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Speichern
-            </button>
-            <button href="/bookmark/{{form['id']}}"
-                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Abbrechen
-            </button>
-        </div>
-    </form>
-</div>
+                    </li>
+                </ul>
+                <button type="submit" id="form_save"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Speichern
+                </button>
+                <button href="/bookmark/{{form['id']}}"
+                    class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Abbrechen
+                </button>
+            </div>
+        </form>
+    </div>
 
 
 </div>
