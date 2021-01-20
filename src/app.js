@@ -18,7 +18,19 @@ export default async function webApp(config) {
 
 	// Insert Middelware here!
 	//app.use(koaBody());
-	app.use(koaBody({ multipart: true }));
+	app.use(koaBody({
+		multipart: true,
+		formidable: {
+			// 1mb
+			maxFileSize: 1024 * 1024
+		},
+		onError: (error, ctx) => {
+			if (error.message.indexOf('maxFileSize exceeded') === 0) {
+			ctx.throw(413); // Payload too large
+			}
+			throw error;
+			}
+	}));
 	app.use(koaStatic('./public'));
 
 	const templateDir = process.cwd() + '/views';

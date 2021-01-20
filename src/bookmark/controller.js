@@ -1,5 +1,6 @@
 import * as model from './model.js';
 import * as formController from './form-controller.js';
+import { Console } from 'console';
 
 // GET FUNCTIONS
 
@@ -14,7 +15,6 @@ export async function index(ctx) {
             bookmarks: data
         });
     }
-
     if (data != undefined) {
         // Item was found in Database
         ctx.status = 200;
@@ -48,7 +48,6 @@ export async function show(ctx) {
 
 export async function confirmDelete(ctx) {
     // delete a bookmark
-
     const data = await model.getById(ctx.db, ctx.params.id);
 
     if (ctx.accepts("text/html")) {
@@ -103,7 +102,6 @@ export async function edit(ctx) {
         ctx.status = 404;
       } else {
         await formController.renderForm(ctx, data);
-        //await formController.submitForm(ctx);
       }
     }
   }

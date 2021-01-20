@@ -62,9 +62,18 @@
                     <li class="py-4">
                         <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
 
+
+
                         {% if form['image'] %}
-                        <img class="h-64 object-cover my-8" id="form_image" name="image" src="/{{ form['image'] }}" alt="">
+                        <span class="inline-block relative my-8">
+                            <img class="h-64 object-cover " id="form_image" name="image" src="/{{ form['image'] }}" alt="">
+                            <button type="button" class="absolute h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                x
+                            </button>
+                          </span>
+                        <div class="static">
                         {% endif %}
+                        
                         <input type="file" id="form_image" name="image" value="{{ form['image'] }}">
                     </li>
                 </ul>
