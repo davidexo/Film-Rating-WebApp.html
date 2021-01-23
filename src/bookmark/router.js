@@ -38,7 +38,6 @@ router.get("/", async (ctx, next) => {
   });
   
   // Ein Bookmark bearbeiten - Aktion ausfuehren
-
   router.post("/bookmark/:id/edit", async (ctx, next) => {
     await formController.submitForm(ctx);
   });
@@ -60,6 +59,16 @@ router.get("/", async (ctx, next) => {
   router.delete("/bookmark/:id", async (ctx, next) => {
     await controller.deleteById(ctx);
   });
-  
+
+  // Einen Film bewerten - Formular anzeigen
+    router.get("/bookmark/:id/rate", async (ctx, next) => {
+      await controller.rate(ctx);
+    });
+
+  // Einen Film bewerten - Aktion ausfuehren
+  router.post("/bookmark/:id/rate", async (ctx, next) => {
+    await formController.rateMovie(ctx);
+  });
+
   export default router;
   

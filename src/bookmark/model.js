@@ -13,6 +13,8 @@ import {
  * @property {string} date_created
  * @property {string} tags
  * @property {string} image
+ * @property {number} amount_ratings
+ * @property {number} rating
  * 
  */
 
@@ -73,7 +75,6 @@ export async function deleteById(db, id) {
  * @return {Promise<number>}
  */
 export async function update (db, id, bookmark) {
-
   if(bookmark.image) {
     console.log("There is an image");
     const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
@@ -85,4 +86,10 @@ export async function update (db, id, bookmark) {
     bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, id);
     return result.changes;
   }
+}
+
+export async function updateRating (db, id, rating) {
+  console.log("Update Rating");
+  const result = await db.run("UPDATE bookmarks SET rating=? WHERE id = ?", rating, id);
+  return result.changes;
 }

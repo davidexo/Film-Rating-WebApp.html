@@ -125,3 +125,16 @@ function getFiletype(filename) {
 export async function processFormData(ctx, data) {
 
 }
+
+export async function rateMovie(ctx) {
+    var data = ctx.request.body || {};
+
+    console.log(data.rating);
+    
+    if (ctx.params.id) {
+        console.log("Post auf rate ausgeführt");
+        // console.table(data);
+        await model.updateRating(ctx.db, ctx.params.id, data.rating);
+        ctx.redirect("/bookmark/" + ctx.params.id);
+    }
+}

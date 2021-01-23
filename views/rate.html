@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block title %}Film bewerten{% endblock %}
+{% block content %}
+
+
+<div class="lg:flex p-8 bg-gray-700 lg:items-center lg:justify-between">
+    <div class="flex-1 min-w-0">
+        <h2 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate">
+            {{form['title']}} bewerten
+        </h2>
+    </div>
+    <div class="mt-5 flex lg:mt-0 lg:ml-4">
+    </div>
+</div>
+
+<main class="pt-12 pb-8 bg-gray-600">
+
+    <div class="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8 bg-white my-10 py-20 rounded-md shadow-xl">
+        <div class="max-w-3xl mx-auto">
+
+            <!-- Intro -->
+            <div>
+                <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
+                    {{form['title']}} bewerten
+                </h2>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    Wie findest du den Film {{form['title']}}?
+                </p>
+            </div>
+
+            <form method="post" class="space-y-8 divide-y divide-gray-200">
+                <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <ul class="divide-y divide-gray-200">
+                        <li class="py-4 flex">
+                            <label for="stars">Wie findest du den Film {{form['title']}}?</label>
+                            <select id="rating" name="rating" class="text-2xl">
+                                <option value="1">1 / 10</option>
+                                <option value="2">2 / 10</option>
+                                <option value="3">3 / 10</option>
+                                <option value="4">4 / 10</option>
+                                <option value="5">5 / 10</option>
+                                <option value="6">6 / 10</option>
+                                <option value="7">7 / 10</option>
+                                <option value="8">8 / 10</option>
+                                <option value="9">9 / 10</option>
+                                <option value="10">10 / 10</option>
+                            </select>
+                            <label for="stars">Dieser film hat X bewertungen</label>
+                        </li>
+                    </ul>
+                    <button type="submit" id="form_save"
+                        class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Bestätigen
+                    </button>
+                    <button href="/bookmark/{{form['id']}}"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Abbrechen
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

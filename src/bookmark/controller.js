@@ -106,6 +106,21 @@ export async function edit(ctx) {
     }
   }
 
+// Rate a movie
+export async function rate(ctx) {
+    const data = await model.getById(ctx.db, ctx.params.id);
+
+    if (ctx.accepts("text/html")) {
+        console.log("Führe mit HTMl aus!");
+        await ctx.render('rate', {
+            form: data
+        });
+    } else if (ctx.accepts("application/json")) {
+        console.log("Führe mit JSON aus");
+        // Funktionalität fehlt. Muss das sein?
+    }
+}
+
 // Delete a bookmark by ID
 export async function deleteById(ctx) {
 
