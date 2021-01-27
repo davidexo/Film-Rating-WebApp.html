@@ -88,8 +88,16 @@ export async function update (db, id, bookmark) {
   }
 }
 
-export async function updateRating (db, id, rating) {
+export async function updateRating (db, id, newRating) {
   console.log("Update Rating");
-  const result = await db.run("UPDATE bookmarks SET rating=? WHERE id = ?", rating, id);
+
+  const current = await db.get("SELECT rating, amount_ratings FROM bookmarks WHERE id = ?", id);
+  console.table(current);
+  const newAmountRatings = current.amount_ratings + 1;
+
+  const averageRating = ((parseFloat(current.rating) + parseFloat(newRating)) / newAmountRatings);
+  console.log(averageRating);
+
+  const result = await db.run("UPDATE bookmarks SET rating=?, amount_ratings=? WHERE id = ?", averageRating, newAmountRatings, id);
   return result.changes;
 }
