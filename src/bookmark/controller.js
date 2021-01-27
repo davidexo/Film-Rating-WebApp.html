@@ -28,6 +28,10 @@ export async function index(ctx) {
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
+    // round Rating for better displaying
+    //data.rating = parseFloat(data.rating).toFixed(2);
+    data.rating = +data.rating.toFixed(2);
+
     if (data != undefined) {
         // Item was found in Database
         ctx.status = 200;

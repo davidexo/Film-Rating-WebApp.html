@@ -13,7 +13,7 @@ import {
  * @property {string} date_created
  * @property {string} tags
  * @property {string} image
- * @property {number} amount_ratings
+ * @property {number} total_rating
  * @property {number} rating
  * 
  */
@@ -88,16 +88,22 @@ export async function update (db, id, bookmark) {
   }
 }
 
-export async function updateRating (db, id, newRating) {
-  console.log("Update Rating");
+export async function updateRating (db, id, rating) {
 
-  const current = await db.get("SELECT rating, amount_ratings FROM bookmarks WHERE id = ?", id);
-  console.table(current);
-  const newAmountRatings = current.amount_ratings + 1;
+  // get entry in database
+  const current = await db.get("SELECT rating, total_rating FROM bookmarks WHERE id = ?", id);
+  
+  //console.table(current);
 
-  const averageRating = ((parseFloat(current.rating) + parseFloat(newRating)) / newAmountRatings);
-  console.log(averageRating);
+  // parse values to numbers
+  var overallRating = parseFloat(current.rating);
+  var totalRating = parseFloat(current.total_rating);
+  var newRating = parseFloat(rating);
 
-  const result = await db.run("UPDATE bookmarks SET rating=?, amount_ratings=? WHERE id = ?", averageRating, newAmountRatings, id);
+  // calculate new rating
+  const newOverallRating = ((overallRating * totalRating) + newRating) / (totalRating + 1);
+  console.log(newOverallRating);
+  
+  const result = await db.run("UPDATE bookmarks SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
   return result.changes;
 }
