@@ -8,21 +8,18 @@
         <!-- Intro -->
         <div>
             <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
+                {% if form['id'] %}
+                {{ form['title'] }} bearbeiten
+                {% else %}
                 Film hinzufügen
+                {% endif %}
             </h2>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
                 Füge einen Film hinzu, welchen du veröffentlichen möchtest.
             </p>
         </div>
 
-
-        <!-- Formular-->
-
-        <!--
-        enctype="multipart/form-data"
-    -->
-
-
+        <!-- Formular -->
         <form method="post" enctype="multipart/form-data" class="space-y-8 divide-y divide-gray-200">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <ul class="divide-y divide-gray-200">
@@ -81,10 +78,19 @@
                     class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Speichern
                 </button>
-                <button href="/bookmark/{{form['id']}}"
-                    class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+
+                <!-- Abbrechen Button-->
+                {% if form['id'] %}
+                <!-- wenn es sich um einen bestehenden Film handelt -->
+                <button onclick="location.href='/'" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Abbrechen
                 </button>
+                {% else %}
+                <!-- Wenn ein neuer Film erstellt wird -->
+                <button onclick="location.href='/'" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Abbrechen
+                </button>
+                {% endif %}
             </div>
         </form>
     </div>
