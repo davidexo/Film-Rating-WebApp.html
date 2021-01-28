@@ -93,16 +93,13 @@ export async function updateRating (db, id, rating) {
   // get entry in database
   const current = await db.get("SELECT rating, total_rating FROM bookmarks WHERE id = ?", id);
   
-  //console.table(current);
-
-  // parse values to numbers
   var overallRating = parseFloat(current.rating);
   var totalRating = parseFloat(current.total_rating);
   var newRating = parseFloat(rating);
 
   // calculate new rating
   const newOverallRating = ((overallRating * totalRating) + newRating) / (totalRating + 1);
-  console.log(newOverallRating);
+  console.log("New Overallrating: " + newOverallRating);
   
   const result = await db.run("UPDATE bookmarks SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
   return result.changes;

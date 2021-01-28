@@ -43,7 +43,7 @@
                             </p>
 
                             -->
-                            
+
                         </a>
                     </div>
                     <div class="mt-6 flex items-center">
@@ -52,21 +52,19 @@
                                 <span class="sr-only">Roel Aufderehar</span>
                             </a>
                         </div>
-                        <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900 rating">
-                                {% if bookmark['rating'] %} 
+                        <div>
+                            <p class="text-s font-medium text-gray-900 rating pb-2">
+                                {% if bookmark['rating'] %}
                                 {{bookmark['rating']}} / 10
                                 {% else %}
-                                UNRATED
+                                Noch keine Bewertung
                                 {% endif %}
                             </p>
-                            <a href="{{bookmark['uri']}}" class="flex space-x-1 text-sm text-gray-500">
-                                <span>
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-gray-800">
-                                        Imdb
-                                    </span>
-                                </span>
+                            <a href="{{bookmark['uri']}}" class="inline-flex items-center px-3 py-1 rounded-full text-s font-medium bg-yellow-100 text-gray-800">
+                                Imdb
+                            </a>
+                            <a href="{{bookmark['uri']}}" class="inline-flex items-center px-3 py-1 rounded-full text-s font-medium bg-red-100 text-gray-800">
+                                Rotten Tomatoes
                             </a>
                         </div>
                     </div>
@@ -78,14 +76,13 @@
 </div>
 
 <script>
-
     function roundRatings() {
         const ratings = document.getElementsByClassName("rating");
         for (rating in ratings) {
             const p = document.createElement("p");
             const p_text = document.createTextNode("Alarm!");
             p.appendChild(p_text);
-            
+
             // This is not working...
             //rating.replaceWith(p);
         }
