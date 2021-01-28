@@ -5,6 +5,7 @@ import * as model from './model.js';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as comtroller from './controller.js';
 
 // render form with additional data
 export async function renderForm(ctx, form) {

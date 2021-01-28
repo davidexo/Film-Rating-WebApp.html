@@ -24,7 +24,7 @@
                     {{form['title']}} bewerten
                 </h2>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Wie findest du den Film {{form['title']}}?
+                    Wie findest du den Film {{form['title']}}? ({{form['rating']}})
                 </p>
             </div>
 
@@ -45,7 +45,6 @@
                                 <option value="9">9 / 10</option>
                                 <option value="10">10 / 10</option>
                             </select>
-                            <label for="stars">Dieser film hat X bewertungen</label>
                         </li>
                     </ul>
                     <button type="submit" id="form_save"

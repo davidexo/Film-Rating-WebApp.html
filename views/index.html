@@ -15,7 +15,7 @@
                 Die besten Filme ausgewählt von unserer Community
             </p>
         </div>
-        <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-2 lg:max-w-none">
+        <div class="mt-12 max-w-lg mx-auto grid gap-8 lg:grid-cols-3 lg:max-w-none">
             <!-- Load Objects here-->
             {% for bookmark in bookmarks %}
 
@@ -23,7 +23,7 @@
                 <a href="/bookmark/{{bookmark['id']}}">
                     <div class="flex-shrink-0">
                         {% if bookmark['image'] %}
-                        <img class="h-64 w-full object-cover" src="/{{bookmark['image']}}" alt="">
+                        <img class="h-96 w-full object-cover" src="/{{bookmark['image']}}" alt="">
                         {% endif %}
                     </div>
                 </a>
@@ -54,7 +54,11 @@
                         </div>
                         <div class="ml-3">
                             <p class="text-sm font-medium text-gray-900 rating">
+                                {% if bookmark['rating'] %} 
                                 {{bookmark['rating']}} / 10
+                                {% else %}
+                                UNRATED
+                                {% endif %}
                             </p>
                             <a href="{{bookmark['uri']}}" class="flex space-x-1 text-sm text-gray-500">
                                 <span>

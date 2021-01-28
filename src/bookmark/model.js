@@ -10,7 +10,7 @@ import {
  * @property {string} uri
  * @property {string} title
  * @property {string} description
- * @property {string} date_created
+ * @property {string} release
  * @property {string} tags
  * @property {string} image
  * @property {number} total_rating
@@ -41,7 +41,7 @@ export async function getById(db, id) {
 
 export async function add(db, bookmark) {
   const sql = `INSERT INTO bookmarks
- (uri, title, description, tags, date_created, image)
+ (uri, title, description, tags, release, image)
  VALUES ($uri, $title, $description, $tags, $date, $image)`;
 
   const parameters = {
@@ -77,13 +77,13 @@ export async function deleteById(db, id) {
 export async function update (db, id, bookmark) {
   if(bookmark.image) {
     console.log("There is an image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, bookmark.image, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, release=?, image=? WHERE id = ?", 
+    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.release, bookmark.image, id);
     return result.changes;
   } else {
     console.log("There is no image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, release=? WHERE id = ?", 
+    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.release, id);
     return result.changes;
   }
 }

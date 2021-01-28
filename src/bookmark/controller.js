@@ -11,6 +11,18 @@ export async function index(ctx) {
     if (ctx.accepts() == "application/json") {
         ctx.body = data;
     } else {
+
+        // var film;
+        // for (film in data) {
+        //     console.log("Film: " + film);
+        //     if(film.rating) {
+        //         //console.log("Rating");
+        //         film.rating = roundRating(film.rating);
+        //     } else {
+        //         //console.log("No rating");
+        //     }
+        // }
+
         await ctx.render('index', {
             bookmarks: data
         });
@@ -28,9 +40,7 @@ export async function index(ctx) {
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
-    // round Rating for better displaying
-    //data.rating = parseFloat(data.rating).toFixed(2);
-    data.rating = +data.rating.toFixed(2);
+    data.rating = await roundRating(data.rating);    
 
     if (data != undefined) {
         // Item was found in Database
@@ -137,5 +147,15 @@ export async function deleteById(ctx) {
     } else {
         // 404 NOT FOUND
         ctx.status = 404;
+    }
+}
+
+export async function roundRating(rating) {
+    if(rating) {
+        const result = +rating.toFixed(2);  
+        return result;
+    } else {
+        console.error("There is no rating on this element");
+        return rating;
     }
 }
