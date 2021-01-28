@@ -7,7 +7,6 @@ import {
  *
  * @typedef Bookmark
  * @property {number} id
- * @property {string} uri
  * @property {string} title
  * @property {string} description
  * @property {string} release
@@ -15,6 +14,8 @@ import {
  * @property {string} image
  * @property {number} total_rating
  * @property {number} rating
+ * @property {string} imdb
+ * @property {string} rottentomatoes
  * 
  */
 
@@ -41,16 +42,17 @@ export async function getById(db, id) {
 
 export async function add(db, bookmark) {
   const sql = `INSERT INTO bookmarks
- (uri, title, description, tags, release, image)
- VALUES ($uri, $title, $description, $tags, $date, $image)`;
+ (title, description, tags, release, image, imdb, rottentomatoes)
+ VALUES ($title, $description, $tags, $date, $image, $imdb, $rottentomatoes)`;
 
   const parameters = {
-    $uri: bookmark.uri,
     $title: bookmark.title,
     $description: bookmark.description,
     $tags: bookmark.tags,
     $date: new Date(Date.now()).toISOString(),
-    $image: bookmark.image
+    $image: bookmark.image,
+    $imdb: bookmark.imdb,
+    $rottentomatoes: bookmark.rottentomatoes
   };
 
   const result = await db.run(sql, parameters);
@@ -77,13 +79,13 @@ export async function deleteById(db, id) {
 export async function update (db, id, bookmark) {
   if(bookmark.image) {
     console.log("There is an image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, release=?, image=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.release, bookmark.image, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, image=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.image, bookmark.imdb, bookmark.rottentomatoes, id);
     return result.changes;
   } else {
     console.log("There is no image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, release=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.release, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.imdb, bookmark.rottentomatoes, id);
     return result.changes;
   }
 }

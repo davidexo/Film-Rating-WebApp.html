@@ -72,8 +72,9 @@ export async function submitForm(ctx) {
 export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
-        uri: validateUri(data.uri),
         image: validateImage(data.image),
+        //imdb: validateUri(data.imdb),
+        //rottentomatoes: validateUri(data.rottentomatoes),
     }
 }
 
@@ -121,10 +122,6 @@ function getFiletype(filename) {
     const fileName = string.substring(0, lastSlash);
     const ext = string.substring(lastSlash + 1);
     return ext;
-}
-
-export async function processFormData(ctx, data) {
-
 }
 
 export async function rateMovie(ctx) {

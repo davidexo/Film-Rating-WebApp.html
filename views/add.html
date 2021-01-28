@@ -28,73 +28,78 @@
                         <div class="mt-1">
                             <input type="text" id="form_title" size="80" name="title" value="{{ form['title'] }}"
                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                placeholder="you@example.com" required>
-                            {% if form.errors['title'] %}<p class="Form-error">{{ form.errors['title'] }}</p>{% endif %}
+                                placeholder="Der Titel des Films">
+                            {% if form.errors['title'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['title'] }}
+                            </p>{% endif %}
                     </li>
                     <li class="py-4">
-                        <label for="form_uri" class="block text-sm font-medium text-gray-700">URI</label>
-                        <input type="text" id="form_uri" size="80" name="uri" value="{{ form['uri'] }}"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                            placeholder="you@example.com" required>
-                        {% if form.errors['uri'] %}<p class="Form-error">{{ form.errors['uri'] }}</p>{% endif %}
-                    </li>
-                    <li class="py-4">
-                        <label for="form_tags" class="block text-sm font-medium text-gray-700">Tags</label>
+                        <label for="form_tags" class="block text-sm font-medium text-gray-700">Genre</label>
                         <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}"
                             class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                            placeholder="you@example.com">
-                        {% if form.errors['tags'] %}<p class="Form-error">{{ form.errors['tags'] }}</p>{% endif %}
+                            placeholder="Thriller, Komödie, Drama">
+                        {% if form.errors['tags'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['tags'] }}</p>
+                        {% endif %}
                     </li>
                     <li class="py-4">
                         <label for="form_description"
                             class="block text-sm font-medium text-gray-700">Beschreibung</label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <textarea id="form_description" name="description" rows="3" value="{{ form['uri'] }}"
-                                class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">{{ form['description'] }}</textarea>
-                            {% if form.errors['description'] %}<p class="Form-error">{{ form.errors['description'] }}
+                            <textarea id="form_description" name="description" rows="3"
+                                value="{{ form['description'] }}"
+                                class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
+                                placeholder="Eine kurze Beschreibung über den Film">{{ form['description'] }}</textarea>
+                            {% if form.errors['description'] %}<p class="mt-2 text-sm text-red-600">
+                                {{ form.errors['description'] }}
                             </p>
                             {% endif %}
                         </div>
                     </li>
                     <li class="py-4">
+                        <label for="form_imdb" class="block text-sm font-medium text-gray-700">Imdb</label>
+                        <input type="text" id="form_imdb" size="80" name="imdb" value="{{ form['imdb'] }}"
+                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Link auf Imdb">
+                        {% if form.errors['imdb'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['imdb'] }}</p>
+                        {% endif %}
+                    </li>
+                    <li class="py-4">
                         <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-
-
-
                         {% if form['image'] %}
                         <span class="inline-block relative my-8">
-                            <img class="h-64 object-cover " id="form_image" name="image" src="/{{ form['image'] }}" alt="">
-                            <button type="button" class="absolute h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <img class="h-64 object-cover " id="form_image" name="image" src="/{{ form['image'] }}"
+                                alt="">
+                            <button type="button"
+                                class="absolute h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 x
                             </button>
-                          </span>
+                        </span>
                         <div class="static">
-                        {% endif %}
-                        
-                        <input type="file" id="form_image" name="image" value="{{ form['image'] }}">
+                            {% endif %}
+
+                            <input type="file" id="form_image" name="image" value="{{ form['image'] }}">
                     </li>
                 </ul>
                 <button type="submit" id="form_save"
                     class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Speichern
                 </button>
-
-                <!-- Abbrechen Button-->
-                {% if form['id'] %}
-                <!-- wenn es sich um einen bestehenden Film handelt -->
-                <button onclick="location.href='/'" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Abbrechen
-                </button>
-                {% else %}
-                <!-- Wenn ein neuer Film erstellt wird -->
-                <button onclick="location.href='/'" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Abbrechen
-                </button>
-                {% endif %}
             </div>
         </form>
+
+        <!-- Abbrechen Button-->
+        {% if form['id'] %}
+        <!-- wenn es sich um einen bestehenden Film handelt -->
+        <button onclick="location.href='/'"
+            class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Abbrechen
+        </button>
+        {% else %}
+        <!-- Wenn ein neuer Film erstellt wird -->
+        <button onclick="location.href='/'"
+            class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            {% endif %}
+            Abbrechen
+        </button>
     </div>
-
-
 </div>
 {% endblock %}
