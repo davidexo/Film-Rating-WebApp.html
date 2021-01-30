@@ -5,6 +5,7 @@ import * as model from './model.js';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as comtroller from './controller.js';
 
 // render form with additional data
 export async function renderForm(ctx, form) {
@@ -71,8 +72,9 @@ export async function submitForm(ctx) {
 export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
-        uri: validateUri(data.uri),
         image: validateImage(data.image),
+        //imdb: validateUri(data.imdb),
+        //rottentomatoes: validateUri(data.rottentomatoes),
     }
 }
 
@@ -122,18 +124,13 @@ function getFiletype(filename) {
     return ext;
 }
 
-export async function processFormData(ctx, data) {
-
-}
-
 export async function rateMovie(ctx) {
     var data = ctx.request.body || {};
 
-    console.log(data.rating);
+    console.log("Selected Rating: " + data.rating);
     
     if (ctx.params.id) {
         console.log("Post auf rate ausgeführt");
-        // console.table(data);
         await model.updateRating(ctx.db, ctx.params.id, data.rating);
         ctx.redirect("/bookmark/" + ctx.params.id);
     }

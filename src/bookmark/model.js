@@ -7,14 +7,15 @@ import {
  *
  * @typedef Bookmark
  * @property {number} id
- * @property {string} uri
  * @property {string} title
  * @property {string} description
- * @property {string} date_created
+ * @property {string} release
  * @property {string} tags
  * @property {string} image
  * @property {number} total_rating
  * @property {number} rating
+ * @property {string} imdb
+ * @property {string} rottentomatoes
  * 
  */
 
@@ -41,16 +42,17 @@ export async function getById(db, id) {
 
 export async function add(db, bookmark) {
   const sql = `INSERT INTO bookmarks
- (uri, title, description, tags, date_created, image)
- VALUES ($uri, $title, $description, $tags, $date, $image)`;
+ (title, description, tags, release, image, imdb, rottentomatoes)
+ VALUES ($title, $description, $tags, $date, $image, $imdb, $rottentomatoes)`;
 
   const parameters = {
-    $uri: bookmark.uri,
     $title: bookmark.title,
     $description: bookmark.description,
     $tags: bookmark.tags,
     $date: new Date(Date.now()).toISOString(),
-    $image: bookmark.image
+    $image: bookmark.image,
+    $imdb: bookmark.imdb,
+    $rottentomatoes: bookmark.rottentomatoes
   };
 
   const result = await db.run(sql, parameters);
@@ -77,13 +79,13 @@ export async function deleteById(db, id) {
 export async function update (db, id, bookmark) {
   if(bookmark.image) {
     console.log("There is an image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=?, image=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, bookmark.image, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, image=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.image, bookmark.imdb, bookmark.rottentomatoes, id);
     return result.changes;
   } else {
     console.log("There is no image");
-    const result = await db.run("UPDATE bookmarks SET title=?, uri=?, description=?, tags=?, date_created=? WHERE id = ?", 
-    bookmark.title, bookmark.uri, bookmark.description, bookmark.tags, bookmark.date_created, id);
+    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.imdb, bookmark.rottentomatoes, id);
     return result.changes;
   }
 }
@@ -93,16 +95,13 @@ export async function updateRating (db, id, rating) {
   // get entry in database
   const current = await db.get("SELECT rating, total_rating FROM bookmarks WHERE id = ?", id);
   
-  //console.table(current);
-
-  // parse values to numbers
   var overallRating = parseFloat(current.rating);
   var totalRating = parseFloat(current.total_rating);
   var newRating = parseFloat(rating);
 
   // calculate new rating
   const newOverallRating = ((overallRating * totalRating) + newRating) / (totalRating + 1);
-  console.log(newOverallRating);
+  console.log("New Overallrating: " + newOverallRating);
   
   const result = await db.run("UPDATE bookmarks SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
   return result.changes;

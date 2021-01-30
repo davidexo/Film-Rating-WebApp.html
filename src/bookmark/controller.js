@@ -11,6 +11,7 @@ export async function index(ctx) {
     if (ctx.accepts() == "application/json") {
         ctx.body = data;
     } else {
+
         await ctx.render('index', {
             bookmarks: data
         });
@@ -28,9 +29,7 @@ export async function index(ctx) {
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
-    // round Rating for better displaying
-    //data.rating = parseFloat(data.rating).toFixed(2);
-    data.rating = +data.rating.toFixed(2);
+    data.rating = await roundRating(data.rating);    
 
     if (data != undefined) {
         // Item was found in Database
@@ -71,19 +70,19 @@ export async function add(ctx) {
         // Formular wird ueber den form-controller gerendert
         await formController.submitForm(ctx);
     } else if (ctx.accepts("application/json")) {
-        // JSON-Datenw erden ausgegeben
+        // JSON-Daten werden ausgegeben
         const title = ctx.request.body.title;
-        const uri = ctx.request.body.uri;
-        if (title != null && uri != null) {
+        if (title != null) {
             const bookmark = {
                 // neues Bookmark wird erzeugt
                 id: undefined,
                 title: title,
-                uri: uri,
                 description: ctx.request.body.description,
                 tags: ctx.request.body.tags,
                 date_created: ctx.request.body.date_created,
                 image: ctx.request.body.image,
+                imdb: ctx.request.body.imdb,
+                rottentomatoes: ctx.request.body.rottentomatoes
             };
             // neues Bookmark in Datenbank sichern
             const newId = await model.add(ctx.db, bookmark);
@@ -137,5 +136,15 @@ export async function deleteById(ctx) {
     } else {
         // 404 NOT FOUND
         ctx.status = 404;
+    }
+}
+
+export async function roundRating(rating) {
+    if(rating) {
+        const result = +rating.toFixed(2);  
+        return result;
+    } else {
+        console.error("There is no rating on this element");
+        return rating;
     }
 }
