@@ -1,11 +1,16 @@
 import Router from "@koa/router";
-import koaBody from "koa-body";
 import * as controller from "./controller.js";
 import * as formController from "./form-controller.js";
+import * as login from "./login-form-controller.js";
+//import isAuthenticated from "../middelware/isAuthenticated.js";
 
 const router = new Router();
 
-
+router.get("/bookmark/login", login.showForm);
+router.post("/bookmark/login", async (ctx, next) => {
+  await login.submitForm(ctx);
+});
+router.get("/bookmark/logout", login.logout);
 
 // Alle Bookmarks ausgeben
 router.get("/", async (ctx, next) => {

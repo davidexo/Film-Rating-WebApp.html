@@ -5,6 +5,9 @@ import bookmarkRouter from './bookmark/router.js';
 import koaBody from 'koa-body';
 import views from 'koa-views';
 import koaStatic from "koa-static";
+import { flash } from "./middleware/flash.js";
+import session from "koa-session";
+import SQLite3Store from "koa-sqlite3-session";
 
 
 
@@ -32,6 +35,14 @@ export default async function webApp(config) {
 			}
 	}));
 	app.use(koaStatic('./public'));
+
+  app.keys = ["3)!G[F-.85LCAUY_WSS6!(y:)G02R"];
+
+  app.use(session({ store: new SQLite3Store("./data/session.sqlite") }, app));
+  app.use(flash);
+  
+  
+ 
 
 	const templateDir = process.cwd() + '/views';
 
