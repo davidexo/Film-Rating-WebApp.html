@@ -73,15 +73,16 @@
                             Neues Bookmark
                         </button>
                     </a>
-                    {% endif %}
                     <a href="/bookmark/logout"><button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Logout
                         </button></a>
+                        {% else %}
                     <a href="/bookmark/login"><button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Login
                         </button></a>
+                        {% endif %}
                     <!-- Profile dropdown -->
                     <div class="ml-3 relative">
                         <div>

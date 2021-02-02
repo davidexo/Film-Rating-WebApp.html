@@ -22,19 +22,16 @@ export async function submitForm(ctx) {
   const form = ctx.request.body || {};
   const user = await userModel.getByUsername(ctx.db, form.username);
   if (form.password == user.password) {
+    ctx.session.flash = `Du bist eingeloggt.`;
     user.password = undefined;
     ctx.session.user = user;
-    ctx.state.authenticated = true;
-    console.log("User is authenticated: " + ctx.state.authenticated);
-    ctx.session.flash = `Du bist eingeloggt.`;
+
     ctx.redirect("/");
   }
 }
 
 export async function logout(ctx) {
-  ctx.session.user = undefined;
-  ctx.state.authenticated = false;
-  console.log("User is authenticated: " + ctx.state.authenticated);
   ctx.session.flash = `Du hast dich ausgeloggt.`;
+  ctx.session.user = undefined;
   ctx.redirect("/");
 }
