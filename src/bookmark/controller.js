@@ -10,7 +10,7 @@ import {
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
-    data = sortByRating(data, true);
+    data = sortByRating(data, false);
 
     if (ctx.accepts() == "application/json") {
         ctx.body = data;
@@ -118,13 +118,9 @@ export async function rate(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
     if (ctx.accepts("text/html")) {
-        console.log("Führe mit HTMl aus!");
         await ctx.render('rate', {
             form: data
         });
-    } else if (ctx.accepts("application/json")) {
-        console.log("Führe mit JSON aus");
-        // Funktionalität fehlt. Muss das sein?
     }
 }
 

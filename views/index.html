@@ -14,7 +14,11 @@
             <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
                 Die besten Filme ausgewählt von unserer Community
             </p>
-            <button id="sort-button" class="bg-red-600">Anders sortieren</button>
+            <button id="sort-button" type="button"
+                class="inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                id="options-menu" aria-haspopup="true" aria-expanded="true">
+                Absteigend
+            </button>
         </div>
         <ul id="film-list" class="mt-12 max-w-lg mx-auto grid gap-8 lg:grid-cols-3 lg:max-w-none">
             <!-- Load Objects here-->
@@ -83,12 +87,16 @@
 <script>
     var sortButton = document.getElementById("sort-button");
     var filmList = document.getElementById("film-list");
+    var dir = "asc";
 
     // This function was coded based on the following w3schools tutorial
     // Source: https://www.w3schools.com/howto/howto_js_sort_list.asp
     sortButton.onclick = function () {
         var switching = true;
+        var switchcount = 0;
+        
         dir = "asc";
+        sortButton.innerHTML = 'Absteigend';
 
         while (switching) {
             switching = false;
@@ -97,7 +105,35 @@
             var listElements = filmList.getElementsByTagName("LI");
 
             for (i = 0; i < (listElements.length - 1); i++) {
-                console.log(listElements[i].dataset.rating);
+                shouldSwitch = false;
+
+                if (dir == "asc") {
+                    if (parseFloat(listElements[i].dataset.rating) < parseFloat(listElements[i + 1].dataset
+                        .rating)) {
+                        //console.log("Switching " + i + " and " + (i+1));
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (parseFloat(listElements[i].dataset.rating) > parseFloat(listElements[i + 1].dataset
+                        .rating)) {
+                        //console.log("Switching " + i + " and " + (i+1));
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                console.log("Now switching");
+                listElements[i].parentNode.insertBefore(listElements[i + 1], listElements[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    sortButton.innerHTML = 'Aufsteigend';
+                    switching = true;
+                }
             }
         }
     }
