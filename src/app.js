@@ -1,6 +1,6 @@
 import Koa from 'koa';
 import http from 'http';
-import bookmarkRouter from './bookmark/router.js';
+import movieRouter from './movie/router.js';
 import koaBody from 'koa-body';
 import views from 'koa-views';
 import koaStatic from "koa-static";
@@ -51,7 +51,7 @@ export default async function webApp(config) {
 	app.use(render);
 
 	// Use controller functions
-	app.use(bookmarkRouter.routes());
+	app.use(movieRouter.routes());
 
 	return http.createServer(app.callback()).listen(config.port, () => {
 		console.log(`Listening on port ${config.port}`);

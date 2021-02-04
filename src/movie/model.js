@@ -5,7 +5,7 @@ import {
 
 /**
  *
- * @typedef Bookmark
+ * @typedef movie
  * @property {number} id
  * @property {string} title
  * @property {string} description
@@ -26,7 +26,7 @@ import {
  * @return {Promise<*[]>}
  */
 export async function all(db) {
-  return await db.all("SELECT * FROM bookmarks");
+  return await db.all("SELECT * FROM movies");
 }
 
 /**
@@ -34,25 +34,25 @@ export async function all(db) {
  * @param {Database} db // Pfad zum Datenbankobjekt
  * @param {String} id // Gesuchte Id
  *
- * @return {Promise<Bookmark>}
+ * @return {Promise<movie>}
  */
 export async function getById(db, id) {
-  return await db.get("SELECT * FROM bookmarks WHERE id = ?", id);
+  return await db.get("SELECT * FROM movies WHERE id = ?", id);
   }
 
-export async function add(db, bookmark) {
-  const sql = `INSERT INTO bookmarks
+export async function add(db, movie) {
+  const sql = `INSERT INTO movies
  (title, description, tags, release, image, imdb, rottentomatoes)
  VALUES ($title, $description, $tags, $date, $image, $imdb, $rottentomatoes)`;
 
   const parameters = {
-    $title: bookmark.title,
-    $description: bookmark.description,
-    $tags: bookmark.tags,
+    $title: movie.title,
+    $description: movie.description,
+    $tags: movie.tags,
     $date: new Date(Date.now()).toISOString(),
-    $image: bookmark.image,
-    $imdb: bookmark.imdb,
-    $rottentomatoes: bookmark.rottentomatoes
+    $image: movie.image,
+    $imdb: movie.imdb,
+    $rottentomatoes: movie.rottentomatoes
   };
 
   const result = await db.run(sql, parameters);
@@ -60,7 +60,7 @@ export async function add(db, bookmark) {
 }
 
 export async function deleteById(db, id) {
-  const sql = `DELETE FROM bookmarks WHERE id=$id`;
+  const sql = `DELETE FROM movies WHERE id=$id`;
   const result = await db.run(sql, {
     $id: id
   });
@@ -68,24 +68,24 @@ export async function deleteById(db, id) {
 }
 
 /**
- * Bearbeitet ein Bookmark in der Datenbank
+ * Bearbeitet ein movie in der Datenbank
  *
  * @param {Database} db // Datenbankobjekt
- * @param {number} id // Id des Bookmarks
- * @param {Bookmark} bookmark // Bookmark-Daten
+ * @param {number} id // Id des movies
+ * @param {movie} movie // movie-Daten
  *
  * @return {Promise<number>}
  */
-export async function update (db, id, bookmark) {
-  if(bookmark.image) {
+export async function update (db, id, movie) {
+  if(movie.image) {
     console.log("There is an image");
-    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, image=?, imdb=?, rottentomatoes=? WHERE id = ?", 
-    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.image, bookmark.imdb, bookmark.rottentomatoes, id);
+    const result = await db.run("UPDATE movies SET title=?, description=?, tags=?, release=?, image=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    movie.title, movie.description, movie.tags, movie.release, movie.image, movie.imdb, movie.rottentomatoes, id);
     return result.changes;
   } else {
     console.log("There is no image");
-    const result = await db.run("UPDATE bookmarks SET title=?, description=?, tags=?, release=?, imdb=?, rottentomatoes=? WHERE id = ?", 
-    bookmark.title, bookmark.description, bookmark.tags, bookmark.release, bookmark.imdb, bookmark.rottentomatoes, id);
+    const result = await db.run("UPDATE movies SET title=?, description=?, tags=?, release=?, imdb=?, rottentomatoes=? WHERE id = ?", 
+    movie.title, movie.description, movie.tags, movie.release, movie.imdb, movie.rottentomatoes, id);
     return result.changes;
   }
 }
@@ -93,7 +93,7 @@ export async function update (db, id, bookmark) {
 export async function updateRating (db, id, rating) {
 
   // get entry in database
-  const current = await db.get("SELECT rating, total_rating FROM bookmarks WHERE id = ?", id);
+  const current = await db.get("SELECT rating, total_rating FROM movies WHERE id = ?", id);
   
   var overallRating = parseFloat(current.rating);
   var totalRating = parseFloat(current.total_rating);
@@ -103,6 +103,6 @@ export async function updateRating (db, id, rating) {
   const newOverallRating = ((overallRating * totalRating) + newRating) / (totalRating + 1);
   console.log("New Overallrating: " + newOverallRating);
   
-  const result = await db.run("UPDATE bookmarks SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
+  const result = await db.run("UPDATE movies SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
   return result.changes;
 }
