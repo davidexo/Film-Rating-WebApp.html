@@ -10,7 +10,7 @@ const port = 3000;
 
 	//open database
 	const db =  await sqlite.open({
-        filename: "./data/bookmarks.sqlite",
+        filename: "./data/movies.sqlite",
         driver: sqlite3.Database });
 	const config = { port,  db};
 	await webApp(config);

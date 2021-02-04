@@ -14,13 +14,13 @@ export async function renderForm(ctx, form) {
     });
 }
 
-// add a bookmark
+// add a movie
 export async function add(ctx) {
     //const data = await model.defaultData(ctx);
     await ctx.render("add");
 }
 
-// edit a bookmark
+// edit a movie
 export async function edit(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
     await ctx.render('edit', {
@@ -59,7 +59,7 @@ export async function submitForm(ctx) {
         if (ctx.params.id) {
             console.table(data);
             await model.update(ctx.db, ctx.params.id, data);
-            ctx.redirect("/bookmark/" + ctx.params.id);
+            ctx.redirect("/movie/" + ctx.params.id);
         }
         // Add new
         else {
@@ -132,6 +132,6 @@ export async function rateMovie(ctx) {
     if (ctx.params.id) {
         console.log("Post auf rate ausgeführt");
         await model.updateRating(ctx.db, ctx.params.id, data.rating);
-        ctx.redirect("/bookmark/" + ctx.params.id);
+        ctx.redirect("/movie/" + ctx.params.id);
     }
 }

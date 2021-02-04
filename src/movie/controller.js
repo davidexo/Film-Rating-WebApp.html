@@ -6,7 +6,7 @@ import {
 
 // GET FUNCTIONS
 
-// Show all bookmarks
+// Show all movies
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
@@ -17,7 +17,7 @@ export async function index(ctx) {
     } else {
 
         await ctx.render('index', {
-            bookmarks: data
+            movies: data
         });
     }
     if (data != undefined) {
@@ -29,7 +29,7 @@ export async function index(ctx) {
     }
 }
 
-// Show a bookmark by id
+// Show a movie by id
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
@@ -41,7 +41,7 @@ export async function show(ctx) {
 
         if (ctx.accepts("text/html")) {
             await ctx.render('show', {
-                bookmark: data
+                movie: data
             });
         } else if (ctx.accepts("application/json")) {
             ctx.body = data;
@@ -54,7 +54,7 @@ export async function show(ctx) {
 }
 
 export async function confirmDelete(ctx) {
-    // delete a bookmark
+    // delete a movie
     const data = await model.getById(ctx.db, ctx.params.id);
 
     if (ctx.accepts("text/html")) {
@@ -77,8 +77,8 @@ export async function add(ctx) {
         // JSON-Daten werden ausgegeben
         const title = ctx.request.body.title;
         if (title != null) {
-            const bookmark = {
-                // neues Bookmark wird erzeugt
+            const movie = {
+                // neues movie wird erzeugt
                 id: undefined,
                 title: title,
                 description: ctx.request.body.description,
@@ -88,10 +88,10 @@ export async function add(ctx) {
                 imdb: ctx.request.body.imdb,
                 rottentomatoes: ctx.request.body.rottentomatoes
             };
-            // neues Bookmark in Datenbank sichern
-            const newId = await model.add(ctx.db, bookmark);
-            const newBookmark = await model.getById(ctx.db, newId);
-            ctx.body = JSON.stringify(newBookmark, undefined, 2);
+            // neues movie in Datenbank sichern
+            const newId = await model.add(ctx.db, movie);
+            const newmovie = await model.getById(ctx.db, newId);
+            ctx.body = JSON.stringify(newmovie, undefined, 2);
             ctx.status = 201;
             ctx.set("Content-Type", "application/json");
         } else {
@@ -103,7 +103,7 @@ export async function add(ctx) {
 
 export async function edit(ctx) {
     if (ctx.accepts("text/html")) {
-        // Hol die Daten fuer das Bookmark und gib sie dem form-controller
+        // Hol die Daten fuer das movie und gib sie dem form-controller
         const data = await model.getById(ctx.db, ctx.params.id);
         if (data == null) {
             ctx.status = 404;
@@ -124,7 +124,7 @@ export async function rate(ctx) {
     }
 }
 
-// Delete a bookmark by ID
+// Delete a movie by ID
 export async function deleteById(ctx) {
 
     const data = await model.deleteById(ctx.db, ctx.params.id);
