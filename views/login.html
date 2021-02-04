@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form method="post">
+    <div id="loginform">
+        <div>
+            <p>
+                <label for="form_username" class="required">Username</label>
+                <input type="text" id="form_username" name="username" value="{{ form['username'] }}">
+                {% if form.errors['username'] %}
+            <p class="Form-error">{{ form.errors['username'] }}</p>{% endif %}
+            </p>
+
+            <p>
+                <label for="form_password" class="required">Password</label>
+                <input type="password" id="form_password" name="password" value="{{ form['password'] }}" />
+                {% if form.errors['password'] %}
+            <p class="Form-error">{{ form.errors['password'] }}</p>{% endif %}
+            </p>
+        </div>
+    </div>
+    <button type="submit" id="form_save" name="form[save]">Login</button>
+    <a href="/">Abbrechen</a>
+</form>
+{% endblock %}

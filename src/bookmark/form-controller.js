@@ -5,7 +5,6 @@ import * as model from './model.js';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as comtroller from './controller.js';
 
 // render form with additional data
 export async function renderForm(ctx, form) {
@@ -28,53 +27,54 @@ export async function edit(ctx) {
     });
 }
 export async function submitForm(ctx) {
-    var data = ctx.request.body || {};
-    data.files = ctx.request.files;
-    const errors = await validateForm(data);
+  var data = ctx.request.body || {};
+  data.files = ctx.request.files;
+  const errors = await validateForm(data);
+  
 
-    // Handle uploaded image
-    if (data.files.image.size > 0) {
-        const filename = generateFilename(data.files.image);
-        data.image = filename;
-        const localPath = path.join(process.cwd(), 'public', filename);
+  // Handle uploaded image
+  if (data.files.image.size > 0) {
+    const filename = generateFilename(data.files.image);
+    data.image = filename;
+    const localPath = path.join(process.cwd(), "public", filename);
 
-        fs.rename(data.files.image.path, localPath, function(err) {
-            if ( err ) console.log('ERROR: ' + err);
-        });
-    } else {
-        console.error("File is missing");
+    fs.rename(data.files.image.path, localPath, function (err) {
+      if (err) console.log("ERROR: " + err);
+    });
+  } else {
+    console.error("File is missing");
+  }
+
+  // Something went wrong
+  if (Object.values(errors).some(Boolean)) {
+    console.log("Fehler gefunden. Formular neu rendern");
+    var data = {
+      ...data,
+      errors,
+    };
+    await renderForm(ctx, data);
+  } else {
+    // Edit
+    if (ctx.params.id) {
+      console.table(data);
+      await model.update(ctx.db, ctx.params.id, data);
+      ctx.redirect("/bookmark/" + ctx.params.id);
     }
-
-
-    // Something went wrong
-    if (Object.values(errors).some(Boolean)) {
-        console.log("Fehler gefunden. Formular neu rendern");
-        var data = {
-            ...data,
-            errors
-        };
-        await renderForm(ctx, data);
-    } else {
-        // Edit
-        if (ctx.params.id) {
-            console.table(data);
-            await model.update(ctx.db, ctx.params.id, data);
-            ctx.redirect("/bookmark/" + ctx.params.id);
-        }
-        // Add new
-        else {
-            await model.add(ctx.db, data);
-            ctx.redirect("/");
-        }
+    // Add new
+    else {
+      await model.add(ctx.db, data);
+      ctx.redirect("/");
+      ctx.session.flash = `Neues Review gespeichert.`;
     }
+  }
+  
 }
 
 export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
+        uri: validateUri(data.uri),
         image: validateImage(data.image),
-        //imdb: validateUri(data.imdb),
-        //rottentomatoes: validateUri(data.rottentomatoes),
     }
 }
 
@@ -124,14 +124,4 @@ function getFiletype(filename) {
     return ext;
 }
 
-export async function rateMovie(ctx) {
-    var data = ctx.request.body || {};
-
-    console.log("Selected Rating: " + data.rating);
-    
-    if (ctx.params.id) {
-        console.log("Post auf rate ausgeführt");
-        await model.updateRating(ctx.db, ctx.params.id, data.rating);
-        ctx.redirect("/bookmark/" + ctx.params.id);
-    }
-}
+export async function processFormData(ctx, data) {}
