@@ -7,7 +7,7 @@ import webApp from './src/app.js';
 const port = 3000;
 
 (async () => {
-	
+
 	//open database
 	const db =  await sqlite.open({
         filename: "./data/bookmarks.sqlite",
