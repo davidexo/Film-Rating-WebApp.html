@@ -21,17 +21,19 @@ async function renderForm(ctx, data) {
 export async function submitForm(ctx) {
   const form = ctx.request.body || {};
   const user = await userModel.getByUsername(ctx.db, form.username);
-  if (form.password == user.password) {
-    ctx.session.flash = `Du bist eingeloggt.`;
+  if ((await userModel.passwordIsCorrect(user, form.password)) === true) {
     user.password = undefined;
     ctx.session.user = user;
-
+    ctx.session.flash = `Du bist eingeloggt.`;
     ctx.redirect("/");
+  } else {
+    ctx.state.flash = `Diese Kombination aus Benutzername und Passwort ist nicht gültig`;
+    await renderForm(ctx, form);
   }
 }
 
 export async function logout(ctx) {
-  ctx.session.flash = `Du hast dich ausgeloggt.`;
   ctx.session.user = undefined;
+  ctx.session.flash = `Du hast dich ausgeloggt.`;
   ctx.redirect("/");
 }

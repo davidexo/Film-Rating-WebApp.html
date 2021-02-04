@@ -2,18 +2,18 @@
 {% block content %}
 
 <form method="post">
-    <div id="form">
+    <div id="loginform">
         <div>
             <p>
                 <label for="form_username" class="required">Username</label>
                 <input type="text" id="form_username" name="username" value="{{ form['username'] }}">
-                {% if form.errors['password'] %}
+                {% if form.errors['username'] %}
             <p class="Form-error">{{ form.errors['username'] }}</p>{% endif %}
             </p>
 
             <p>
                 <label for="form_password" class="required">Password</label>
-                <input type="text" id="form_password" name="password" value="{{ form['password'] }}" />
+                <input type="password" id="form_password" name="password" value="{{ form['password'] }}" />
                 {% if form.errors['password'] %}
             <p class="Form-error">{{ form.errors['password'] }}</p>{% endif %}
             </p>

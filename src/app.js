@@ -8,9 +8,6 @@ import koaStatic from "koa-static";
 import { flash } from "./middleware/flash.js";
 import session from "koa-session";
 import SQLite3Store from "koa-sqlite3-session";
-import { isAuthenticated } from "./middleware/isAuthenticated.js";
-
-
 
 export default async function webApp(config) {
   // Initialize application
@@ -44,16 +41,12 @@ export default async function webApp(config) {
   app.use(flash);
 
   app.use(async (ctx, next) => {
-	  ctx.state.user = ctx.session.user;
-	if (ctx.state.user)
-	{
-		ctx.state.authenticated = true;
-		
-	}
-	await next();
-  })
-
-  
+    ctx.state.user = ctx.session.user;
+    if (ctx.state.user) {
+      ctx.state.authenticated = true;
+    }
+    await next();
+  });
 
   const templateDir = process.cwd() + "/views";
 
