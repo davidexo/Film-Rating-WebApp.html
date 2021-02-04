@@ -1,12 +1,16 @@
 import * as model from './model.js';
 import * as formController from './form-controller.js';
-import { Console } from 'console';
+import {
+    Console
+} from 'console';
 
 // GET FUNCTIONS
 
 // Show all bookmarks
 export async function index(ctx) {
-    const data = await model.all(ctx.db);
+    var data = await model.all(ctx.db);
+
+    data = sortByRating(data, true);
 
     if (ctx.accepts() == "application/json") {
         ctx.body = data;
@@ -29,7 +33,7 @@ export async function index(ctx) {
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
-    data.rating = await roundRating(data.rating);    
+    data.rating = await roundRating(data.rating);
 
     if (data != undefined) {
         // Item was found in Database
@@ -99,15 +103,15 @@ export async function add(ctx) {
 
 export async function edit(ctx) {
     if (ctx.accepts("text/html")) {
-      // Hol die Daten fuer das Bookmark und gib sie dem form-controller
-      const data = await model.getById(ctx.db, ctx.params.id);
-      if (data == null) {
-        ctx.status = 404;
-      } else {
-        await formController.renderForm(ctx, data);
-      }
+        // Hol die Daten fuer das Bookmark und gib sie dem form-controller
+        const data = await model.getById(ctx.db, ctx.params.id);
+        if (data == null) {
+            ctx.status = 404;
+        } else {
+            await formController.renderForm(ctx, data);
+        }
     }
-  }
+}
 
 // Rate a movie
 export async function rate(ctx) {
@@ -140,11 +144,29 @@ export async function deleteById(ctx) {
 }
 
 export async function roundRating(rating) {
-    if(rating) {
-        const result = +rating.toFixed(2);  
+    if (rating) {
+        const result = +rating.toFixed(2);
         return result;
     } else {
         console.error("There is no rating on this element");
         return rating;
     }
+}
+
+export function sortByRating(array, descending) {
+    // sort by rating
+    return array.sort(function (a, b) {
+        var keyA = a.rating,
+            keyB = b.rating;
+        // Compare the 2 dates
+        if(descending) {
+            if (keyA > keyB) return -1;
+            if (keyA < keyB) return 1;
+        } else {
+            if (keyA < keyB) return -1;
+            if (keyA > keyB) return 1;
+        }
+
+        return 0;
+    });
 }

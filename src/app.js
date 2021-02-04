@@ -1,6 +1,5 @@
 import Koa from 'koa';
 import http from 'http';
-import helloRouter from './hello.js';
 import bookmarkRouter from './bookmark/router.js';
 import koaBody from 'koa-body';
 import views from 'koa-views';
@@ -50,9 +49,6 @@ export default async function webApp(config) {
 
 	// Extent context protype with the render function
 	app.use(render);
-
-	// Hello World!
-	app.use(helloRouter);
 
 	// Use controller functions
 	app.use(bookmarkRouter.routes());
