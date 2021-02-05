@@ -30,15 +30,6 @@
             <!-- Load Objects here-->
             {% for movie in movies %}
             <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
-                <button id="favorite-{{movie['id']}}" data-isFavorite="no favorite"
-                    class="fav-button absolute bg-gray-100 top-4 right-4 rounded-full">
-                    <svg class=" text-gray-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                        </path>
-                    </svg>
-                </button>
                 <a href="/movie/{{movie['id']}}">
                     <div class="flex-shrink-0 relative">
                         {% if movie['image'] %}
@@ -46,7 +37,19 @@
                         {% endif %}
                     </div>
                 </a>
-                <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                <div class="flex-1 relative bg-white p-6  justify-between">
+                    <button 
+                    id="{{movie['id']}}"
+                    onclick="favorite(this)"
+                    data-is-favorite="false"
+                    class="focus:outline-none fav-button absolute bg-gray-100 top-4 right-4 rounded-full">
+                    <svg class="text-gray-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                        </path>
+                    </svg>
+                </button>
                     <div class="flex-1">
                         <p class="text-sm font-medium text-indigo-600">
                             {{movie['tags']}}
@@ -73,12 +76,16 @@
                             </p>
                             {% if movie['imdb'] %}
                             <a href="{{movie['imdb']}}"
+                                target="_blank"   
+                                rel="noopener noreferrer"
                                 class="inline-flex items-center px-3 py-1 rounded-full text-s font-medium bg-yellow-100 text-gray-800">
                                 Imdb
                             </a>
                             {% endif %}
                             {% if movie['rottentomatoes'] %}
                             <a href="{{movie['rottentomatoes']}}"
+                                target="_blank"   
+                                rel="noopener noreferrer"
                                 class="inline-flex items-center px-3 py-1 rounded-full text-s font-medium bg-red-100 text-gray-800">
                                 Rotten Tomatoes
                             </a>
@@ -146,10 +153,21 @@
         }
     }
 
-    // function changeFavButton() {
-    //     var button;
-    //     button.classList.add("bg-red-600");
-    // }
+    function favorite(button) {
+
+        if(button.dataset.isFavorite == "false") {
+            console.log("Removing movie with ID " + button.id + " from your favorites");
+            button.dataset.isFavorite = "true";
+            button.classList.add("bg-gray-400");            
+            
+
+        } else if (button.dataset.isFavorite = "true") {
+            console.log("Adding movie with ID " + button.id + " to your favorites");
+            button.dataset.isFavorite = "false";
+        } else {
+            console.error("Missformed Dataset: is-favorite");
+        }
+    }
 </script>
 
 {% endblock %}
