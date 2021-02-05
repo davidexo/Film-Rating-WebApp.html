@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Default Title{% endblock %}</title>
     <link rel="stylesheet" href="/styles.css" />
-    <!-- <link rel="stylesheet" href="localhost/3000/styles.css"/> -->
 </head>
 
 <body class="bg-gray-100">
@@ -19,13 +18,12 @@
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
                     <button
+                        id="burger"
                         class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                         aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <!-- Icon when menu is closed. -->
                         <!--
-              Heroicon name: menu
-  
               Menu open: "hidden", Menu closed: "block"
             -->
                         <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -35,7 +33,6 @@
                         </svg>
                         <!-- Icon when menu is open. -->
                         <!--
-              Heroicon name: x
   
               Menu open: "block", Menu closed: "hidden"
             -->
@@ -66,7 +63,6 @@
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Add element button -->
-                    <!-- ToDo: Als normaler User ausgeblendet, oder ausgegraut -->
                     <a href="/movie/add">
                         <button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -95,29 +91,40 @@
   
       Menu open: "block", Menu closed: "hidden"
     -->
-        <div class="hidden sm:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+        <div class="hidden sm:hidden py-8" id="menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 text-center">
                 <a href="#"
-                    class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                    class="bg-gray-900 text-white block px-6 py-4 rounded-md text-3xl font-medium">Top Filme</a>
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-6 py-4 rounded-md text-3xl font-medium">Favoriten</a>
             </div>
         </div>
     </nav>
 
 
     <body>
+        <script>
+            console.log("Hello Burger");
+            const burger = document.querySelector('#burger');
+            const menu = document.querySelector('#menu');
+
+
+            console.log(burger);
+
+
+            burger.addEventListener('click', () => {
+                if(menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                } else {
+                    menu.classList.add('hidden');
+                }
+            })
+
+        </script>
         <main>
             {% block content %}
             {% endblock %}
         </main>
-
-
     </body>
 
 </html>
