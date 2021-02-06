@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}movie-App{% endblock %}
+{% block title %}Movie-App{% endblock %}
 {% block content %}
 
 <div class="relative bg-gray-700 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-">
@@ -94,6 +94,8 @@
                     </div>
                 </div>
             </li>
+
+
             {% endfor %}
     </div>
 </div>
@@ -156,13 +158,13 @@
     function favorite(button) {
 
         if(button.dataset.isFavorite == "false") {
-            console.log("Removing movie with ID " + button.id + " from your favorites");
+            console.log("Adding movie with ID " + button.id + " from your favorites");
             button.dataset.isFavorite = "true";
 
             button.classList.remove("bg-gray-100");
             button.classList.add("bg-gray-400");            
         } else if (button.dataset.isFavorite = "true") {
-            console.log("Adding movie with ID " + button.id + " to your favorites");
+            console.log("Removing movie with ID " + button.id + " to your favorites");
             button.dataset.isFavorite = "false";
             button.classList.remove("bg-gray-400"); 
             button.classList.add("bg-gray-100");

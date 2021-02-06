@@ -1,0 +1,95 @@
+{% extends 'layout.html' %}
+{% block title %}Account{% endblock %}
+{% block content %}
+
+<div>
+    <div class="relative pb-32 bg-gray-900 overflow-hidden">
+
+        <header class="relative py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-white">
+                    Dein Account, User
+                </h1>
+            </div>
+        </header>
+    </div>
+
+    <main class="relative -mt-32">
+        <div class="mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+                    <form class="divide-y divide-gray-200 lg:col-span-12" action="#" method="POST">
+                        <div class="py-6 px-4 sm:p-6 lg:pb-8">
+                            <div class="">
+                                <div class="w-32 pb-4">
+                                    <p class="text-sm font-medium text-gray-700" aria-hidden="true">
+                                        Profilbild
+                                    </p>
+                                    <div class="relative rounded-full overflow-hidden block">
+                                        <img class="relative rounded-full w-32 h-32 mt-4" src="/images/leonardo-avatar.png" alt="Dein Profilbild">
+                                        <label for="user-photo"
+                                            class="absolute inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
+                                            <span>Profilbild aendern</span>
+                                            <span class="sr-only"> Profilbild</span>
+                                            <input type="file" id="user-photo" name="user-photo"
+                                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-span-12">
+                                <label for="url" class="block text-sm font-medium text-gray-700 pb-2">
+                                    Dein Status
+                                </label>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-pink-100 text-pink-800">
+                                        Admin
+                                      </span>
+                            </div>
+
+                            <div class="mt-6 grid grid-cols-12 gap-6">
+                                <div class="col-span-12 sm:col-span-6">
+                                    <label for="first_name" class="block text-sm font-medium text-gray-700">First
+                                        name</label>
+                                    <input type="text" name="first_name" id="first_name" autocomplete="given-name"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+                                </div>
+
+                                <div class="col-span-12 sm:col-span-6">
+                                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last
+                                        name</label>
+                                    <input type="text" name="last_name" id="last_name" autocomplete="family-name"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+                                </div>
+
+                                <div class="col-span-12">
+                                    <label for="url" class="block text-sm font-medium text-gray-700">Passwort
+                                        aendern</label>
+                                    <input type="text" name="url" id="url"
+                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+                            <button type="submit" id="form_save"
+                                class="inline-flex mr-4 items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Speichern
+                            </button>
+                            <button type="button"
+                                class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

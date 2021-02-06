@@ -28,6 +28,32 @@ export async function index(ctx) {
     }
 }
 
+// Show all favorites
+export async function favorites(ctx) {
+    var data = await model.all(ctx.db);
+
+    data = await sortByRating(data, false);
+    data = await roundRatingInArray(data);
+
+    await ctx.render('index', {
+        movies: data
+    });
+    if (data != undefined) {
+        // Item was found in Database
+        ctx.status = 200;
+    } else {
+        // Item was NOT found in database
+        ctx.status = 404;
+    }
+}
+
+// Show Account
+export async function account(ctx) {
+    await ctx.render('account');
+}
+
+
+
 // Show a movie by id
 export async function show(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
@@ -99,8 +125,6 @@ export async function add(ctx) {
         }
     }
 }
-
-
 
 export async function edit(ctx) {
     if (ctx.accepts("text/html")) {

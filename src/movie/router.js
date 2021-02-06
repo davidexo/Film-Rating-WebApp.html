@@ -11,9 +11,18 @@ const router = new Router();
 router.get("/", async (ctx, next) => {
     await controller.index(ctx);
   });
-  
-  // Ein neues movie anlegen
 
+// Alle favoriten ausgeben
+router.get("/favorites", async (ctx, next) => {
+  await controller.favorites(ctx);
+});
+
+// Alle favoriten ausgeben
+router.get("/account", async (ctx, next) => {
+  await controller.account(ctx);
+});
+  
+  // Einen neues movie anlegen
   router.post("/movie/add", async (ctx, next) => {
     await controller.add(ctx);
   });
