@@ -3,6 +3,9 @@ import * as formController from './form-controller.js';
 import {
     Console
 } from 'console';
+import {
+    parse
+} from 'postcss';
 
 // GET FUNCTIONS
 
@@ -10,16 +13,12 @@ import {
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
-    data = sortByRating(data, false);
+    data = await sortByRating(data, false);
+    data = await roundRatingInArray(data);
 
-    if (ctx.accepts() == "application/json") {
-        ctx.body = data;
-    } else {
-
-        await ctx.render('index', {
-            movies: data
-        });
-    }
+    await ctx.render('index', {
+        movies: data
+    });
     if (data != undefined) {
         // Item was found in Database
         ctx.status = 200;
@@ -101,6 +100,8 @@ export async function add(ctx) {
     }
 }
 
+
+
 export async function edit(ctx) {
     if (ctx.accepts("text/html")) {
         // Hol die Daten fuer das movie und gib sie dem form-controller
@@ -140,13 +141,22 @@ export async function deleteById(ctx) {
 }
 
 export async function roundRating(rating) {
-    if (rating) {
-        const result = +rating.toFixed(2);
+
+    var floatRating = parseFloat(rating)
+    if (floatRating) {
+        const result = +floatRating.toFixed(2);
         return result;
     } else {
         console.error("There is no rating on this element");
-        return rating;
+        return floatRating;
     }
+}
+
+export async function roundRatingInArray(array) {
+    for (var j = 0; j < (array.length - 1); j++) {
+        array[j].rating = await roundRating(array[j].rating);
+    }
+    return array
 }
 
 export function sortByRating(array, descending) {
@@ -155,7 +165,7 @@ export function sortByRating(array, descending) {
         var keyA = a.rating,
             keyB = b.rating;
         // Compare the 2 dates
-        if(descending) {
+        if (descending) {
             if (keyA > keyB) return -1;
             if (keyA < keyB) return 1;
         } else {
