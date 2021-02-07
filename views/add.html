@@ -2,91 +2,114 @@
 {% block title %}Add{% endblock %}
 {% block content %}
 
+<div>
+    <div class="relative pb-32 bg-gray-900 overflow-hidden">
+
+        <header class="relative py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-white">
+                    {% if form['id'] %}
+                    {{ form['title'] }} bearbeiten
+                    {% else %}
+                    Film hinzufügen
+                    {% endif %}
+                </h1>
+            </div>
+        </header>
+    </div>
+
+    <main class="relative -mt-32 max-w-7xl mx-auto">
+        <div class="mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+
+                    <form method="post" enctype="multipart/form-data" class="divide-y divide-gray-200 lg:col-span-12">
+                        <!-- Formularfelder-->
+                        <div class="py-6 px-4 sm:p-6 lg:pb-8">
+                            <ul>
+                                <li class="py-4">
+                                    <label for="form_title"
+                                        class="block text-sm font-medium text-gray-700">Titel</label>
+                                    <div class="mt-1">
+                                        <input type="text" id="form_title" size="80" name="title"
+                                            value="{{ form['title'] }}"
+                                            class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                            placeholder="Der Titel des Films">
+                                        {% if form.errors['title'] %}<p class="mt-2 text-sm text-red-600">
+                                            {{ form.errors['title'] }}
+                                        </p>{% endif %}
+                                </li>
+                                <li class="py-4">
+                                    <label for="form_tags" class="block text-sm font-medium text-gray-700">Genre</label>
+                                    <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}"
+                                        class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                        placeholder="Thriller, Komödie, Drama">
+                                    {% if form.errors['tags'] %}<p class="mt-2 text-sm text-red-600">
+                                        {{ form.errors['tags'] }}</p>
+                                    {% endif %}
+                                </li>
+                                <li class="py-4">
+                                    <label for="form_description"
+                                        class="block text-sm font-medium text-gray-700">Beschreibung</label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <textarea id="form_description" name="description" rows="3"
+                                            value="{{ form['description'] }}"
+                                            class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                            placeholder="Eine kurze Beschreibung über den Film">{{ form['description'] }}</textarea>
+                                        {% if form.errors['description'] %}<p class="mt-2 text-sm text-red-600">
+                                            {{ form.errors['description'] }}
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                                <li class="py-4">
+                                    <label for="form_imdb" class="block text-sm font-medium text-gray-700">Imdb</label>
+                                    <input type="text" id="form_imdb" size="80" name="imdb" value="{{ form['imdb'] }}"
+                                        class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                        placeholder="Link auf Imdb">
+                                    {% if form.errors['imdb'] %}<p class="mt-2 text-sm text-red-600">
+                                        {{ form.errors['imdb'] }}</p>
+                                    {% endif %}
+                                </li>
+                                <li class="py-4">
+                                    <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
+                                    {% if form['image'] %}
+                                    <span class="inline-block relative my-8">
+                                        <img class="h-64 object-cover " id="form_image" name="image"
+                                            src="/{{ form['image'] }}" alt="">
+                                        <button type="button"
+                                            class="absolute h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            x
+                                        </button>
+                                    </span>
+                                    <div class="static">
+                                        {% endif %}
+                                        <input type="file" id="form_image" class="mt-2 bg-white py-3 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" name="image" value="{{ form['image'] }}">
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Bestätigen / Cancel Buttons -->
+                        <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+                            <button type="submit" id="form_save"
+                                class="inline-flex mr-4 items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Speichern
+                            </button>
+                            <button type="button" onclick="location.href='/'"
+                                class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                                Abbrechen
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white my-10 py-20 rounded-md shadow-xl">
     <div class="max-w-3xl mx-auto">
 
-        <!-- Intro -->
-        <div>
-            <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
-                {% if form['id'] %}
-                {{ form['title'] }} bearbeiten
-                {% else %}
-                Film hinzufügen
-                {% endif %}
-            </h2>
-            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                Füge einen Film hinzu, welchen du veröffentlichen möchtest.
-            </p>
-        </div>
 
-        <!-- Formular -->
-        <form method="post" enctype="multipart/form-data" class="space-y-8 divide-y divide-gray-200">
-            <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                <ul class="divide-y divide-gray-200">
-                    <li class="py-4">
-                        <label for="form_title" class="block text-sm font-medium text-gray-700">Titel</label>
-                        <div class="mt-1">
-                            <input type="text" id="form_title" size="80" name="title" value="{{ form['title'] }}"
-                                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                placeholder="Der Titel des Films">
-                            {% if form.errors['title'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['title'] }}
-                            </p>{% endif %}
-                    </li>
-                    <li class="py-4">
-                        <label for="form_tags" class="block text-sm font-medium text-gray-700">Genre</label>
-                        <input type="text" id="form_tags" size="80" name="tags" value="{{ form['tags'] }}"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Thriller, Komödie, Drama">
-                        {% if form.errors['tags'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['tags'] }}</p>
-                        {% endif %}
-                    </li>
-                    <li class="py-4">
-                        <label for="form_description"
-                            class="block text-sm font-medium text-gray-700">Beschreibung</label>
-                        <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <textarea id="form_description" name="description" rows="3"
-                                value="{{ form['description'] }}"
-                                class="shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-                                placeholder="Eine kurze Beschreibung über den Film">{{ form['description'] }}</textarea>
-                            {% if form.errors['description'] %}<p class="mt-2 text-sm text-red-600">
-                                {{ form.errors['description'] }}
-                            </p>
-                            {% endif %}
-                        </div>
-                    </li>
-                    <li class="py-4">
-                        <label for="form_imdb" class="block text-sm font-medium text-gray-700">Imdb</label>
-                        <input type="text" id="form_imdb" size="80" name="imdb" value="{{ form['imdb'] }}"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Link auf Imdb">
-                        {% if form.errors['imdb'] %}<p class="mt-2 text-sm text-red-600">{{ form.errors['imdb'] }}</p>
-                        {% endif %}
-                    </li>
-                    <li class="py-4">
-                        <label for="photo" class="block text-sm font-medium text-gray-700">Photo</label>
-                        {% if form['image'] %}
-                        <span class="inline-block relative my-8">
-                            <img class="h-64 object-cover " id="form_image" name="image" src="/{{ form['image'] }}"
-                                alt="">
-                            <button type="button"
-                                class="absolute h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                x
-                            </button>
-                        </span>
-                        <div class="static">
-                            {% endif %}
-
-                            <input type="file" id="form_image" name="image" value="{{ form['image'] }}">
-                    </li>
-                </ul>
-                <button type="submit" id="form_save"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Speichern
-                </button>
-            </div>
-        </form>
-
-        <!-- Abbrechen Button-->
         {% if form['id'] %}
         <!-- wenn es sich um einen bestehenden Film handelt -->
         <button onclick="location.href='/'"
