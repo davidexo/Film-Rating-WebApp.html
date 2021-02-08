@@ -4,6 +4,11 @@ import movieRouter from './movie/router.js';
 import koaBody from 'koa-body';
 import views from 'koa-views';
 import koaStatic from "koa-static";
+import { flash } from "./middleware/flash.js";
+import session from "koa-session";
+
+// SHIT GOES WRONG RIGHT HERE
+//import SQLite3Store from "koa-sqlite3-session";
 
 
 
@@ -16,7 +21,6 @@ export default async function webApp(config) {
 	app.context.db = config.db;
 
 	// Insert Middelware here!
-	//app.use(koaBody());
 	app.use(koaBody({
 		multipart: true,
 		formidable: {
@@ -31,6 +35,19 @@ export default async function webApp(config) {
 			}
 	}));
 	app.use(koaStatic('./public'));
+
+	app.keys = ["3)!G[F-.85LCAUY_WSS6!(y:)G02R"];
+
+	//app.use(session({ store: new SQLite3Store("./data/session.sqlite") }, app));
+	app.use(flash);
+
+	app.use(async (ctx, next) => {
+		ctx.state.user = ctx.session.user;
+		if (ctx.state.user) {
+		  ctx.state.authenticated = true;
+		}
+		await next();
+	  });
 
 	const templateDir = process.cwd() + '/views';
 

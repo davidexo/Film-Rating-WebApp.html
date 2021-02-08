@@ -2,10 +2,14 @@ import Router from "@koa/router";
 import koaBody from "koa-body";
 import * as controller from "./controller.js";
 import * as formController from "./form-controller.js";
+import * as login from "./login-form-controller.js";
+import { isAuthenticated } from "./isAuthenticated.js";
 
 const router = new Router();
 
+router.get("/movie/login", login.showForm);
 
+router.get("/movie/logout", login.logout);
 
 // Alle movies ausgeben
 router.get("/", async (ctx, next) => {
