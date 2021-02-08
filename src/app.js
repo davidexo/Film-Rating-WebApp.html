@@ -8,7 +8,7 @@ import { flash } from "./middleware/flash.js";
 import session from "koa-session";
 
 // SHIT GOES WRONG RIGHT HERE
-//import SQLite3Store from "koa-sqlite3-session";
+import SQLite3Store from "koa-sqlite3-session";
 
 
 
