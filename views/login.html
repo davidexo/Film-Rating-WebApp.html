@@ -1,25 +1,66 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<form method="post">
-    <div id="loginform">
-        <div>
-            <p>
-                <label for="form_username" class="required">Username</label>
-                <input type="text" id="form_username" name="username" value="{{ form['username'] }}">
-                {% if form.errors['username'] %}
-            <p class="Form-error">{{ form.errors['username'] }}</p>{% endif %}
-            </p>
+<div>
+    <div class="relative pb-32 bg-gray-900 overflow-hidden">
 
-            <p>
-                <label for="form_password" class="required">Password</label>
-                <input type="password" id="form_password" name="password" value="{{ form['password'] }}" />
-                {% if form.errors['password'] %}
-            <p class="Form-error">{{ form.errors['password'] }}</p>{% endif %}
-            </p>
-        </div>
+        <header class="relative py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-white">
+                    Login
+                </h1>
+            </div>
+        </header>
     </div>
-    <button type="submit" id="form_save" name="form[save]">Login</button>
-    <a href="/">Abbrechen</a>
-</form>
+
+    <main class="relative -mt-32 max-w-7xl mx-auto">
+        <div class="mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+
+                    <form method="post" class="divide-y divide-gray-200 lg:col-span-12">
+                        <!-- Formularfelder-->
+                        <div class="py-6 px-4 sm:p-6 lg:pb-8">
+                            <ul>
+                                <li class="py-4">
+                                    <label for="form_username" class="required"
+                                        class="block text-sm font-medium text-gray-700">Username</label>
+                                    <div class="mt-1">
+                                        <input type="text" id="form_username" size="80" name="username"
+                                            value="{{ form['username'] }}"
+                                            class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                            placeholder="Leeroy Jenkins">
+                                        {% if form.errors['username'] %}<p class="mt-2 text-sm text-red-600">
+                                            {{ form.errors['username'] }}
+                                        </p>{% endif %}
+                                </li>
+                                <li class="py-4">
+                                    <label for="form_password" class="block text-sm font-medium text-gray-700">Passwort</label>
+                                    <input type="password" id="form_password" size="80" name="password" value="{{ form['password'] }}"
+                                        class="mt-1 block w-full border border-gray-300  rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm"
+                                        placeholder="********">
+                                    {% if form.errors['password'] %}<p class="mt-2 text-sm text-red-600">
+                                        {{ form.errors['password'] }}</p>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Bestätigen / Cancel Buttons -->
+                        <div class="mt-4 py-4 px-4 flex justify-end sm:px-6">
+                            <button type="submit" id="form_save" name="form[save]"
+                                class="inline-flex mr-4 items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Speichern
+                            </button>
+                            <button type="button" onclick="location.href='/'"
+                                class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                                Abbrechen
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
 {% endblock %}
