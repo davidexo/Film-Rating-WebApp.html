@@ -49,12 +49,13 @@
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a 
                                 href="/" 
-                                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Top
-                                Filme</a>
+                                class="text-white px-3 py-2 rounded-md text-sm font-medium">
+                                Top Filme
+                            </a>
                             <a 
                                 href="/favorites"
                                 class="active:bg-green-700 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                Favoriten
+                                Deine Favoriten 
                             </a>
                             <a 
                             href="/account"
@@ -66,7 +67,7 @@
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Add element button -->
-                    {% if authenticated %}
+                    {% if authenticated == true %}
                     <a href="/movie/add">
                         <button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -76,8 +77,8 @@
                     {% else %}
                     <a href="/movie/login">
                         <button type="button"
-                            class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Login
+                            class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Anmelden
                         </button>
                     </a>
                     {% endif %}
@@ -94,10 +95,15 @@
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                             <a href="/account" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
                             role="menuitem">Dein Account</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
+                            <a href="/favorites" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
                                 role="menuitem">Deine Favoriten</a>
+                            {% if authenticated %}
                             <a href="/movie/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 role="menuitem">Abmelden</a>
+                            {% else %}
+                            <a href="/movie/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">Anmelden</a>
+                            {% endif %}
                         </div>
                     </div>
 

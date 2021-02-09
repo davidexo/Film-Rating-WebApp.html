@@ -17,9 +17,6 @@ import {
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
-
-    console.log(ctx.session.user);
-
     data = await sortByRating(data, false);
     data = await roundRatingInArray(data);
 
@@ -192,7 +189,7 @@ export async function roundRating(rating) {
         const result = +floatRating.toFixed(2);
         return result;
     } else {
-        console.error("There is no rating on this element");
+        //console.error("There is no rating on this element");
         return floatRating;
     }
 }
