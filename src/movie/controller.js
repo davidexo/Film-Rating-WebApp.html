@@ -1,11 +1,15 @@
 import * as model from './model.js';
 import * as formController from './form-controller.js';
+import * as userModel from "./userModel.js";
 import {
     Console
 } from 'console';
 import {
     parse
 } from 'postcss';
+import {
+    data
+} from 'autoprefixer';
 
 // GET FUNCTIONS
 
@@ -13,11 +17,14 @@ import {
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
+
+    console.log(ctx.session.user);
+
     data = await sortByRating(data, false);
     data = await roundRatingInArray(data);
 
     await ctx.render('index', {
-        movies: data
+        movies: data,
     });
     if (data != undefined) {
         // Item was found in Database
@@ -32,10 +39,13 @@ export async function index(ctx) {
 export async function favorites(ctx) {
     var data = await model.all(ctx.db);
 
+    //data.favorites = ctx.session.user.favorites
+
     data = await sortByRating(data, false);
     data = await roundRatingInArray(data);
+    data = await filterByIds(data, ctx.session.user.favorites);
 
-    await ctx.render('index', {
+    await ctx.render('favorites', {
         movies: data
     });
     if (data != undefined) {
@@ -47,12 +57,23 @@ export async function favorites(ctx) {
     }
 }
 
+// Filters an array of movies using a string containing a set of IDs and return those movies
+// Used to filter for favorite movies
+export async function filterByIds(array, string) {
+    var filtered = array.filter(containsId, string);
+    return filtered;
+}
+
+// Checks if a movie has an id that is included in a given string
+function containsId(value) {    
+    const id = String(value.id);
+    return this.includes(id);
+}
+
 // Show Account
 export async function account(ctx) {
     await ctx.render('account');
 }
-
-
 
 // Show a movie by id
 export async function show(ctx) {
@@ -199,4 +220,8 @@ export function sortByRating(array, descending) {
 
         return 0;
     });
+}
+
+export async function favoriteMovie(ctx) {
+    console.log(ctx.session.user);
 }
