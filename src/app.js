@@ -38,7 +38,7 @@ export default async function webApp(config) {
 
 	app.keys = ["3)!G[F-.85LCAUY_WSS6!(y:)G02R"];
 
-	//app.use(session({ store: new SQLite3Store("./data/session.sqlite") }, app));
+	app.use(session({ store: new SQLite3Store("./data/session.sqlite") }, app));
 	app.use(flash);
 
 	app.use(async (ctx, next) => {
