@@ -25,6 +25,7 @@ export async function submitForm(ctx) {
     user.password = undefined;
     ctx.session.user = user;
     ctx.session.flash = `Du bist eingeloggt.`;
+    console.log("Du bist eingeloggt!");
     ctx.redirect("/");
   } else {
     ctx.state.flash = `Diese Kombination aus Benutzername und Passwort ist nicht gültig`;

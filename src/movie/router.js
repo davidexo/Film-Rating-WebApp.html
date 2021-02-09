@@ -9,6 +9,10 @@ const router = new Router();
 
 router.get("/movie/login", login.showForm);
 
+router.post("/movie/login", async (ctx, next) => {
+  await login.submitForm(ctx);
+});
+
 router.get("/movie/logout", login.logout);
 
 // Alle movies ausgeben
@@ -17,7 +21,7 @@ router.get("/", async (ctx, next) => {
   });
 
 // Alle favoriten ausgeben
-router.get("/favorites", async (ctx, next) => {
+router.get("/favorites", isAuthenticated, async (ctx, next) => {
   await controller.favorites(ctx);
 });
 
@@ -27,16 +31,16 @@ router.get("/account", async (ctx, next) => {
 });
   
   // Einen neues movie anlegen
-  router.post("/movie/add", async (ctx, next) => {
+  router.post("/movie/add",isAuthenticated, async (ctx, next) => {
     await controller.add(ctx);
   });
 
-  router.post("/movie/add", async (ctx, next) => {
+  router.post("/movie/add",isAuthenticated, async (ctx, next) => {
     await controller.add(ctx);
   });
   
   // Formular fuer ein neues movie
-  router.get("/movie/add", async (ctx, next) => {
+  router.get("/movie/add",isAuthenticated, async (ctx, next) => {
     await formController.add(ctx);
   });
   
@@ -46,24 +50,23 @@ router.get("/account", async (ctx, next) => {
   });
   
   // Ein movie bearbeiten - Formular anzeigen
-  router.get("/movie/:id/edit", async (ctx, next) => {
+  router.get("/movie/:id/edit",isAuthenticated, async (ctx, next) => {
     await controller.edit(ctx);
   });
   
   // Ein movie bearbeiten - Aktion ausfuehren
-  router.post("/movie/:id/edit", async (ctx, next) => {
+  router.post("/movie/:id/edit",isAuthenticated, async (ctx, next) => {
     await formController.submitForm(ctx);
   });
 
-  //router.post("/movie/:id/edit", formController.fileUploadBodyParser(), formController.submitForm)
   
   // Frage: movie loeschen?
-  router.get("/movie/:id/delete", async (ctx, next) => {
+  router.get("/movie/:id/delete",isAuthenticated, async (ctx, next) => {
     await controller.confirmDelete(ctx);
   });
   
   // Ein movie loeschen
-  router.post("/movie/:id/delete", async (ctx, next) => {
+  router.post("/movie/:id/delete",isAuthenticated, async (ctx, next) => {
     await controller.deleteById(ctx);
     ctx.redirect("/");
   });
