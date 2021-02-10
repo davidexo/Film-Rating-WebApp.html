@@ -3,7 +3,9 @@ import koaBody from "koa-body";
 import * as controller from "./controller.js";
 import * as formController from "./form-controller.js";
 import * as login from "./login-form-controller.js";
-import { isAuthenticated } from "./isAuthenticated.js";
+import {
+  isAuthenticated
+} from "./isAuthenticated.js";
 
 const router = new Router();
 
@@ -17,8 +19,8 @@ router.get("/movie/logout", login.logout);
 
 // Alle movies ausgeben
 router.get("/", async (ctx, next) => {
-    await controller.index(ctx);
-  });
+  await controller.index(ctx);
+});
 
 // Alle favoriten ausgeben
 router.get("/favorites", isAuthenticated, async (ctx, next) => {
@@ -26,65 +28,69 @@ router.get("/favorites", isAuthenticated, async (ctx, next) => {
 });
 
 // Alle favoriten ausgeben
-router.get("/account", async (ctx, next) => {
+router.get("/account", isAuthenticated, async (ctx, next) => {
   await controller.account(ctx);
 });
-  
-  // Einen neues movie anlegen
-  router.post("/movie/add",isAuthenticated, async (ctx, next) => {
-    await controller.add(ctx);
-  });
 
-  router.post("/movie/add",isAuthenticated, async (ctx, next) => {
-    await controller.add(ctx);
-  });
-  
-  // Formular fuer ein neues movie
-  router.get("/movie/add",isAuthenticated, async (ctx, next) => {
-    await formController.add(ctx);
-  });
-  
-  // Ein bestimmtes movie ausgeben
-  router.get("/movie/:id", async (ctx, next) => {
-    await controller.show(ctx);
-  });
-  
-  // Ein movie bearbeiten - Formular anzeigen
-  router.get("/movie/:id/edit",isAuthenticated, async (ctx, next) => {
-    await controller.edit(ctx);
-  });
-  
-  // Ein movie bearbeiten - Aktion ausfuehren
-  router.post("/movie/:id/edit",isAuthenticated, async (ctx, next) => {
-    await formController.submitForm(ctx);
-  });
+// Einen neues movie anlegen
+router.post("/movie/add", isAuthenticated, async (ctx, next) => {
+  await controller.add(ctx);
+});
 
-  
-  // Frage: movie loeschen?
-  router.get("/movie/:id/delete",isAuthenticated, async (ctx, next) => {
-    await controller.confirmDelete(ctx);
-  });
-  
-  // Ein movie loeschen
-  router.post("/movie/:id/delete",isAuthenticated, async (ctx, next) => {
-    await controller.deleteById(ctx);
-    ctx.redirect("/");
-  });
-  
-  // Ein movie loeschen
-  router.delete("/movie/:id", async (ctx, next) => {
-    await controller.deleteById(ctx);
-  });
+router.post("/movie/add", isAuthenticated, async (ctx, next) => {
+  await controller.add(ctx);
+});
 
-  // Einen Film bewerten - Formular anzeigen
-    router.get("/movie/:id/rate", async (ctx, next) => {
-      await controller.rate(ctx);
-    });
+// Formular fuer ein neues movie
+router.get("/movie/add", isAuthenticated, async (ctx, next) => {
+  await formController.add(ctx);
+});
 
-  // Einen Film bewerten - Aktion ausfuehren
-  router.post("/movie/:id/rate", async (ctx, next) => {
-    await formController.rateMovie(ctx);
-  });
+// Ein bestimmtes movie ausgeben
+router.get("/movie/:id", async (ctx, next) => {
+  await controller.show(ctx);
+});
 
-  export default router;
-  
+// Ein movie bearbeiten - Formular anzeigen
+router.get("/movie/:id/edit", isAuthenticated, async (ctx, next) => {
+  await controller.edit(ctx);
+});
+
+// Ein movie bearbeiten - Aktion ausfuehren
+router.post("/movie/:id/edit", isAuthenticated, async (ctx, next) => {
+  await formController.submitForm(ctx);
+});
+
+
+// Frage: movie loeschen?
+router.get("/movie/:id/delete", isAuthenticated, async (ctx, next) => {
+  await controller.confirmDelete(ctx);
+});
+
+// Ein movie loeschen
+router.post("/movie/:id/delete", isAuthenticated, async (ctx, next) => {
+  await controller.deleteById(ctx);
+  ctx.redirect("/");
+});
+
+// Ein movie loeschen
+router.delete("/movie/:id", async (ctx, next) => {
+  await controller.deleteById(ctx);
+});
+
+// Einen Film bewerten - Formular anzeigen
+router.get("/movie/:id/rate", async (ctx, next) => {
+  await controller.rate(ctx);
+});
+
+// Einen Film bewerten - Aktion ausfuehren
+router.post("/movie/:id/rate", async (ctx, next) => {
+  await formController.rateMovie(ctx);
+});
+
+// Zum Impressum
+router.get("/impressum", async (ctx, next) => {
+  await controller.imprint(ctx);
+});
+
+export default router;

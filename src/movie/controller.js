@@ -167,6 +167,15 @@ export async function rate(ctx) {
     }
 }
 
+// Show Imprint
+export async function imprint(ctx) {
+
+    if (ctx.accepts("text/html")) {
+        await ctx.render('imprint', {
+        });
+    }
+}
+
 // Delete a movie by ID
 export async function deleteById(ctx) {
 
