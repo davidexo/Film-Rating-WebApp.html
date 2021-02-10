@@ -36,5 +36,6 @@ export async function submitForm(ctx) {
 export async function logout(ctx) {
   ctx.session.user = undefined;
   ctx.session.flash = `Du hast dich ausgeloggt.`;
+  console.log("Du hast dich ausgeloggt.");
   ctx.redirect("/");
 }

@@ -34,6 +34,15 @@ export default async function webApp(config) {
 			throw error;
 			}
 	}));
+
+	app.use(async (ctx, next) => {
+		//console.log(ctx.status);
+		if (ctx.status === 401) {
+		  console.log("Du bist nicht autorisiert (Middleware");
+		}
+		await next();
+	  });
+
 	app.use(koaStatic('./public'));
 
 	app.keys = ["3)!G[F-.85LCAUY_WSS6!(y:)G02R"];
