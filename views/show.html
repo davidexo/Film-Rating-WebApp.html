@@ -50,6 +50,7 @@
                             </a>
                         </div>
                         {% endif %}
+                        {% if movie['date_created'] %}
                         <div class="mt-2 flex items-center text-sm text-gray-300">
                             <!-- Heroicon name: calendar -->
                             <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +61,7 @@
                             </svg>
                             Veröffentlicht am {{movie['date_created']}}
                         </div>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- Rechte Seite -->
@@ -123,7 +125,6 @@
                         <div class="p-6 text-gray-300">
                             <!-- Your content -->
                             <p>{{movie['description']}}</p>
-                            <p>{{movie['image']}}</p>
                         </div>
                     </div>
                 </section>
