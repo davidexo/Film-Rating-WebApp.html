@@ -5,12 +5,17 @@ import * as model from './model.js';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as comtroller from './controller.js';
+import * as controller from "./controller.js";
 
 // render form with additional data
 export async function renderForm(ctx, form) {
+
+    const token = await csrf.generateToken();
+    ctx.session.csrf = token;
+
     await ctx.render("add", {
-        form: form
+      form: form,
+      csrf: token,
     });
 }
 
@@ -31,6 +36,11 @@ export async function submitForm(ctx) {
     var data = ctx.request.body || {};
     data.files = ctx.request.files;
     const errors = await validateForm(data);
+
+    if (ctx.session.csrf !== ctx.request.body._csrf) {
+      ctx.throw(401);
+    }
+    ctx.session.csrf = undefined;
 
     // Handle uploaded image
     if (data.files.image.size > 0) {

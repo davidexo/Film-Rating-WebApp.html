@@ -1,5 +1,3 @@
-import * as argon2 from "argon2";
-
 export async function getByUsername(db, username) {
   return await db.get("SELECT * FROM users WHERE username= ?", username);
 }
