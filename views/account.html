@@ -31,6 +31,7 @@
                                             class="absolute inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                                             <span>Profilbild aendern</span>
                                             <span class="sr-only"> Profilbild</span>
+                                            <input type="hidden" name="_csrf" value="{{ csrf }}">
                                             <input type="file" id="user-photo" name="user-photo"
                                                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
                                         </label>
@@ -51,6 +52,7 @@
                                 <div class="col-span-12 sm:col-span-6">
                                     <label for="first_name" class="block text-sm font-medium text-gray-700">First
                                         name</label>
+                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
                                     <input type="text" name="first_name" id="first_name" autocomplete="given-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
                                 </div>
@@ -58,6 +60,7 @@
                                 <div class="col-span-12 sm:col-span-6">
                                     <label for="last_name" class="block text-sm font-medium text-gray-700">Last
                                         name</label>
+                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
                                     <input type="text" name="last_name" id="last_name" autocomplete="family-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
                                 </div>
@@ -65,6 +68,7 @@
                                 <div class="col-span-12">
                                     <label for="url" class="block text-sm font-medium text-gray-700">Passwort
                                         aendern</label>
+                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
                                     <input type="text" name="url" id="url"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
                                 </div>
