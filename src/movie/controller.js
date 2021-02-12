@@ -69,7 +69,19 @@ function containsId(value) {
 
 // Show Account
 export async function account(ctx) {
-    await ctx.render('account');
+    const data = await ctx.session.user;
+    // if(data) {
+    //     console.log(data);
+    // }
+
+    await ctx.render('account', {
+        user: data
+    });
+
+    await ctx.render('account', {
+        user: data
+    });
+
 }
 
 // Show a movie by id
@@ -86,8 +98,6 @@ export async function show(ctx) {
             await ctx.render('show', {
                 movie: data
             });
-        } else if (ctx.accepts("application/json")) {
-            ctx.body = data;
         }
 
     } else {

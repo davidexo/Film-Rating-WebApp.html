@@ -13,12 +13,7 @@
             <p class="mt-3 max-w-2xl text-xl text-gray-400 sm:mt-4">
                 Die besten Filme ausgewählt von unserer Community
             </p>
-            <label class="text-base text-gray-200 mr-2" for="sort-button"> Sortieren nach</label>
-            <button id="filter-button" type="button"
-                class="mt-4 inline-flex justify-center rounded-md border border-gray-500 shadow-sm px-4 py-2 bg-gray-600 text-sm font-medium text-gray-200 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
-                id="options-menu" aria-haspopup="true" aria-expanded="true">
-                Bewertung
-            </button>
+            <label class="text-base text-gray-200 mr-2" for="sort-button"> Sortieren nach Bewertung</label>
             <button id="sort-button" type="button"
                 class="mt-4 inline-flex justify-center rounded-md border border-gray-500 shadow-sm px-4 py-2 bg-gray-600 text-sm font-medium text-gray-200 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
                 id="options-menu" aria-haspopup="true" aria-expanded="true">
@@ -127,14 +122,12 @@
                 if (dir == "asc") {
                     if (parseFloat(listElements[i].dataset.rating) < parseFloat(listElements[i + 1].dataset
                             .rating)) {
-                        //console.log("Switching " + i + " and " + (i+1));
                         shouldSwitch = true;
                         break;
                     }
                 } else if (dir == "desc") {
                     if (parseFloat(listElements[i].dataset.rating) > parseFloat(listElements[i + 1].dataset
                             .rating)) {
-                        //console.log("Switching " + i + " and " + (i+1));
                         shouldSwitch = true;
                         break;
                     }
