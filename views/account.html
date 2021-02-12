@@ -54,22 +54,14 @@
                                 <div class="col-span-12 sm:col-span-6">
                                     <label for="first_name" class="block text-sm font-medium text-gray-700">Vorname</label>
                                         <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                    <input type="text" name="first_name" id="first_name" autocomplete="given-name"
+                                    <input type="text" name="first_name" value="{{user['first_Name']}}" id="first_name" autocomplete="given-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
                                 </div>
 
                                 <div class="col-span-12 sm:col-span-6">
                                     <label for="last_name" class="block text-sm font-medium text-gray-700">Nachname</label>
                                         <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                    <input type="text" name="last_name" id="last_name" autocomplete="family-name"
-                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
-                                </div>
-
-                                <div class="col-span-12">
-                                    <label for="url" class="block text-sm font-medium text-gray-700">Passwort
-                                        aendern</label>
-                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                    <input type="text" name="url" id="url"
+                                    <input type="text" name="last_name" id="last_name" value="{{user['last_Name']}}" autocomplete="family-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
                                 </div>
                             </div>

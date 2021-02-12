@@ -34,17 +34,18 @@ export async function index(ctx) {
 
 // Show all favorites
 export async function favorites(ctx) {
+    
     var data = await model.all(ctx.db);
-
-    //data.favorites = ctx.session.user.favorites
+    const user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
 
     data = await sortByRating(data, false);
-    data = await roundRatingInArray(data);
-    data = await filterByIds(data, ctx.session.user.favorites);
+    data = await roundRatingInArray(data);    
+    data = await filterByIds(data, user.favorites);
 
     await ctx.render('favorites', {
         movies: data
     });
+
     if (data != undefined) {
         // Item was found in Database
         ctx.status = 200;
@@ -57,8 +58,14 @@ export async function favorites(ctx) {
 // Filters an array of movies using a string containing a set of IDs and return those movies
 // Used to filter for favorite movies
 export async function filterByIds(array, string) {
-    var filtered = array.filter(containsId, string);
-    return filtered;
+    if(string != null) {
+        var filtered = array.filter(containsId, string);
+        return filtered;
+    } else {
+        console.error("There are no favorites. Return null");
+        return null;
+    }
+
 }
 
 // Checks if a movie has an id that is included in a given string
@@ -69,14 +76,11 @@ function containsId(value) {
 
 // Show Account
 export async function account(ctx) {
-    const data = await ctx.session.user;
-    // if(data) {
-    //     console.log(data);
-    // }
+    // old version
+    //const data = await ctx.session.user;
 
-    await ctx.render('account', {
-        user: data
-    });
+    // This works better because it updates in case data has changed within a session
+    const data = await userModel.getByUsername(ctx.db, ctx.session.user.username);
 
     await ctx.render('account', {
         user: data
@@ -235,5 +239,5 @@ export function sortByRating(array, descending) {
 }
 
 export async function favoriteMovie(ctx) {
-    console.log(ctx.session.user);
+    //console.log(ctx.session.user);
 }

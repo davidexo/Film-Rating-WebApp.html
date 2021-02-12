@@ -46,6 +46,11 @@ router.get("/movie/add", isAuthenticated, async (ctx, next) => {
   await formController.add(ctx);
 });
 
+// Post: Den Account bearbeiten
+router.post("/account", isAuthenticated, async (ctx, next) => {
+  await formController.editAccount(ctx);
+});
+
 // Ein bestimmtes movie ausgeben
 router.get("/movie/:id", async (ctx, next) => {
   await controller.show(ctx);

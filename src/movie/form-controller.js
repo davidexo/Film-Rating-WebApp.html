@@ -6,6 +6,7 @@ import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as controller from "./controller.js";
+import * as userModel from "./userModel.js";
 
 // render form with additional data
 export async function renderForm(ctx, form) {
@@ -144,4 +145,17 @@ export async function rateMovie(ctx) {
         await model.updateRating(ctx.db, ctx.params.id, data.rating);
         ctx.redirect("/movie/" + ctx.params.id);
     }
+}
+
+export async function editAccount(ctx) {
+    console.log("Post auf account ausgeführt");
+    //console.log("User: " + ctx.session.user);
+
+    var data = await ctx.request.body || {};
+    console.log("Username: " + ctx.session.user.username);
+    console.log(data.first_name);
+
+    userModel.editUser(ctx.db, ctx.session.user.username, data)
+
+    ctx.redirect("/account");
 }
