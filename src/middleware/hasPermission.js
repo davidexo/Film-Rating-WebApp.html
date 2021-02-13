@@ -1,4 +1,4 @@
-export default function hasPermission(permission) {
+export function hasPermission(permission) {
   return async function (ctx, next) {
     if (!check(ctx.state.user, permission)) {
       ctx.throw(401);

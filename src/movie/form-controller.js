@@ -11,27 +11,24 @@ import * as csrf from "./csrf.js";
 
 // render form with additional data
 export async function renderForm(ctx, form) {
-
-    const token = await csrf.generateToken();
-    ctx.session.csrf = token;
-
-    await ctx.render("add", {
-      form: form,
-      csrf: token,
-    });
+  await ctx.render("add", {
+    form: form,
+  });
 }
 
 // add a movie
 export async function add(ctx) {
-    //const data = await model.defaultData(ctx);
-    await ctx.render("add");
+  //const data = await model.defaultData(ctx);
+
+  await ctx.render("add");
 }
 
 // edit a movie
 export async function edit(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
-    await ctx.render('edit', {
-        form: data
+
+    await ctx.render("edit", {
+      form: data,
     });
 }
 export async function submitForm(ctx) {
@@ -39,10 +36,13 @@ export async function submitForm(ctx) {
     data.files = ctx.request.files;
     const errors = await validateForm(data);
 
+    /*const token = await csrf.generateToken();
+    ctx.session.csrf = token;
+
     if (ctx.session.csrf !== ctx.request.body._csrf) {
       ctx.throw(401);
     }
-    ctx.session.csrf = undefined;
+    ctx.session.csrf = undefined;*/
 
     // Handle uploaded image
     if (data.files.image.size > 0) {

@@ -57,17 +57,9 @@ export default async function webApp(config) {
         ctx.db,
         ctx.session.user.id
       );
-      ctx.state.canAdd = check(ctx.session.user, "add movie");
-      ctx.state.viewAccount = check(ctx.session.user, "view account");
-      ctx.state.viewFavs = check(ctx.session.user, "view favourites");
-      ctx.state.canEdit = check(ctx.session.user, "edit movie");
-      ctx.state.canDelete = check(ctx.session.user, "delete movie");
-      ctx.state.canLogout = check(ctx.session.user, "can logout");
-      ctx.state.canRate = check(ctx.session.user, "rate movie");
       ctx.state.user = ctx.session.user;
       ctx.state.authenticated = true;
     }
-
     await next();
   });
 
