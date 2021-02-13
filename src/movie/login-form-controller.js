@@ -1,4 +1,6 @@
 import * as userModel from "./userModel.js";
+import * as argon from "argon2";
+
 
 export async function showForm(ctx) {
   const data = await defaultData(ctx);
@@ -21,6 +23,7 @@ async function renderForm(ctx, data) {
 export async function submitForm(ctx) {
   const form = ctx.request.body || {};
   const user = await userModel.getByUsername(ctx.db, form.username);
+
   if ((await userModel.passwordIsCorrect(user, form.password)) === true) {
     user.password = undefined;
     ctx.session.user = user;
@@ -39,3 +42,5 @@ export async function logout(ctx) {
   console.log("Du hast dich ausgeloggt.");
   ctx.redirect("/");
 }
+
+
