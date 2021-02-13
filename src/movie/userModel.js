@@ -17,7 +17,7 @@ export async function editUser(db, username, data) {
 }
 
 export async function editFavorites (db, username, string) {
-  const result = await db.run("UPDATE users SET favorites = ? WHERE username = ?", 
+  const result = await db.run("UPDATE users SET favorites=? WHERE username=?", 
   string, username);
   return result.changes;
 }

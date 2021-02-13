@@ -19,7 +19,8 @@
 
             <!-- Load Objects here-->
             {% for movie in movies %}
-            <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden transition ease-out duration-200 transform hover:scale-105">
+            {% include "./card.html" %}
+            <!-- <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden transition ease-out duration-200 transform hover:scale-105">
                 <a href="/movie/{{movie['id']}}">
                     <div class="flex-shrink-0 relative">
                         {% if movie['image'] %}
@@ -88,9 +89,7 @@
                         </div>
                     </div>
                 </div>
-            </li>
-
-
+            </li> -->
             {% endfor %}
     </div>
 </div>
@@ -102,22 +101,6 @@
     var dir = "asc";
 
     function favorite(button) {
-
-        // if (button.dataset.isFavorite == "false") {
-        //     console.log("Adding movie with ID " + button.id + " from your favorites");
-        //     button.dataset.isFavorite = "true";
-
-        //     button.classList.remove("bg-gray-100");
-        //     button.classList.add("bg-gray-400");
-        // } else if (button.dataset.isFavorite = "true") {
-        //     console.log("Removing movie with ID " + button.id + " to your favorites");
-        //     button.dataset.isFavorite = "false";
-        //     button.classList.remove("bg-gray-400");
-        //     button.classList.add("bg-gray-100");
-        // } else {
-        //     console.error("Missformed Dataset: is-favorite");
-        // }
-
         window.location.href='movie/' + button.id + '/fav';
     }
 </script>
