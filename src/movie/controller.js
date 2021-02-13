@@ -17,8 +17,18 @@ import {
 export async function index(ctx) {
     var data = await model.all(ctx.db);
 
+
     data = await sortByRating(data, false);
     data = await roundRatingInArray(data);
+
+    var user;
+    try {
+        user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
+        // Add isFavorite attribute to data object
+        data = await abc(data, user);
+    } catch {
+        console.log('No user');
+    }
 
     await ctx.render('index', {
         movies: data,
@@ -34,7 +44,7 @@ export async function index(ctx) {
 
 // Show all favorites
 export async function favorites(ctx) {
-    
+
     var data = await model.all(ctx.db);
     const user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
 
@@ -42,17 +52,13 @@ export async function favorites(ctx) {
     data = await sortByRating(data, true);
 
     // Round ratings to 2 digits
-    data = await roundRatingInArray(data);    
+    data = await roundRatingInArray(data);
 
     // Filter for favorite movies
     data = await filterByIds(data, user.favorites);
 
-    // add isFavorite attribute
-    if(user.favorites != null) {
-        for (var i = 0; i < (data.length); i++) {
-            data[i].isFavorite = true;
-        }
-    }
+    // Add isFavorite attribute to data object
+    data = await abc(data, user);
 
     await ctx.render('favorites', {
         movies: data,
@@ -71,7 +77,7 @@ export async function favorites(ctx) {
 // Filters an array of movies using a string containing a set of IDs and return those movies
 // Used to filter for favorite movies
 export async function filterByIds(array, string) {
-    if(string != null) {
+    if (string != null) {
         var filtered = array.filter(containsId, string);
         return filtered;
     } else {
@@ -81,8 +87,18 @@ export async function filterByIds(array, string) {
 
 }
 
+export async function abc(obj, user) {
+    // add isFavorite attribute
+    if (user.favorites != null) {
+        for (var i = 0; i < (obj.length); i++) {
+            obj[i].isFavorite = user.favorites.includes(obj[i].id);
+        }
+    }
+    return obj
+}
+
 // Checks if a movie has an id that is included in a given string
-function containsId(value) {    
+function containsId(value) {
     const id = String(value.id);
     return this.includes(id);
 }
@@ -194,8 +210,7 @@ export async function rate(ctx) {
 // Show Imprint
 export async function imprint(ctx) {
     if (ctx.accepts("text/html")) {
-        await ctx.render('imprint', {
-        });
+        await ctx.render('imprint', {});
     }
 }
 
@@ -261,23 +276,10 @@ export async function favoriteMovie(ctx) {
     // search favorites for the clicked movie id
     var favoritesArray = user.favorites.split(', ');
 
-    // Log user's favorites
-    //console.log("User's favorites: " + favoritesArray);
-
-    for (var j = 0; j < (favoritesArray.length); j++) {
-        //console.log(favoritesArray[j]);
-    }
-
-
-    //Log clicked movie's id
-    //console.log("ID of clicked movie: " + ctx.params.id);
-
-    
-
     const index = favoritesArray.indexOf(ctx.params.id)
     //console.log("Index" + index);
-    
-    if(index > -1 ) {
+
+    if (index > -1) {
         console.log("Element found. Removing it");
         favoritesArray.splice(index, 1);
     } else {
