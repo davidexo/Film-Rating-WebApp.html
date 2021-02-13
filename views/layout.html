@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Default Title{% endblock %}</title>
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/extra.css" />
 </head>
 
-<body class="bg-gray-100">
-
-    <!-- NAVIGATION  TAILWINDCSS     -->
+<body class="bg-gray-100 {{ body_class }}">
 
     <nav class="bg-gray-800">
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -45,19 +44,19 @@
                             alt="gudMovies">
                     </a>
                     <div class="hidden sm:block sm:ml-6">
-                        <div class="flex space-x-4">
+                        <div class="flex space-x-4 site-nav">
                             <a 
                                 href="/" 
-                                class="text-white px-3 py-2 rounded-md text-sm font-medium">
+                                class="nav-index text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Top Filme</a>
                             <a 
                                 href="/favorites"
-                                class=" text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                class="nav-favorites text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Deine Favoriten
                             </a>
                             <a 
                             href="/account"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            class="nav-account text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                             Dein Account
                         </a>
                         </div>
@@ -193,5 +192,4 @@
   </footer>
         </footer>
     </body>
-
 </html>

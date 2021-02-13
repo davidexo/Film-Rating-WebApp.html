@@ -1,0 +1,6 @@
+body.index .site-nav a.nav-index,
+body.favorites .site-nav a.nav-favorites,
+body.account .site-nav a.nav-account
+{
+    background-color: rgba(0, 0, 0, 0.3);
+}
