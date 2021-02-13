@@ -38,12 +38,25 @@ export async function favorites(ctx) {
     var data = await model.all(ctx.db);
     const user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
 
-    data = await sortByRating(data, false);
+    // Sort movoies by rating (descending)
+    data = await sortByRating(data, true);
+
+    // Round ratings to 2 digits
     data = await roundRatingInArray(data);    
+
+    // Filter for favorite movies
     data = await filterByIds(data, user.favorites);
 
+    // add isFavorite attribute
+    if(user.favorites != null) {
+        for (var i = 0; i < (data.length); i++) {
+            data[i].isFavorite = true;
+        }
+    }
+
     await ctx.render('favorites', {
-        movies: data
+        movies: data,
+        user: user
     });
 
     if (data != undefined) {
@@ -214,7 +227,7 @@ export async function roundRating(rating) {
 }
 
 export async function roundRatingInArray(array) {
-    for (var j = 0; j < (array.length - 1); j++) {
+    for (var j = 0; j < (array.length); j++) {
         array[j].rating = await roundRating(array[j].rating);
     }
     return array
@@ -239,5 +252,40 @@ export function sortByRating(array, descending) {
 }
 
 export async function favoriteMovie(ctx) {
-    //console.log(ctx.session.user);
+
+    // Get current user
+    const user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
+
+    console.log("BEFORE: " + user.favorites);
+
+    // search favorites for the clicked movie id
+    var favoritesArray = user.favorites.split(', ');
+
+    // Log user's favorites
+    //console.log("User's favorites: " + favoritesArray);
+
+    for (var j = 0; j < (favoritesArray.length); j++) {
+        //console.log(favoritesArray[j]);
+    }
+
+
+    //Log clicked movie's id
+    //console.log("ID of clicked movie: " + ctx.params.id);
+
+    
+
+    const index = favoritesArray.indexOf(ctx.params.id)
+    //console.log("Index" + index);
+    
+    if(index > -1 ) {
+        console.log("Element found. Removing it");
+        favoritesArray.splice(index, 1);
+    } else {
+        console.log("Element not found. It has to be added");
+        favoritesArray.push(ctx.params.id);
+    }
+
+    var favoriteString = favoritesArray.join(", ");
+    console.log("NEW: " + favoriteString);
+    userModel.editFavorites(ctx.db, ctx.session.user.username, favoriteString);
 }

@@ -27,7 +27,7 @@ router.get("/favorites", isAuthenticated, async (ctx, next) => {
   await controller.favorites(ctx);
 });
 
-// Alle favoriten ausgeben
+// Account Einstellungen darstellen
 router.get("/account", isAuthenticated, async (ctx, next) => {
   await controller.account(ctx);
 });
@@ -59,6 +59,13 @@ router.get("/movie/:id", async (ctx, next) => {
 // Ein movie bearbeiten - Formular anzeigen
 router.get("/movie/:id/edit", isAuthenticated, async (ctx, next) => {
   await controller.edit(ctx);
+});
+
+// Einen movie favorisieren
+router.get("/movie/:id/fav", isAuthenticated, async (ctx, next) => {
+  await controller.favoriteMovie(ctx);
+  //console.log("Favorite Router Post");
+  ctx.redirect("/");
 });
 
 // Ein movie bearbeiten - Aktion ausfuehren
