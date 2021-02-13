@@ -275,23 +275,18 @@ export async function favoriteMovie(ctx) {
     // Get current user
     const user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
 
-    console.log("BEFORE: " + user.favorites);
-
     // search favorites for the clicked movie id
     var favoritesArray = user.favorites.split(', ');
-
     const index = favoritesArray.indexOf(ctx.params.id)
-    //console.log("Index" + index);
 
     if (index > -1) {
-        console.log("Element found. Removing it");
+        //console.log("Element found. Removing it");
         favoritesArray.splice(index, 1);
     } else {
-        console.log("Element not found. It has to be added");
+        //console.log("Element not found. It has to be added");
         favoritesArray.push(ctx.params.id);
     }
 
     var favoriteString = favoritesArray.join(", ");
-    console.log("NEW: " + favoriteString);
     userModel.editFavorites(ctx.db, ctx.session.user.username, favoriteString);
 }
