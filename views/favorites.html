@@ -19,7 +19,7 @@
 
             <!-- Load Objects here-->
             {% for movie in movies %}
-            <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+            <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden transition ease-out duration-200 transform hover:scale-105">
                 <a href="/movie/{{movie['id']}}">
                     <div class="flex-shrink-0 relative">
                         {% if movie['image'] %}

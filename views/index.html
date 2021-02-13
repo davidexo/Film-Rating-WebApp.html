@@ -18,14 +18,14 @@
             <button id="sort-button" type="button"
                 class="mt-4 inline-flex justify-center rounded-md border border-gray-500 shadow-sm px-4 py-2 bg-gray-600 text-sm font-medium text-gray-200 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
                 id="options-menu" aria-haspopup="true" aria-expanded="true">
-                Absteigend
+                Aufsteigend
             </button>
         </div>
         <ul id="film-list" class="mt-16 max-w-lg mx-auto grid gap-8 lg:grid-cols-3 lg:max-w-none">
 
             <!-- Load Objects here-->
             {% for movie in movies %}
-            <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden">
+            <li data-rating="{{movie['rating']}}" class="flex flex-col rounded-lg shadow-lg overflow-hidden transition ease-out duration-200 transform hover:scale-105">
                 <a href="/movie/{{movie['id']}}">
                     <div class="flex-shrink-0 relative">
                         {% if movie['image'] %}
@@ -99,8 +99,6 @@
                     </div>
                 </div>
             </li>
-
-
             {% endfor %}
     </div>
 </div>

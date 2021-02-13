@@ -9,12 +9,14 @@ import {
 
 const router = new Router();
 
+// Einloggen
 router.get("/movie/login", login.showForm);
 
 router.post("/movie/login", async (ctx, next) => {
   await login.submitForm(ctx);
 });
 
+// Ausloggen
 router.get("/movie/logout", login.logout);
 
 // Alle movies ausgeben
