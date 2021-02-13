@@ -1,6 +1,8 @@
 import * as model from './model.js';
 import * as formController from './form-controller.js';
 import * as userModel from "./userModel.js";
+import * as csrf from "./csrf.js";
+
 import {
     Console
 } from 'console';
@@ -25,7 +27,7 @@ export async function index(ctx) {
     try {
         user = await userModel.getByUsername(ctx.db, ctx.session.user.username);
         // Add isFavorite attribute to data object
-        data = await abc(data, user);
+        data = await addIsFavoriteAttribute(data, user);
     } catch {
         console.log('No user');
     }
@@ -58,7 +60,7 @@ export async function favorites(ctx) {
     data = await filterByIds(data, user.favorites);
 
     // Add isFavorite attribute to data object
-    data = await abc(data, user);
+    data = await addIsFavoriteAttribute(data, user);
 
     await ctx.render('favorites', {
         movies: data,
@@ -87,7 +89,7 @@ export async function filterByIds(array, string) {
 
 }
 
-export async function abc(obj, user) {
+export async function addIsFavoriteAttribute(obj, user) {
     // add isFavorite attribute
     if (user.favorites != null) {
         for (var i = 0; i < (obj.length); i++) {
@@ -142,6 +144,8 @@ export async function show(ctx) {
 export async function confirmDelete(ctx) {
     // delete a movie
     const data = await model.getById(ctx.db, ctx.params.id);
+
+    console.log("reached");
 
     if (ctx.accepts("text/html")) {
         await ctx.render('delete', {

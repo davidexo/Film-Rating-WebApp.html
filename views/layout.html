@@ -46,7 +46,6 @@
                     </a>
                     <div class="hidden sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a 
                                 href="/" 
                                 class="text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -90,7 +89,7 @@
                                 <img class="h-10 w-10 rounded-full" src="/images/leonardo-avatar.png" alt="">
                             </button>
                         </div>
-                        <div id="user-menu" class="transition ease-out duration-200 transform opacity-0 scale-95 origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg z-10 py-1 bg-white ring-1 ring-black ring-opacity-5"
+                        <div id="user-menu" class="transition ease-out duration-200 hidden transform opacity-0 scale-95 origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg z-10 py-1 bg-white ring-1 ring-black ring-opacity-5"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                             <a href="/account" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
                             role="menuitem">Dein Account</a>
@@ -113,9 +112,10 @@
     <!-- Mobile menu -->
         <div class="hidden sm:hidden py-8" id="menu">
             <div class="px-2 pt-2 pb-3 space-y-1 text-center">
-                <a href="#" class="bg-gray-900 text-white block px-6 py-4 rounded-md text-3xl font-medium">Top Filme</a>
-                <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-6 py-4 rounded-md text-3xl font-medium">Favoriten</a>
+                <a href="/" class="text-gray-300 block px-6 py-4 rounded-md text-3xl font-medium">Top Filme</a>
+                <a href="/favorites"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-6 py-4 rounded-md text-3xl font-medium">Deine Favoriten</a>
+                <a href="/Account" class="text-gray-300 block px-6 py-4 rounded-md text-3xl font-medium">Dein Account</a>
             </div>
         </div>
     </nav>
@@ -154,10 +154,11 @@
 
             // Toggle User Dropdown
             userMenuButton.addEventListener('click', () => {
+                //userMenu.toggle();
                 if (userMenu.classList.contains('opacity-0')) {
-                    userMenu.classList.remove('opacity-0', 'scale-95');
+                    userMenu.classList.remove('opacity-0', 'scale-95', 'hidden');
                 } else {
-                    userMenu.classList.add('opacity-0', 'scale-95');
+                    userMenu.classList.add('opacity-0', 'scale-95', 'hidden');
                 }
             })
 

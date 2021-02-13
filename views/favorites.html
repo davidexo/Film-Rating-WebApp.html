@@ -102,20 +102,20 @@
 
     function favorite(button) {
 
-        if (button.dataset.isFavorite == "false") {
-            console.log("Adding movie with ID " + button.id + " from your favorites");
-            button.dataset.isFavorite = "true";
+        // if (button.dataset.isFavorite == "false") {
+        //     console.log("Adding movie with ID " + button.id + " from your favorites");
+        //     button.dataset.isFavorite = "true";
 
-            button.classList.remove("bg-gray-100");
-            button.classList.add("bg-gray-400");
-        } else if (button.dataset.isFavorite = "true") {
-            console.log("Removing movie with ID " + button.id + " to your favorites");
-            button.dataset.isFavorite = "false";
-            button.classList.remove("bg-gray-400");
-            button.classList.add("bg-gray-100");
-        } else {
-            console.error("Missformed Dataset: is-favorite");
-        }
+        //     button.classList.remove("bg-gray-100");
+        //     button.classList.add("bg-gray-400");
+        // } else if (button.dataset.isFavorite = "true") {
+        //     console.log("Removing movie with ID " + button.id + " to your favorites");
+        //     button.dataset.isFavorite = "false";
+        //     button.classList.remove("bg-gray-400");
+        //     button.classList.add("bg-gray-100");
+        // } else {
+        //     console.error("Missformed Dataset: is-favorite");
+        // }
 
         window.location.href='movie/' + button.id + '/fav';
     }

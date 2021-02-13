@@ -33,7 +33,7 @@
                     </div>
                 </a>
                 <div class="flex-1 relative bg-white p-6  justify-between">
-                    {% if movie['isFavorite'] %}
+                    {% if movie['isFavorite'] and authenticated %}
                     <button id="{{movie['id']}}" onclick="favorite(this)" data-is-favorite="false"
                         class="focus:outline-none fav-button absolute bg-indigo-200 top-4 right-4 rounded-full">
                         <svg class="text-indigo-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor"
@@ -43,7 +43,7 @@
                             </path>
                         </svg>
                     </button>
-                    {% else %}
+                    {% elseif movie['isFavorite'] == false and authenticated %}
                     <button id="{{movie['id']}}" onclick="favorite(this)" data-is-favorite="false"
                     class="focus:outline-none fav-button absolute bg-gray-100 top-4 right-4 rounded-full">
                     <svg class="text-gray-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor"
@@ -159,20 +159,20 @@
 
     function favorite(button) {
 
-        if(button.dataset.isFavorite == "false") {
-            console.log("Adding movie with ID " + button.id + " from your favorites");
-            button.dataset.isFavorite = "true";
+        // if(button.dataset.isFavorite == "false") {
+        //     console.log("Adding movie with ID " + button.id + " from your favorites");
+        //     button.dataset.isFavorite = "true";
 
-            button.classList.remove("bg-gray-100");
-            button.classList.add("bg-gray-400");            
-        } else if (button.dataset.isFavorite = "true") {
-            console.log("Removing movie with ID " + button.id + " to your favorites");
-            button.dataset.isFavorite = "false";
-            button.classList.remove("bg-gray-400"); 
-            button.classList.add("bg-gray-100");
-        } else {
-            console.error("Missformed Dataset: is-favorite");
-        }
+        //     button.classList.remove("bg-gray-100");
+        //     button.classList.add("bg-gray-400");            
+        // } else if (button.dataset.isFavorite = "true") {
+        //     console.log("Removing movie with ID " + button.id + " to your favorites");
+        //     button.dataset.isFavorite = "false";
+        //     button.classList.remove("bg-gray-400"); 
+        //     button.classList.add("bg-gray-100");
+        // } else {
+        //     console.error("Missformed Dataset: is-favorite");
+        // }
 
         window.location.href='movie/' + button.id + '/fav';
     }
