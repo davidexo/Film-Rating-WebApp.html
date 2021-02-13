@@ -7,6 +7,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as controller from "./controller.js";
 import * as userModel from "./userModel.js";
+import * as csrf from "./csrf.js";
 
 // render form with additional data
 export async function renderForm(ctx, form) {

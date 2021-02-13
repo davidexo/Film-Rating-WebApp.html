@@ -1,13 +1,20 @@
 import * as argon from "argon2";
 
 export async function getByUsername(db, username) {
-  return await db.get("SELECT * FROM users WHERE username= ?", username);
+  if (username)
+  {
+    return await db.get("SELECT * FROM users WHERE username= ?", username);
+  }
+  
 }
 
 export async function passwordIsCorrect(user, password) {
-  const hashedPassword = user.password;
-  const correctPassword = await validatePassword(hashedPassword, password);
-  return correctPassword;
+  if (password)
+  {
+    const hashedPassword = user.password;
+    const correctPassword = await validatePassword(hashedPassword, password);
+    return correctPassword;
+  }
 }
 
 export async function editUser(db, username, data) {

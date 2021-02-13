@@ -51,29 +51,37 @@
                                 href="/" 
                                 class="text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Top Filme</a>
+                            {% if viewFavs %}
                             <a 
                                 href="/favorites"
                                 class=" text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Deine Favoriten
                             </a>
+                            {% endif %}
+                            {% if viewAcc %}
                             <a 
                             href="/account"
                             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                             Dein Account
-                        </a>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Add element button -->
-                    {% if authenticated == true %}
+                    {%if canAdd %}
                     <a href="/movie/add">
                         <button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Film hinzufügen
                         </button>
                     </a>
-                    {% else %}
+                    {% endif %}
+                    
+                    {% if authenticated %}
+                    {% else %} 
+                    
                     <a href="/movie/login">
                         <button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -83,12 +91,14 @@
                     {% endif %}
                     <div class="ml-3 relative">
                         <div>
+                            {% if authenticated %}
                             <button
                                 class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                                 id="user-menu-button" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="h-10 w-10 rounded-full" src="/images/leonardo-avatar.png" alt="">
                             </button>
+                            {% endif %}
                         </div>
                         <div id="user-menu" class="transition ease-out duration-200 transform opacity-0 scale-95 origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg z-10 py-1 bg-white ring-1 ring-black ring-opacity-5"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
@@ -96,7 +106,7 @@
                             role="menuitem">Dein Account</a>
                             <a href="/favorites" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
                                 role="menuitem">Deine Favoriten</a>
-                            {% if authenticated %}
+                            {% if canLogout %}
                             <a href="/movie/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                 role="menuitem">Abmelden</a>
                             {% else %}
