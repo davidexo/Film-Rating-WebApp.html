@@ -18,14 +18,13 @@ export async function renderForm(ctx, form) {
 
 // add a movie
 export async function add(ctx) {
-  //const data = await model.defaultData(ctx);
-
   await ctx.render("add");
 }
 
 // edit a movie
 export async function edit(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
+
 
     await ctx.render("edit", {
       form: data,
@@ -35,14 +34,6 @@ export async function submitForm(ctx) {
     var data = ctx.request.body || {};
     data.files = ctx.request.files;
     const errors = await validateForm(data);
-
-    /*const token = await csrf.generateToken();
-    ctx.session.csrf = token;
-
-    if (ctx.session.csrf !== ctx.request.body._csrf) {
-      ctx.throw(401);
-    }
-    ctx.session.csrf = undefined;*/
 
     // Handle uploaded image
     if (data.files.image.size > 0) {
@@ -85,8 +76,9 @@ export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
         image: validateImage(data.image),
+        // TODO FIX FEEDBACK IF THESE ARE MALFORMED
         //imdb: validateUri(data.imdb),
-        //rottentomatoes: validateUri(data.rottentomatoes),
+        //rottentomatoes: validateUri(data.rottentomatoes)
     }
 }
 
