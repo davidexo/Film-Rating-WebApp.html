@@ -109,15 +109,19 @@
                                 Speichern
                             </button>
                             {% if form['id'] %}
-                            <button type="button" onclick="location.href='/movie/{{form['id']}}'"
-                                class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
-                                Abbrechen
-                            </button>
+                            <a href="/movie/{{form['id']}}">
+                                <button type="button"
+                                    class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                                    Abbrechen
+                                </button></a>
+
                             {% else %}
-                            <button type="button" onclick="location.href='/'"
-                                class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
-                                Abbrechen
-                            </button>
+                            <a href="/">
+                                <button type="button"
+                                    class="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500">
+                                    Abbrechen
+                                </button>
+                            </a>
                             {% endif %}
                         </div>
                     </form>
