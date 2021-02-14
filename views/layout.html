@@ -49,6 +49,7 @@
                                 href="/" 
                                 class="nav-index text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Top Filme</a>
+                            {% if authenticated %}
                             <a 
                                 href="/favorites"
                                 class="nav-favorites text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -58,13 +59,14 @@
                             href="/account"
                             class="nav-account text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                             Dein Account
-                        </a>
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <!-- Add element button -->
-                    {% if authenticated == true %}
+                    {%if authenticated %}
                     <a href="/movie/add">
                         <button type="button"
                             class="inline-flex items-center px-4 py-3 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
