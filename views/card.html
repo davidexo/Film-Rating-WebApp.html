@@ -11,25 +11,28 @@
     </a>
     <div class="flex-1 relative bg-white p-6  justify-between">
         {% if movie['isFavorite'] and authenticated %}
-        <button id="{{movie['id']}}" onclick="favorite(this)" data-is-favorite="false"
-            class="focus:outline-none fav-button absolute bg-indigo-200 top-4 right-4 rounded-full">
-            <svg class="text-indigo-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                </path>
-            </svg>
-        </button>
+        <a href="movie/{{movie['id']}}/fav">
+            <button class="focus:outline-none fav-button absolute bg-indigo-200 top-4 right-4 rounded-full">
+                <svg class="text-indigo-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                    </path>
+                </svg>
+            </button>
+        </a>
         {% elseif movie['isFavorite'] == false and authenticated %}
-        <button id="{{movie['id']}}" onclick="favorite(this)" data-is-favorite="false"
-            class="focus:outline-none fav-button absolute bg-gray-100 top-4 right-4 rounded-full">
-            <svg class="text-gray-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                </path>
-            </svg>
-        </button>
+        <a href="movie/{{movie['id']}}/fav">
+            <button class="focus:outline-none fav-button absolute bg-gray-100 top-4 right-4 rounded-full">
+                <svg class="text-gray-600  w-12 h-12 px-2 py-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                    </path>
+                </svg>
+            </button>
+        </a>
+
         {% endif %}
         <div class="flex-1">
             <p class="text-sm font-medium text-indigo-600">
