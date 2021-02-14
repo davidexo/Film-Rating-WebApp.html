@@ -6,8 +6,6 @@ import views from "koa-views";
 import koaStatic from "koa-static";
 import { flash } from "./middleware/flash.js";
 import session from "koa-session";
-import * as permissionModel from "./movie/permissionModel.js";
-import { check } from "./middleware/hasPermission.js";
 
 // SHIT GOES WRONG RIGHT HERE
 import SQLite3Store from "koa-sqlite3-session";
@@ -53,10 +51,6 @@ export default async function webApp(config) {
 
   app.use(async (ctx, next) => {
     if (ctx.session.user) {
-      ctx.session.user.permissions = await permissionModel.getByUserId(
-        ctx.db,
-        ctx.session.user.id
-      );
       ctx.state.user = ctx.session.user;
       ctx.state.authenticated = true;
     }
