@@ -23,17 +23,14 @@
                 <h2 class="text-3xl leading-6 pb-6 font-medium text-gray-900">
                     {{form['title']}} bewerten
                 </h2>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                    Wie findest du den Film {{form['title']}}? ({{form['rating']}})
-                </p>
             </div>
 
             <form method="post" class="space-y-8 divide-y divide-gray-200">
                 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <ul class="divide-y divide-gray-200">
-                        <li class="py-4 flex">
-                            <label for="stars">Wie findest du den Film {{form['title']}}?</label>
-                            <select id="rating" name="rating" class="text-2xl">
+                        <li class="py-4">
+                            <label for="stars" class="">Wie findest du den Film {{form['title']}}?</label>
+                            <select id="rating" name="rating" class="mt-2 block p-4 text-base bg-gray-200 border-gray-400 focus:outline-none sm:text-sm rounded-md">
                                 <option value="1">1 / 10</option>
                                 <option value="2">2 / 10</option>
                                 <option value="3">3 / 10</option>

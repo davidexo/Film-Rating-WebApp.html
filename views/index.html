@@ -1,6 +1,6 @@
 {% set body_class = "index" %}
 {% extends 'layout.html' %}
-{% block title %}Movie-App{% endblock %}
+{% block title %}Top-Filme{% endblock %}
 {% block content %}
 
 <div class="relative bg-gray-700 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-">
@@ -37,7 +37,7 @@
     var filmList = document.getElementById("film-list");
     var dir = "asc";
 
-    // This function was coded based on the following w3schools tutorial
+    // This function was coded with help the following w3schools sample
     // Source: https://www.w3schools.com/howto/howto_js_sort_list.asp
     sortButton.onclick = function () {
         var switching = true;
@@ -83,8 +83,6 @@
             }
         }
     }
-
-
 </script>
 
 {% endblock %}
