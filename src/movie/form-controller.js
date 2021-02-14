@@ -76,8 +76,12 @@ export async function validateForm(data) {
     return {
         title: validateTitle(data.title),
         image: validateImage(data.image),
+        description: validateDescription(data.description),
+        tags: validateGenre(data.tags),
+        imdb: validateUri(data.imdb),
+        rottentomatoes: validateUri(data.rottentomatoes)
         // TODO FIX FEEDBACK IF THESE ARE MALFORMED
-        //imdb: validateUri(data.imdb),
+        
         //rottentomatoes: validateUri(data.rottentomatoes)
     }
 }
@@ -94,14 +98,28 @@ export function validateTitle(title) {
     return !containsText(title) ? "Bitte einen Titel eingeben" : undefined;
 }
 
+// Generate error message if there is no genre
+// validateGenre :: String -> String | undefined
+export function validateGenre(genre) {
+    return !containsText(genre) ? "Bitte gebe mindestens ein Genre an" : undefined;
+}
+
+// Generate error message if description is empty.
+// validateDescription :: String -> String | undefined
+export function validateDescription(description) {
+    return !containsText(description) ? "Bitte eine kurze Beschreibung eingeben (Mindestens 3 Zeichen)" : undefined;
+}
+
 // Generate error message if uri is not a valid URL
 // validateUri :: String -> String | undefined
 export function validateUri(string) {
-    try {
-        const myURL = new URL(string);
-        return undefined;
-    } catch (error) {
-        return "Keine gültige URL";
+    if(string != ""  && string != undefined) {
+        try {
+            const myURL = new URL(string);
+            return undefined;
+        } catch (error) {
+            return "Keine gültige URL";
+        }
     }
 }
 
@@ -109,7 +127,7 @@ export function validateImage(file) {
     if (!file) return;
     if (file.size == 0) return;
     // Check file type (functions still missing)
-    //if (mimetypeOk(file.type) && typeOk(file.name)) return;
+    if (mimetypeOk(file.type) && typeOk(file.name)) return;
     return 'Dateiformat nicht zulässig.';
 }
 
