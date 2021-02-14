@@ -10,7 +10,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold text-white">
                     {% if user['id'] %}
-                    Dein Account, User
+                    Dein Account {{ user['first_Name'] }}
                     {% endif %}
                 </h1>
             </div>
@@ -23,47 +23,33 @@
                 <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
                     <form class="divide-y divide-gray-200 lg:col-span-12" action="#" method="POST">
                         <div class="py-6 px-4 sm:p-6 lg:pb-8">
-                            <div>
-                                <div class="w-32 pb-4">
-                                    <p class="text-sm font-medium text-gray-700" aria-hidden="true">
-                                        Profilbild
-                                    </p>
-                                    <div class="relative rounded-full overflow-hidden block">
-                                        <img class="relative rounded-full w-32 h-32 mt-4" src="/images/leonardo-avatar.png" alt="Dein Profilbild">
-                                        <label for="user-photo"
-                                            class="absolute inset-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
-                                            <span>Profilbild aendern</span>
-                                            <span class="sr-only"> Profilbild</span>
-                                            <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                            <input type="file" id="user-photo" name="user-photo"
-                                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="col-span-12">
                                 <label for="url" class="block text-sm font-medium text-gray-700 pb-2">
                                     Dein Status
                                 </label>
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-pink-100 text-pink-800">
-                                        Admin
-                                      </span>
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-pink-100 text-pink-800">
+                                    Admin
+                                </span>
                             </div>
 
                             <div class="mt-6 grid grid-cols-12 gap-6">
                                 <div class="col-span-12 sm:col-span-6">
-                                    <label for="first_name" class="block text-sm font-medium text-gray-700">Vorname</label>
-                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                    <input type="text" name="first_name" value="{{user['first_Name']}}" id="first_name" autocomplete="given-name"
+                                    <label for="first_name"
+                                        class="block text-sm font-medium text-gray-700">Vorname</label>
+                                    <input type="text" name="first_name" value="{{user['first_Name']}}" id="first_name"
+                                        placeholder="Dein Vorname" autocomplete="given-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+                                    <p class="mt-2 text-sm text-gray-600">Optional Angabe</p>
                                 </div>
 
                                 <div class="col-span-12 sm:col-span-6">
-                                    <label for="last_name" class="block text-sm font-medium text-gray-700">Nachname</label>
-                                        <input type="hidden" name="_csrf" value="{{ csrf }}">
-                                    <input type="text" name="last_name" id="last_name" value="{{user['last_Name']}}" autocomplete="family-name"
+                                    <label for="last_name"
+                                        class="block text-sm font-medium text-gray-700">Nachname</label>
+                                    <input type="text" name="last_name" id="last_name" placeholder="Dein Nachname"
+                                        value="{{user['last_Name']}}" autocomplete="family-name"
                                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm">
+                                    <p class="mt-2 text-sm text-gray-600">Optional Angabe</p>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,9 @@ import Router from "@koa/router";
 import * as controller from "./controller.js";
 import * as formController from "./form-controller.js";
 import * as login from "./login-form-controller.js";
-import { isAuthenticated } from "../middleware/isAuthenticated.js";
+import {
+  isAuthenticated
+} from "../middleware/isAuthenticated.js";
 
 const router = new Router();
 

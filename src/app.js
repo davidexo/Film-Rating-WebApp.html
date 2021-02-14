@@ -4,7 +4,9 @@ import movieRouter from "./movie/router.js";
 import koaBody from "koa-body";
 import views from "koa-views";
 import koaStatic from "koa-static";
-import { flash } from "./middleware/flash.js";
+import {
+  flash
+} from "./middleware/flash.js";
 import session from "koa-session";
 
 // SHIT GOES WRONG RIGHT HERE
@@ -46,7 +48,9 @@ export default async function webApp(config) {
 
   app.keys = ["3)!G[F-.85LCAUY_WSS6!(y:)G02R"];
 
-  app.use(session({ store: new SQLite3Store("./data/session.sqlite") }, app));
+  app.use(session({
+    store: new SQLite3Store("./data/session.sqlite")
+  }, app));
   app.use(flash);
 
   app.use(async (ctx, next) => {

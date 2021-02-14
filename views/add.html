@@ -96,18 +96,9 @@
                                     <img class="h-64 object-cover rounded-md" id="form_image_preview" name="image"
                                         src="/{{ form['image'] }}" alt="">
                                     {% endif %}
-
                                     <input type="file" id="form_image"
                                         class="mt-2 bg-white py-3 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         name="image" value="{{ form['image'] }}">
-                                    <button id="delete-image-button" type="button"
-                                        class="h-10 w-30  m-2 top-0 right-0  items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        <svg class="-mh-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                        </svg>
-                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -136,23 +127,5 @@
     </main>
 </div>
 
-
-<script>
-    const deleteImageButton = document.getElementById("delete-image-button");
-    const formImage = document.getElementById("form_image");
-    const previewImage = document.getElementById("form_image_preview")
-    const formImagePreviewContainer = document.getElementById("form_image_preview_container");
-
-    deleteImageButton.onclick = function () {
-        console.log("Clearing formImage.value");
-        console.log("formImage.value: " + formImage.value);
-        formImage.value = "";
-    }
-
-    formImage.onchange = function () {
-        console.log("I have changed, I swear!");
-        formImagePreviewContainer.classList.add("hidden");
-    }
-</script>
 
 {% endblock %}

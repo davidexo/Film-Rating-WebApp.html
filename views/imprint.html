@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% block title %}Dokumentation / Impressum{% endblock %}
 {% block content %}
 
 <div>
@@ -7,7 +8,7 @@
         <header class="relative py-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold text-white">
-                    Impressum
+                    Dokumentation / Impressum
                 </h1>
             </div>
         </header>
@@ -18,8 +19,30 @@
             <div class="bg-white rounded-lg shadow overflow-hidden">
                 <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
                     <div class="divide-y divide-gray-200 lg:col-span-12">
+                        <!-- Content Container-->
                         <div class="py-6 px-4 sm:p-6 lg:pb-8">
-                            © David Bielenberg & Florian Blum
+                            <h1
+                                class="my-2 block text-2xl leading-8 font-medium tracking-tight text-gray-900 sm:text-3xl">
+                                Eckdaten
+                            </h1>
+                            <h2>Gruppenmitglieder</h2>
+                            <p>
+                                David Bielenberg
+                                <span class="text-red-400">630894</span>
+                                <span class="text-green-400">dabi9710</span>
+
+                                Florian Blum
+                                <span class="text-red-400">111111</span>
+                                <span class="text-green-400">xxxx1111</span>
+                            </p>
+                            <h2>Loginnamen</h2>
+                            <p>
+                                Es gibt einen Nutzer, welcher über alle Rechte verfügt. Also auch neue Filme hinzufügen
+                                und bestehende bearbeiten kann
+                                Nutzername: "admin"
+                                Passwort: "admin"
+                            </p>
+
                         </div>
                     </div>
                 </div>

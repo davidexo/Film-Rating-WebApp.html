@@ -5,29 +5,26 @@ import * as model from './model.js';
 import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as controller from "./controller.js";
 import * as userModel from "./userModel.js";
-import * as csrf from "./csrf.js";
 
 // render form with additional data
 export async function renderForm(ctx, form) {
-  await ctx.render("add", {
-    form: form,
-  });
+    await ctx.render("add", {
+        form: form,
+    });
 }
 
 // add a movie
 export async function add(ctx) {
-  await ctx.render("add");
+    await ctx.render("add");
 }
 
 // edit a movie
 export async function edit(ctx) {
     const data = await model.getById(ctx.db, ctx.params.id);
 
-
     await ctx.render("edit", {
-      form: data,
+        form: data,
     });
 }
 export async function submitForm(ctx) {
@@ -41,8 +38,8 @@ export async function submitForm(ctx) {
         data.image = filename;
         const localPath = path.join(process.cwd(), 'public', filename);
 
-        fs.rename(data.files.image.path, localPath, function(err) {
-            if ( err ) console.log('ERROR: ' + err);
+        fs.rename(data.files.image.path, localPath, function (err) {
+            if (err) console.log('ERROR: ' + err);
         });
     } else {
         console.error("File is missing");
@@ -80,9 +77,6 @@ export async function validateForm(data) {
         tags: validateGenre(data.tags),
         imdb: validateUri(data.imdb),
         rottentomatoes: validateUri(data.rottentomatoes)
-        // TODO FIX FEEDBACK IF THESE ARE MALFORMED
-        
-        //rottentomatoes: validateUri(data.rottentomatoes)
     }
 }
 
@@ -113,7 +107,7 @@ export function validateDescription(description) {
 // Generate error message if uri is not a valid URL
 // validateUri :: String -> String | undefined
 export function validateUri(string) {
-    if(string != ""  && string != undefined) {
+    if (string != "" && string != undefined) {
         try {
             const myURL = new URL(string);
             return undefined;
@@ -150,7 +144,7 @@ export async function rateMovie(ctx) {
     var data = ctx.request.body || {};
 
     console.log("Selected Rating: " + data.rating);
-    
+
     if (ctx.params.id) {
         console.log("Post auf rate ausgeführt");
         await model.updateRating(ctx.db, ctx.params.id, data.rating);
