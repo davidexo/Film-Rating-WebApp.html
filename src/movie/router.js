@@ -55,7 +55,7 @@ router.get("/movie/:id", async (ctx, next) => {
 });
 
 // Ein movie bearbeiten - Formular anzeigen
-router.get("/movie/:id/edit", isAuthenticated, async (ctx, next) => {
+router.get("/movie/:id/edit", async (ctx, next) => {
   await controller.edit(ctx);
 });
 
@@ -72,7 +72,7 @@ router.post("/movie/:id/edit", async (ctx, next) => {
 });
 
 // Frage: movie loeschen?
-router.get("/movie/:id/delete", isAuthenticated, async (ctx, next) => {
+router.get("/movie/:id/delete", async (ctx, next) => {
   await controller.confirmDelete(ctx);
 });
 
