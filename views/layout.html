@@ -82,21 +82,16 @@
                             <span class="sr-only">User Menü öffnen</span>
                             <img class="h-10 w-10 rounded-full" src="/images/leonardo-avatar.png" alt="Dein Profilbild">
                         </button>
-                        {% endif %}
                         <div id="user-menu"
-                            class="transition ease-out duration-200 transform origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg z-10 py-1 bg-white ring-1 ring-black ring-opacity-5"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                            <a href="/account" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
-                                role="menuitem">Dein Account</a>
-                            <a href="/favorites" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
-                                role="menuitem">Deine Favoriten</a>
-                            {% if authenticated %}
-                            <a href="/movie/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">Abmelden</a>
-                            {% else %}
-                            <a href="/movie/login" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                role="menuitem">Anmelden</a>
-                            {% endif %}
+                        class="transition ease-out duration-200 transform origin-top-right absolute right-0 mt-4 w-48 rounded-md shadow-lg z-10 py-1 bg-white ring-1 ring-black ring-opacity-5"
+                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                        <a href="/account" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
+                            role="menuitem">Dein Account</a>
+                        <a href="/favorites" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
+                            role="menuitem">Deine Favoriten</a>
+                        <a href="/movie/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem">Abmelden</a>
+                        {% endif %}
                         </div>
                     </div>
                 </div>
