@@ -10,7 +10,6 @@
 		"argon": "^2.0.21",
 		"argon-logger": "^0.4.0",
 		"argon2": "^0.26.2",
-		"autoprefixer": "^10.2.1",
 		"jsdom": "^16.4.0",
 		"koa": "^2.13.0",
 		"koa-body": "^4.2.0",
@@ -21,15 +20,17 @@
 		"koa-views": "^7.0.0",
 		"nodemon": "^2.0.6",
 		"nunjucks": "^3.2.2",
-		"postcss": "^8.2.4",
 		"run": "^1.4.0",
 		"silkrouter": "^4.1.1",
 		"sqlite": "^4.0.17",
 		"sqlite3": "^4.2.0",
-		"tailwindcss": "^2.0.2",
 		"uuid": "^8.3.2"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"autoprefixer": "^10.2.4",
+		"postcss": "^8.2.6",
+		"tailwindcss": "^2.0.3"
+	},
 	"scripts": {
 		"build-css": "tailwindcss build src/styles.css -o public/styles.css"
 	},

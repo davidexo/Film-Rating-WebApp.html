@@ -96,13 +96,17 @@ export async function updateRating (db, id, rating) {
   const current = await db.get("SELECT rating, total_rating FROM movies WHERE id = ?", id);
   
   var overallRating = parseFloat(current.rating);
-  var totalRating = parseFloat(current.total_rating);
   var newRating = parseFloat(rating);
+  var totalRating = parseFloat(current.total_rating);
+  
+
+  console.log(overallRating);
+  console.log(totalRating);
+  console.log(newRating);
 
   // calculate new rating
   const newOverallRating = ((overallRating * totalRating) + newRating) / (totalRating + 1);
-  console.log("New Overallrating: " + newOverallRating);
   
-  const result = await db.run("UPDATE movies SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+newRating), id);
+  const result = await db.run("UPDATE movies SET rating=?, total_rating=? WHERE id = ?", newOverallRating, (totalRating+1), id);
   return result.changes;
 }

@@ -10,6 +10,7 @@
                 <h1 class="text-3xl font-bold text-white">
                     Dokumentation / Impressum
                 </h1>
+
             </div>
         </header>
     </div>
@@ -23,483 +24,650 @@
                         <div class="py-6 px-4 sm:p-6 lg:pb-8">
 
                             <div class="py-6 px-4 sm:p-6 lg:pb-8">
-                                <h1 class="my-2 block text-2xl leading-8 font-medium tracking-tight text-gray-900 sm:text-3xl">
+                                <h1
+                                    class="my-2 block text-2xl leading-8 font-medium tracking-tight text-gray-900 sm:text-3xl">
                                     Dokumentation
                                 </h1>
-                                <h2>Ziel und Umfang der Anwendung</h2>
-                                <span>
-                                    Ziel der Anwendung war es, eine Blog-ähnliche Film-Bewertungs-Plattform zu erstellen, ähnlich wie imdb. Nutzer
-                                    können sich auf der Webseite anmelden und dann neue Film-Einträge erstellen und bestehende Film-Einträge
-                                    bearbeiten, löschen oder bewerten. Beim Erstellen und Bearbeiten besteht weiterhin die Möglichkeit ein Bild
-                                    hochzuladen.
-                                    Weiterhin besteht die Möglichkeit das Profil aufzurufen und zu bearbeiten und bestehende Film-Einträge zu den
-                                    Favoriten hinzuzufügen und diese dann gesondert auf der Seite aufzurufen.
-                                    Besucher, welche nicht angemeldet sind, können nur die Startseite sehen, die Film-Einträge sortieren und auf
-                                    bestehende Film-Einträge zugreifen, diese jedoch nicht bearbeiten.
-                                </span>
-                                <h2>Aufbau und Aufteilung der Anwendung</h2>
-                                <span>Im Root-Ordner der Anwendung befinden sich die server.js, welche Zugriff auf die Datenbank ermöglicht und
-                                    folgende weitere Ordner:
-                            
-                                    Im views-Ordner befinden sich die Templates für die HTML-Seiten.
-                                    Im public-Ordner befinden sich die CSS-Dateien und andere Ressourcen, wie z.B. Bilder.
-                                    Hochgeladene Bilder (Coverarts der Filme) werden gehasht und in den Ordner upload gelegt
-                                    Im data-Ordner befindet sich die Datenbank, welche von der Anwendung verwendet wird.
-                                    Im src-Ordner befinden sich die app.js, welche den Server und die Webanwendung startet. Sessions instanziert und
-                                    die Templates lädt und folgende weitere Ordner:
-                                    Im middleware-Ordner befinden sich flash.js, welche das Anzeigen von Flash-Nachrichten in der Anwendung
-                                    ermöglicht. und isAuthenticated.js, welche überprüft ob ein Nutzer im State vorhanden ist.
-                                    Im movie-Ordner befinden sich folgende Dateien:
-                                    controller.js, in welcher Funktionen zum Verarbeiten von Daten und zum Ausführen von Aktionen auf der Seite
-                                    definiert sind.
-                                    form-controller.js, in welcher Funktionen zum Verarbeiten von Formularen und zum Weiterreichen der Daten
-                                    definiert sind.
-                                    login-form-controller.js, in welcher Funktionen zum Verarbeiten des Login-Formulars definiert sind und zum
-                                    Validieren der Login-Informationen
-                                    model.js, in welcher Funktionen zum Zugriff auf die Datenbank bezüglich Filmen definiert sind
-                                    router.js, in welcher die zu erreichenden Routen definiert sind
-                                    user-model.js, in welcher Funktionen, welche direkt mit dem Nutzer zu tun haben, definiert sind. Diese sind
-                                    unter anderem die Überprüfung des Passworts, das Lesen eines Nutzers aus der Datenbank per Username und das
-                                    Editieren der Favoriten und des Nutzer-Accounts.
-                            
-                                    Diese Aufteilung wurde gewählt um ein problemloses Arbeiten in der Gruppe zu ermöglichen. Alle Funktionen
-                                    bezüglich einer Aufgabe sind einer bestimmten Datei zugewiesen, was das Überprüfen und Zusammenführen von neuen
-                                    Änderungen über Github erleichtert.
-                            
-                                    Fast alle URIs sind über /movie zu erreichen. Dieser Aufbau wurde von der im Labor erarbeiteten Anwendung
-                                    übernommen und von Bookmarks auf Movies angepasst.
-                                    Account und Favorites, welche neu zu der Anwendung hinzugekommen sind, können direkt von der Basis aus
-                                    zugegriffen werden und benötigen kein /movie.
-                                    Seiten, welche mit dem An- und abmelden von Benutzern zu tun haben, sind über /movie/login beziehungsweise
-                                    /movie/logout zu erreichen.
-                                    Seiten, welche mit dem Hinzufügen eines neuen Filmes zu tun haben, sind über /movie/add zu erreichen.
-                                    Man kann direkt auf individuell bestehende Film-Einträge zugreifen, wenn man /movie/id aufruft, wobei id für die
-                                    Nummer des Filmes in der Datenbank steht.
-                                    Seiten, welche mit dem Bearbeiten von bestehenden Film-Einträgen zu tun haben, sind über /movie/id/edit zu
-                                    erreichen.
-                                    Seiten, welche mit dem Löschen, Bewerten und Favorisieren von bestehenden Film-Einträgen zu tun haben, sind über
-                                    jeweils movie/id/delete, /movie/id/rate und movie/id/fav zu erreichen.
-                                </span>
-                                <h2>Aufbau der Datenbank</h2>
-                                <span>Von der Anwendung werden zwei Datenbanken verwendet. Die sessions-Datenbank, in welcher alle Daten bezüglich
-                                    Sessions gespeichert werden und welche von Koa-Sessions automatisch erstellt und verwaltet wird und die
-                                    movies-Datenbank, in welcher alle Daten bezüglich der Anwendung gespeichert werden.
-                            
-                                    In der movie-Datenbank befinden sich zwei wesentliche Tabellen. Die movie-Tabelle, in welcher alle Daten eines
-                                    Filmes gespeichert sind und die users-Tabelle, in welcher alle Daten eines Nutzers gespeichert sind.
-                                    Ein Nutzer setzt sich aus einer Nutzer-ID, einem Benutzernamen, einem gehashten Passwort, den favorisierten
-                                    Film-Einträgen und einem Vor- und Nachnamen zusammen.
-                                    Ein Film setzt sich aus einer Film-ID, einem Film-Titel, einer Film-Beschreibung, den Tags, einem
-                                    Veröffentlichungsdatum, einem Bild, die Anzahl aller Bewertungen, einer Durchschnitts-Bewertung und Links zu
-                                    anderen Film-Plattformen, wie RottenTomatoes und imdb, zusammen.
-                                </span>
-                                <h2>Nutzung von JS im Frontend</h2>
-                                <span>
-                                    Um zu gewährleisten, dass alle Bereiche der Anwendung ansteuerbar und die wichtigsten Funktionen erhalten
-                                    bleiben, selbst wenn Javascript im Browser deaktiviert ist, oder aus anderen Gründen nicht verfügbar ist, haben
-                                    wir nur sparsam im Frontend selbst mit Javascript gearbeitet. In der Regel werden daher Daten, wie die Filme,
-                                    bereits bei Seitenaufruf im Controller behandelt. Das heisst die Filme werden bereits vorher für die Darstellung
-                                    auf der Seite vorbereitet. Beispielsweise werden Filme vorab sortiert, die Bewertungen, welche für die genaue
-                                    Berechnung mit vielen Nachkommastellen in der Datenbank abgespeichert werden, gerundet.
-                            
-                                    Zwischenzeitlich, hatten wir Interaktionen, wie den Favorisieren-Button mittels Javascript gelöst, was ein
-                                    natives Feeling ermöglichte. Allerdings haben wir uns dann doch lieber für eine javascript-arme Lösung
-                                    entschieden, um maximale Kompatibilität zu gewährleisten.
-                            
-                                    Die Sortierung der Filme funktioniert innerhalb eines Script-Tags in Template (index.html). Das haben wir für in
-                                    Ordnung befunden, da die Funktion die Sortierung zu invertieren nicht als unverzichtbar für die Navigation der
-                                    Seite ansehen.
-                                    Auch das Ein- und Ausblenden eines Dropdowns bei Klick auf den Avatar (im angemeldeten Zustand) und die mobile
-                                    Burger Navigation werden mit Javascript getriggert. Als Lösung haben wir die Menüs standardmäßig eingeblendet
-                                    und mit Javascript wieder versteckt, sodass es bei Fehlen von Javascript weiterhin sichtbar bleibt und die Seite
-                                    auch ohne Javascript vollständig zu navigieren bleibt.
-                            
-                                </span>
-                                <h2>Verwendung von externen Komponenten und Begründung</h2>
-                                <span>Tailwind
-                                    Für das Frontend haben wir uns für TailwindCSS entschieden. Dabei handelt es sich, um ein sehr flexibles utility
-                                    framework. Wir haben uns dafür entschieden, da es mehr Flexibilität als z.B. Bootstrap bietet, jedoch trotzdem
-                                    die Entwicklungszeit nach kurzer Umgewöhnung verkürzen konnte, gerade da das Framework uns teilweise bereits
-                                    bekannt war und die Hausarbeit so als Gelegenheit genutzt werden konnte, Erfahrung mit Tailwind zu sammeln.
-                            
-                                    <a href="https://tailwindcss.com/">tailwindcss.com</a>
-                            
-                                    Heroicons
-                                    Diese kostenfreie und freie Icon Library bietet cleane SVG Icons mit mit minimaler Zeilenanzahl an und
-                                    funktionieren hervorragend im Zusammenspiel mit Tailwind
-                            
-                                    <a href="https://heroicons.dev/">heroicons.dev</a>
-                            
-                                </span>
-                                <h2>Projekttagebuch und Aufgabenteilung</h2>
-                                <span>
-                                    Während Florian sich überwiegend mit der Implementierung des Users, der Sessions und allem was damit
-                                    zusammenhängt beschäftigt hat, hat David neben der Umsetzung des Frontends an den verschiedenen
-                                    Interaktionsmöglichkeiten, wie dem Favorisieren und dem Bewertet der Filme gearbeitet.
-                                </span>
-                                <h2>Aufgetretene Probleme und deren Lösungen</h2>
-                                <h3>TailwindCSS in ES6 Environment</h3>
-                                <span>Bei der Verwendung von TailwindCSS gab es das Problem, dass das CSS Frameswork nicht mit ES6 Environments
-                                    kompatibel ist. Zwar funktioniert das Framework dennoch, jedoch lässt es sich nicht mittels config Datei
-                                    konfigurieren, um etwa Farbtöne anzupassen, Schriftfamilien zu personalisieren, oder Zusätzliche Module zu
-                                    konfigurieren. Da wir darauf im Rahmen dieser Hausarbeit darauf verzichten konnten, haben wir uns dennoch für
-                                    dieses Framework ohne individuelle Anpassungen der tailwindcss.config.js entschieden Zukunft soll dieses Problem
-                                    wohl von den Entwicklern von Tailwind behoben werden. Auch heute gibt es bereits mögliche Workarounds.</span>
-                                <h3>Inkompatibilität der Sqlite Modules</h3>
-                                <span>Da wir sowohl Windows als auch Mac OS verwendet haben waren unsere Setups nach der Implementation von Session
-                                    nicht mehr kompatibel, da auch wir von den Problemen verschiedener Sqlite3 Versionen betroffen waren. Dieses
-                                    Problem konnten wir jedoch jeweils für unsere jeweilige Plattform lösen und haben anschließend unsere
-                                    node_modules zu einer gitignore hinzugefügt, um ungestört von unseren jeweiligen Setups weiterentwickeln zu
-                                    können.</span>
-                                <h3>Fehlerhafte Implementation des CSRF-Tokens</h3>
-                                <span>Bei der Implementation des CSRF-Tokens gab es das Problem, dass aufgrund von asynchronen Routen der
-                                    Request-Body
-                                    teilweise leer war und damit das Token nicht korrekt gesetzt wurde. Dies führte dazu, dass bei jedem Aufruf ein
-                                    401-Fehler geworfen wurde.
-                                    Aufgrund von Zeitmangel wurde sich entschlossen die Implementation des CSRF-Tokens aus der finalen Abgabe zu
-                                    entfernen.
-                                </span>
-                                <h3>Erstellen mehrerer Nutzerrollen</h3>
-                                <span>Bei der Implementation von Nutzerrollen gab es das Problem, dass aufgrund von asynchronen Routen die
-                                    hasPermission-Methode sich nicht korrekt verhalten hatte. Obwohl die Permissions korrekt in den State geladen
-                                    wurden, konnten verschiedene Nutzer, welche nicht über die erforderlichen Rechte verfügten, auf bestimmte
-                                    Inhalte zugreifen.
-                                    Aufgrund von Zeitmangel wurde sich entschlossen die Implementation von Nutzerrollen zu entfernen und eine simple
-                                    Autorisierung mit zwei Rechte-Gruppen zu verwenden.
-                                </span>
-                                <h2>Rechte-Erklärung</h2>
-                                <span>Hiermit erklären wir, dass wir über die nötigen Rechte und Erlaubnisse zur Verwendung aller externen
-                                    Komponenten,
-                                    Bilder und Inhalte verfügen. Die in der Anwendung verwendeten Bild-Materialien erreichen nicht die nötige
-                                    Schöpfungshöhe und können deshalb zu enzyklopädischen Zwecken verwendet werden.</span>
-    
+                                <h2 class="text-2xl">
+                                    Eckdaten
+                                </h2>
+                                <!-- Table-->
+                                <div class="flex flex-col mt-8">
+                                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 mb-8">
+                                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                                <table class="min-w-full divide-y divide-gray-200">
+                                                    <thead class="bg-gray-50">
+                                                        <tr>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                Name
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                Martikelnummer
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                Loginname
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Even row -->
+                                                        <tr class="bg-gray-50">
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                David Bielenberg
+                                                            </td>
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                630894
+                                                            </td>
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                dabi9710
+                                                            </td>
+                                                        </tr>
 
-
-
-
-
-                            <h1
-                                class="my-2 block text-2xl leading-8 font-medium tracking-tight text-gray-900 sm:text-3xl">
-                                Eckdaten
-                            </h1>
-                            <h2>Gruppenmitglieder</h2>
-                            <p>
-                                David Bielenberg
-                                <span class="text-red-400">630894</span>
-                                <span class="text-green-400">dabi9710</span>
-
-                                Florian Blum
-                                <span class="text-red-400">570960</span>
-                                <span class="text-green-400">flbl5465
-                                </span>
-                            </p>
-                            <h2>Loginnamen</h2>
-                            <p>
-                                Es gibt einen Nutzer, welcher über alle Rechte verfügt. Also auch neue Filme hinzufügen
-                                und bestehende bearbeiten kann
-                                Nutzername: "admin"
-                                Passwort: "admin"
-                            </p>
-                            <div class="flex flex-col mt-8">
-                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                            <table class="min-w-full divide-y divide-gray-200">
-                                                <thead class="bg-gray-50">
-                                                    <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Datum
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Funktion
-                                                        </th>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                            Wer hat es umgesetzt?
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            14.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Frontend-Verbesserungen, alle Buttons funktionieren ohne JS,
-                                                            CSRF-Token wieder entfernt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            13.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Nutzerrollen entfernt und alte Auth-Methode
-                                                            wiederhergestellt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            13.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Verschiedene Nutzerrollen hinzugefügt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            13.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Nutzerrollen entfernt und alte Auth-Methode
-                                                            wiederhergestellt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            14.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Frontend-Verbesserungen, alle Buttons funktionieren ohne JS,
-                                                            CSRF-Token wieder entfernt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            13.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Diverse Frontend-Verbesserungen
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            13.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Passwort-Hashing hinzugefügt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            12.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Edge Cases für Favoriten behoben
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            11.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Code für CSRF-Token wurde hinzugefügt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            09.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-                                                            Favoriten und Template-Verbesserungen
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            07.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-                                                            Frontend aufgeräumt und verbessert
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            04.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Routen geschützt, Login-Bugfixes
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            04.02.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-                                                            Filmspezifische Attribute und Variablennamen
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            30.01.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Sessions und simpler Login
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Florian Blum
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            28.01.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-                                                            Layout-Changes und Bewertungs-Bugfixes
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Even row -->
-                                                    <tr class="bg-gray-50">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            23.01.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            Bewertungs-Funktion hinzugefügt
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            20.01.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-                                                            Bild-Upload hinzugefügt
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-                                                    <!-- Odd row -->
-                                                    <tr class="bg-white">
-                                                        <td
-                                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                            14.01.21
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-
-
-                                                            Initial Commit - CSS setup
-
-
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                            David Bielenberg
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                        <!-- Odd row -->
+                                                        <tr class="bg-white">
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                Florian Blum
+                                                            </td>
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                570960
+                                                            </td>
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                flbl5465
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <span>
+                                    Es gibt einen Nutzer, welcher über alle Rechte verfügt. Also auch neue Filme
+                                    hinzufügen und bestehende bearbeiten kann.
+                                </span>
+                                <div class="flex flex-col mt-8">
+                                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 mb-8">
+                                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                                <table class="min-w-full divide-y divide-gray-200">
+                                                    <thead class="bg-gray-50">
+                                                        <tr>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                Username
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                Passwort
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- Even row -->
+                                                        <tr class="bg-gray-50">
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                admin
+                                                            </td>
+                                                            <td
+                                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                admin
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </span>
+                                <h2 class="text-2xl my-4 font-medium">Ziel und Umfang der Anwendung</h2>
+                                <span>
+                                    Ziel der Anwendung war es, eine Blog-ähnliche Film-Bewertungs-Plattform zu
+                                    erstellen, ähnlich wie imdb. <br>
+                                    Nutzer können sich auf der Webseite anmelden und dann neue Film-Einträge erstellen und
+                                    bestehende Film-Einträge
+                                    bearbeiten, löschen oder bewerten. Beim Erstellen und Bearbeiten besteht weiterhin
+                                    die Möglichkeit ein Bild hochzuladen. <br>
+                                    Weiterhin besteht die Möglichkeit das Profil aufzurufen und zu bearbeiten und
+                                    bestehende Film-Einträge zu den
+                                    Favoriten hinzuzufügen und diese dann gesondert auf der Seite aufzurufen.
+                                    Besucher, welche nicht angemeldet sind, können nur die Startseite sehen, die
+                                    Film-Einträge sortieren und auf bestehende Film-Einträge zugreifen, diese jedoch nicht bearbeiten.
+
+                                    <h2 class="text-2xl my-4 font-medium">Aufbau und Aufteilung der Anwendung</h2>
+                                    <span>
+                                        Im Root-Ordner der Anwendung befinden sich die server.js, welche Zugriff auf die
+                                        Datenbank ermöglicht und folgende weitere Ordner:<br>
+
+                                        Im views-Ordner befinden sich die Templates für die HTML-Seiten.
+                                        Im public-Ordner befinden sich die CSS-Dateien und andere Ressourcen, wie z.B.
+                                        Bilder.<br>
+                                        Hochgeladene Bilder (Coverarts der Filme) werden gehasht und in den Ordner
+                                        upload gelegt<br>
+                                        Im data-Ordner befindet sich die Datenbank, welche von der Anwendung verwendet
+                                        wird. <br>
+                                        Im src-Ordner befinden sich die app.js, welche den Server und die Webanwendung
+                                        startet. Sessions instanziert und
+                                        die Templates lädt und folgende weitere Ordner:<br>
+                                        Im middleware-Ordner befinden sich flash.js, welche das Anzeigen von
+                                        Flash-Nachrichten in der Anwendung
+                                        ermöglicht. und isAuthenticated.js, welche überprüft ob ein Nutzer im State
+                                        vorhanden ist.<br>
+                                        Im movie-Ordner befinden sich folgende Dateien:
+                                        controller.js, in welcher Funktionen zum Verarbeiten von Daten und zum Ausführen
+                                        von Aktionen auf der Seite definiert sind.<br>
+                                        form-controller.js, in welcher Funktionen zum Verarbeiten von Formularen und zum
+                                        Weiterreichen der Daten definiert sind.<br>
+                                        login-form-controller.js, in welcher Funktionen zum Verarbeiten des
+                                        Login-Formulars definiert sind und zum
+                                        Validieren der Login-Informationen<br>
+                                        model.js, in welcher Funktionen zum Zugriff auf die Datenbank bezüglich Filmen
+                                        definiert sind<br>
+                                        router.js, in welcher die zu erreichenden Routen definiert sind
+                                        user-model.js, in welcher Funktionen, welche direkt mit dem Nutzer zu tun haben,
+                                        definiert sind. <br>
+                                        Diese sind unter anderem die Überprüfung des Passworts, das Lesen eines Nutzers aus der
+                                        Datenbank per Username und das
+                                        Editieren der Favoriten und des Nutzer-Accounts.
+                                        <br>
+                                        Diese Aufteilung wurde gewählt um ein problemloses Arbeiten in der Gruppe zu
+                                        ermöglichen. Alle Funktionen
+                                        bezüglich einer Aufgabe sind einer bestimmten Datei zugewiesen, was das
+                                        Überprüfen und Zusammenführen von neuen
+                                        Änderungen über Github erleichtert.
+                                        <br>
+                                        Fast alle URIs sind über /movie zu erreichen. Dieser Aufbau wurde von der im
+                                        Labor erarbeiteten Anwendung
+                                        übernommen und von Bookmarks auf Movies angepasst.<br>
+                                        Account und Favorites, welche neu zu der Anwendung hinzugekommen sind, können
+                                        direkt von der Basis aus
+                                        zugegriffen werden und benötigen kein /movie.<br>
+                                        Seiten, welche mit dem An- und abmelden von Benutzern zu tun haben, sind über
+                                        /movie/login beziehungsweise
+                                        /movie/logout zu erreichen.<br>
+                                        Seiten, welche mit dem Hinzufügen eines neuen Filmes zu tun haben, sind über
+                                        /movie/add zu erreichen.<br>
+                                        Man kann direkt auf individuell bestehende Film-Einträge zugreifen, wenn man
+                                        /movie/id aufruft, wobei id für die
+                                        Nummer des Filmes in der Datenbank steht.<br>
+                                        Seiten, welche mit dem Bearbeiten von bestehenden Film-Einträgen zu tun haben,
+                                        sind über /movie/id/edit zu
+                                        erreichen.<br>
+                                        Seiten, welche mit dem Löschen, Bewerten und Favorisieren von bestehenden
+                                        Film-Einträgen zu tun haben, sind über
+                                        jeweils movie/id/delete, /movie/id/rate und movie/id/fav zu erreichen.
+                                    </span>
+                                    <h2 class="text-2xl my-4 font-medium">Aufbau der Datenbank</h2>
+                                    <span>Von der Anwendung werden zwei Datenbanken verwendet. Die sessions-Datenbank,
+                                        in welcher alle Daten bezüglich Sessions gespeichert werden und welche von Koa-Sessions automatisch erstellt und
+                                        verwaltet wird und die
+                                        movies-Datenbank, in welcher alle Daten bezüglich der Anwendung gespeichert
+                                        werden.<br><br>
+
+                                        In der movie-Datenbank befinden sich zwei wesentliche Tabellen. Die
+                                        movie-Tabelle, in welcher alle Daten eines
+                                        Filmes gespeichert sind und die users-Tabelle, in welcher alle Daten eines
+                                        Nutzers gespeichert sind.<br>
+                                        Ein Nutzer setzt sich aus einer Nutzer-ID, einem Benutzernamen, einem gehashten
+                                        Passwort, den favorisierten
+                                        Film-Einträgen und einem Vor- und Nachnamen zusammen.
+                                        Ein Film setzt sich aus einer Film-ID, einem Film-Titel, einer
+                                        Film-Beschreibung, den Tags, einem
+                                        Veröffentlichungsdatum, einem Bild, die Anzahl aller Bewertungen, einer
+                                        Durchschnitts-Bewertung und Links zu
+                                        anderen Film-Plattformen, wie RottenTomatoes und imdb, zusammen.<br>
+                                    </span>
+                                    <h2 class="text-2xl my-4 font-medium">Nutzung von JS im Frontend</h2>
+                                    <span>
+                                        Um zu gewährleisten, dass alle Bereiche der Anwendung ansteuerbar und die
+                                        wichtigsten Funktionen erhalten
+                                        bleiben, selbst wenn Javascript im Browser deaktiviert ist, oder aus anderen
+                                        Gründen nicht verfügbar ist, haben
+                                        wir nur sparsam im Frontend selbst mit Javascript gearbeitet. In der Regel
+                                        werden daher Daten, wie die Filme,
+                                        bereits bei Seitenaufruf im Controller behandelt. Das heisst die Filme werden
+                                        bereits vorher für die Darstellung auf der Seite vorbereitet. Beispielsweise werden Filme vorab sortiert, die
+                                        Bewertungen, welche für die genaue
+                                        Berechnung mit vielen Nachkommastellen in der Datenbank abgespeichert werden,
+                                        gerundet.<br><br>
+
+                                        Zwischenzeitlich, hatten wir Interaktionen, wie den Favorisieren-Button mittels
+                                        Javascript gelöst, was ein natives Feeling ermöglichte. Allerdings haben wir uns dann doch lieber für eine
+                                        javascript-arme Lösung entschieden, um maximale Kompatibilität zu gewährleisten.<br><br>
+
+                                        Die Sortierung der Filme funktioniert innerhalb eines Script-Tags in Template
+                                        (index.html). Das haben wir für in
+                                        Ordnung befunden, da die Funktion die Sortierung zu invertieren nicht als
+                                        unverzichtbar für die Navigation der
+                                        Seite ansehen.<br>
+                                        Auch das Ein- und Ausblenden eines Dropdowns bei Klick auf den Avatar (im
+                                        angemeldeten Zustand) und die mobile
+                                        Burger Navigation werden mit Javascript getriggert. Als Lösung haben wir die
+                                        Menüs standardmäßig eingeblendet
+                                        und mit Javascript wieder versteckt, sodass es bei Fehlen von Javascript
+                                        weiterhin sichtbar bleibt und die Seite
+                                        auch ohne Javascript vollständig zu navigieren bleibt.<br><br>
+
+                                    </span>
+                                    <h2 class="text-2xl my-4 font-medium">Verwendung von externen Komponenten und
+                                        Begründung
+                                    </h2>
+                                    <span>
+                                        <b>Tailwind</b> <br>
+                                        Für das Frontend haben wir uns für TailwindCSS entschieden. Dabei handelt es
+                                        sich,
+                                        um ein sehr flexibles utility
+                                        framework. Wir haben uns dafür entschieden, da es mehr Flexibilität als z.B.
+                                        Bootstrap bietet, jedoch trotzdem
+                                        die Entwicklungszeit nach kurzer Umgewöhnung verkürzen konnte, gerade da das
+                                        Framework uns teilweise bereits
+                                        bekannt war und die Hausarbeit so als Gelegenheit genutzt werden konnte,
+                                        Erfahrung
+                                        mit Tailwind zu sammeln.<br><br>
+
+                                        <a class="text-indigo-600"href="https://tailwindcss.com/">tailwindcss.com</a>
+                                        <br><br>
+                                        <b>Heroicons</b><br>
+                                        Diese kostenfreie und freie Icon Library bietet cleane SVG Icons mit mit
+                                        minimaler Zeilenanzahl an und
+                                        funktionieren hervorragend im Zusammenspiel mit Tailwind<br><br>
+
+                                        <a class="text-indigo-600" href="https://heroicons.dev/">heroicons.dev</a><br>
+
+                                    </span>
+                                    <h2 class="text-2xl my-4 font-medium">Projekttagebuch und Aufgabenteilung</h2>
+                                    <span>
+                                        Während Florian sich überwiegend mit der Implementierung des Users, der Sessions
+                                        und allem was damit
+                                        zusammenhängt beschäftigt hat, hat David neben der Umsetzung des Frontends an
+                                        den verschiedenen Interaktionsmöglichkeiten, wie dem Favorisieren und dem Bewertet der Filme
+                                        gearbeitet.<br>
+                                    </span>
+                                    <!-- Table-->
+                                    <div class="flex flex-col mt-8">
+                                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                                <div
+                                                    class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                                    <table class="min-w-full divide-y divide-gray-200">
+                                                        <thead class="bg-gray-50">
+                                                            <tr>
+                                                                <th scope="col"
+                                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                    Datum
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                    Funktion
+                                                                </th>
+                                                                <th scope="col"
+                                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                    Wer hat es umgesetzt?
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    14.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Frontend-Verbesserungen, alle Buttons funktionieren
+                                                                    ohne
+                                                                    JS,
+                                                                    CSRF-Token wieder entfernt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    13.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Nutzerrollen entfernt und alte Auth-Methode
+                                                                    wiederhergestellt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    13.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Verschiedene Nutzerrollen hinzugefügt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    13.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Nutzerrollen entfernt und alte Auth-Methode
+                                                                    wiederhergestellt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    14.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Frontend-Verbesserungen, alle Buttons funktionieren
+                                                                    ohne
+                                                                    JS,
+                                                                    CSRF-Token wieder entfernt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    13.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Diverse Frontend-Verbesserungen
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    13.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Passwort-Hashing hinzugefügt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    12.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Edge Cases für Favoriten behoben
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    11.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Code für CSRF-Token wurde hinzugefügt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    09.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Favoriten und Template-Verbesserungen
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    07.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Frontend aufgeräumt und verbessert
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    04.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Routen geschützt, Login-Bugfixes
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    04.02.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Filmspezifische Attribute und Variablennamen
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    30.01.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Sessions und simpler Login
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Florian Blum
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    28.01.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Layout-Changes und Bewertungs-Bugfixes
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Even row -->
+                                                            <tr class="bg-gray-50">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    23.01.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Bewertungs-Funktion hinzugefügt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    20.01.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Bild-Upload hinzugefügt
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+                                                            <!-- Odd row -->
+                                                            <tr class="bg-white">
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                    14.01.21
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    Initial Commit - CSS setup
+                                                                </td>
+                                                                <td
+                                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                    David Bielenberg
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-2xl mt-4 font-medium">Aufgetretene Probleme und deren Lösungen</h2>
+                                    <h3 class="text-xl mt-4 font-medium">TailwindCSS in ES6 Environment</h3>
+                                    <span>
+                                        Bei der Verwendung von TailwindCSS gab es das Problem, dass das CSS Frameswork
+                                        nicht mit ES6 Environments
+                                        kompatibel ist.<br>
+                                        Zwar funktioniert das Framework dennoch, jedoch lässt es sich nicht mittels config Datei
+                                        konfigurieren, um etwa Farbtöne anzupassen, Schriftfamilien zu personalisieren,oder
+                                        Zusätzliche Module zu konfigurieren. Da wir darauf im Rahmen dieser Hausarbeit darauf verzichten
+                                        konnten,haben wir uns dennoch für
+                                        dieses Framework ohne individuelle Anpassungen der tailwindcss.config.js
+                                        entschieden Zukunft soll dieses Problem
+                                        wohl von den Entwicklern von Tailwind behoben werden. Auch heute gibt es bereits
+                                        mögliche Workarounds.<br></span>
+                                    <h3 class="text-xl mt-4 font-medium">Inkompatibilität der Sqlite Modules</h3>
+                                    <span>Da wir sowohl Windows als auch Mac OS verwendet haben waren unsere Setups nach
+                                        der Implementation von Session
+                                        nicht mehr kompatibel, da auch wir von den Problemen verschiedener Sqlite3
+                                        Versionen betroffen waren. <br>
+                                        Dieses Problem konnten wir jedoch jeweils für unsere jeweilige Plattform lösen
+                                        und haben anschließend unsere node_modules zu einer gitignore hinzugefügt, um ungestört von unseren jeweiligen
+                                        Setups weiterentwickeln zu
+                                        können.</span>
+                                    <h3 class="text-xl mt-4 font-medium">Fehlerhafte Implementation des CSRF-Tokens</h3>
+                                    <span>Bei der Implementation des CSRF-Tokens gab es das Problem, dass aufgrund von
+                                        asynchronen Routen der Request-Body
+                                        teilweise leer war und damit das Token nicht korrekt gesetzt wurde. Dies führte dazu, dass bei jedem Aufruf ein
+                                        401-Fehler geworfen wurde.<br>
+                                        Aufgrund von Zeitmangel wurde sich entschlossen die Implementation des CSRF-Tokens
+                                        aus der finalen Abgabe zu entfernen.<br>
+                                    </span>
+                                    <h3 class="text-xl mt-4 font-medium">Erstellen mehrerer Nutzerrollen</h3>
+                                    <span>Bei der Implementation von Nutzerrollen gab es das Problem, dass aufgrund von
+                                        asynchronen Routen die asPermission-Methode sich nicht korrekt verhalten hatte. Obwohl die Permissions
+                                        korrekt in den State geladen wurden, konnten verschiedene Nutzer, welche nicht über die erforderlichen Rechte
+                                        verfügten, auf bestimmte Inhalte zugreifen.<br>
+                                        Aufgrund von Zeitmangel wurde sich entschlossen die Implementation von Nutzerrollen
+                                        zu entfernen und eine simple Autorisierung mit zwei Rechte-Gruppen zu verwenden.
+                                    </span>
+                                    <h2 class="text-2xl mt-4">Rechte-Erklärung</h2>
+                                    <span>Hiermit erklären wir, dass wir über die nötigen Rechte und Erlaubnisse zur
+                                        Verwendung aller externen Komponenten,
+                                        Bilder und Inhalte verfügen. Die in der Anwendung verwendeten Bild-Materialien
+                                        erreichen nicht die nötige Schöpfungshöhe und können deshalb zu enzyklopädischen Zwecken verwendet
+                                        werden.</span>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
     </main>
 </div>
 
