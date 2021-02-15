@@ -1,7 +1,4 @@
 // Bisher bekomme ich die config nicht mit der .cjs Endung zum Laufen. Bei Verwendung der config file mit.js Endung wird ein Fehler ausgelöst, da die Config dann fälschlicherweise für ESM Module gehalten wird
-
-
-//const colors = require('tailwindcss/colors')
 import * as colors from 'tailwindcss/colors'
 
 module.exports = {
