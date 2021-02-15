@@ -1,7 +1,6 @@
 import * as model from './model.js';
 import * as formController from './form-controller.js';
 import * as userModel from "./userModel.js";
-import * as csrf from "./csrf.js";
 
 import {
     Console

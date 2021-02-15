@@ -21,14 +21,14 @@
                         aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <!-- Icon when menu is open. -->
-                        <svg id="menu-icon-closed" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        <svg id="menu-icon-closed" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
 
                         <!-- Menu open: "block", Menu closed: "hidden"-->
-                        <svg id="menu-icon-open" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        <svg id="menu-icon-open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -104,7 +104,7 @@
         </div>
 
         <!-- Mobile menu -->
-        <div class="hidden sm:hidden py-8" id="menu">
+        <div class="sm:hidden py-8" id="menu">
             <div class="px-2 pt-2 pb-3 space-y-1 text-center">
                 <a href="/" class="nav-index text-gray-300 block px-6 py-4 rounded-md text-3xl font-medium">Top
                     Filme</a>
@@ -127,6 +127,12 @@
 
             const userMenuButton = document.querySelector('#user-menu-button');
             const userMenu = document.querySelector('#user-menu');
+
+            // Site has loaded
+            window.addEventListener("load", function(event) {
+                // hide mobile menu (for users with JS)
+                burger.click();
+            });
 
             // Toggle Main Menu
             burger.addEventListener('click', () => {
